@@ -3,7 +3,7 @@ output_dir: "../docs"
 include: [".nojekyll"]
 exclude: ["include"]
 navbar:
-  title: Divvy data exploration
+  title: Intro R data analysis
   left:
     - text: "Overview"
       href: index.html
