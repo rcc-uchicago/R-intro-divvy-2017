@@ -1,5 +1,5 @@
 ---
-title: "Divvy data exploration project"
+title: "Introduction to R for data analysis"
 author: "Peter Carbonetto"
 output:
   html_document:
@@ -12,7 +12,42 @@ output:
 [Steven Vance](https://www.flickr.com/photos/jamesbondsv) /
 [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/)*
 
-## Project overview
+[Research Computing Center](https://rcc.uchicago.edu)<br>
+[University of Chicago](https://www.uchicago.edu)
+
+Date: Tuesday, August 1, 2017<br>
+Time: 2:00 pm to 4:00 pm<br>
+Location: Zar Room, John Crerar Library<br>
+Instructor: Peter Carbonetto
+
+## General Information
+
+The [R computing environment](http://cran.r-project.org) has become
+one of the most important tools in quantitative research, from
+computational biology to financial modeling. This short workshop will
+expose participants to the basic elements of R through an analysis of
+[Divvy bike trip data](https://www.divvybikes.com/system-data). The
+aim is to provide participants with the basic tools to explore the
+features of R and RStudio on their own, either on the RCC cluster, or
+on their own computer.
+
+**Level:** Introductory
+
+**Prerequistes:** No previous programming experience is required.
+Mac, Linux, or Windows operating system that they have administrative
+privileges on. An RCC account is helpful, but not required.
+
+**Where:** Kathleen A. Zar Room, John Crerar Library, University of
+Chicago ([OpenStreetMap](https://www.openstreetmap.org/search?query=john%20crerar%20library#map=18/41.79053/-87.60282)).
+
+**Additional info:** This workshop is an attempt to apply elements of
+the
+[Software Carpentry approach](http://software-carpentry.org/lessons);
+see also
+[this article](http://dx.doi.org/10.12688/f1000research.3-62.v2)).
+
+Please also take a look at the [Code of Conduct](conduct.html), and the
+[license information](license.html).
 
 The purpose of this project is to gain some insight into city-wide
 biking trends by analyzing the

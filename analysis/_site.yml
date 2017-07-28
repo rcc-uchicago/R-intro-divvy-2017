@@ -1,4 +1,4 @@
-name: Divvy data exploration
+name: Intro R data analysis
 output_dir: "../docs"
 include: [".nojekyll"]
 exclude: ["include"]
