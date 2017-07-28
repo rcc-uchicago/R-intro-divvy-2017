@@ -1,5 +1,5 @@
 ---
-title: "Reading the Divvy trip data into R"
+title: "Importing and inspecting the Divvy trip data"
 author: "Peter Carbonetto"
 output: html_document
 ---
@@ -22,12 +22,26 @@ knitr::read_chunk("chunks.R")
 ```{r code-version, echo=FALSE, results='asis'}
 ```
 
-## Reading
-
 ## Installing the data.table package
+
+Explain why we can't use `read.csv` as we did before.
 
 ```{r, eval=FALSE}
 install.packages("data.table")
+```
+
+```{r, eval=TRUE}
+library(data.table)
+```
+
+Getting help on the package.
+
+```{r, eval=FALSE}
+help(package=data.table)
+```
+
+```{r, eval=FALSE}
+vignette("datable-intro")
 ```
 
 ## Where are your packages?

@@ -1,5 +1,5 @@
 ---
-title: "A map of the Divvy stations in Chicago"
+title: "Plotting a map of the Divvy stations"
 author: "Peter Carbonetto"
 output: html_document
 ---
@@ -21,6 +21,9 @@ knitr::read_chunk("chunks.R")
  exists and R package git2r is installed -->
 ```{r code-version, echo=FALSE, results='asis'}
 ```
+
+In the previous two episodes, we've done lots of work importing and
+manipulating the Divvy data, so now let's do something fun with it.
 
 In this analysis, I will use the Divvy trip and station data to
 generate a map of Chicago.
