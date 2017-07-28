@@ -1,16 +1,9 @@
 ---
 title: "Introduction to R for data analysis"
-author: "Peter Carbonetto"
 output:
   html_document:
     toc: false
 ---
-
-<br>
-![Divvy bikes](divvy.jpg) <br>
-*[Photo](https://www.flickr.com/photos/jamesbondsv/9041673199) by
-[Steven Vance](https://www.flickr.com/photos/jamesbondsv) /
-[CC BY 2.0](https://creativecommons.org/licenses/by/2.0/)*
 
 [Research Computing Center](https://rcc.uchicago.edu)<br>
 [University of Chicago](https://www.uchicago.edu)
@@ -33,21 +26,27 @@ on their own computer.
 
 **Level:** Introductory
 
-**Prerequistes:** No previous programming experience is required.
-Mac, Linux, or Windows operating system that they have administrative
-privileges on. An RCC account is helpful, but not required.
+**Prerequistes:** Mac, Linux, or Windows operating system that they
+have administrative privileges on. An RCC account is helpful, but not
+required. No previous programming experience is required.
 
 **Where:** Kathleen A. Zar Room, John Crerar Library, University of
 Chicago ([OpenStreetMap](https://www.openstreetmap.org/search?query=john%20crerar%20library#map=18/41.79053/-87.60282)).
 
-**Additional info:** This workshop is an attempt to apply elements of
+**Other information:** This workshop is an attempt to apply elements of
 the
-[Software Carpentry approach](http://software-carpentry.org/lessons);
-see also
-[this article](http://dx.doi.org/10.12688/f1000research.3-62.v2)).
+[Software Carpentry approach](http://software-carpentry.org/lessons).
+See also
+[this article](http://dx.doi.org/10.12688/f1000research.3-62.v2).
 
 Please also take a look at the [Code of Conduct](conduct.html), and the
 [license information](license.html).
+
+## Aims
+
+*Aims go here.*
+
+## Outline
 
 The purpose of this project is to gain some insight into city-wide
 biking trends by analyzing the
@@ -77,9 +76,23 @@ data.](seasonal-trends.html)
 
 <br>
 
+## Useful R resources
+
++ [CRAN](http://cran.r-project.org).
+
++ [RStudio](http://rstudio.com).
+
++ [BioConductor](http://bioconductor.org).
+
++ [Software Carpentry](http://software-carpentry.org/lessons).
+
++ [Data Carpentry](http://www.datacarpentry.org/lessons).
+
++ [R for Data Science](http://r4ds.had.co.nz).
+
 ## Credits
 
-This workflowr project was developed by [Peter
+These materials were developed by [Peter
 Carbonetto](http://pcarbo.github.io) at the [University of
 Chicago](https://www.uchicago.edu).
 
