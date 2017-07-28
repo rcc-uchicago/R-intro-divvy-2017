@@ -1,6 +1,3 @@
-# Divvy data exploration: a workflowr project illustration
+# Introduction to R for data analysis
 
-An illustration of [workflowr](https://jdblischak.github.io/workflowr)
-for developing a organized, sharable and reproducible data analysis.
-
-View the project website [here](https://stephenslab.github.io/wflow-divvy).
+View the workshop materials [here](https://rcc-uchicago.github.io/R-intro-divvy).
