@@ -5,9 +5,8 @@ output:
     toc: false
 ---
 
-All instructional material contained in
-this repository is made available under the Creative Commons
-Attribution license
+All instructional material contained in this repository is made
+available under the Creative Commons Attribution license
 ([CC BY 4.0](https://creativecommons.org/licenses/by/4.0)).
 
 All source code and software in this repository are made available
