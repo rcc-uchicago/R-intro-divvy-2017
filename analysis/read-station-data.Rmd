@@ -1,5 +1,5 @@
 ---
-title: "Reading the Divvy station data into R"
+title: "Importing and inspecting the Divvy station data"
 author: "Peter Carbonetto"
 output: html_document
 ---
