@@ -270,7 +270,7 @@ div.tocify {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">Divvy data exploration</a>
+      <a class="navbar-brand" href="index.html">Intro R data analysis</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -307,15 +307,23 @@ div.tocify {
 shared across the workflowr files. -->
 <!-- Update knitr chunk options -->
 <!-- Insert the date the file was last updated -->
-<p><strong>Last updated:</strong> 2017-07-24</p>
+<p><strong>Last updated:</strong> 2017-07-28</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository exists and R
  package git2r is installed -->
-<p><strong>Code version:</strong> 3464086</p>
-<p>To reproduce the results on your own computer, please follow these setup instructions.</p>
+<p><strong>Code version:</strong> f4ee89f</p>
 <div id="setup-instructions" class="section level2">
 <h2>Setup instructions</h2>
-<p>Download or clone the <a href="https://github.com/stephenslab/wflow-divvy">git repository</a> on your computer.</p>
-<p>Download the Divvy data files and copy the files to the “data” directory. I have provided a script <code>code/retrieve_divvy_data.sh</code> that will automatically retrieve the data files and move them to the expected location. Alternatively, you can view this script and follow the steps by hand. After completing this step, these files should be in the data directory:</p>
+<p>To follow the lessons on your own computer, please follow these setup instructions.</p>
+<ol style="list-style-type: decimal">
+<li>Install <a href="http://cran.r-project.org">R</a> and/or <a href="https://www.rstudio.com/products/rstudio">Rstudio</a>.</li>
+</ol>
+<p><em>Note:</em> If you do not use RStudio, you will need to make sure that you have the necessary software on your computer to handle X Windows graphics. Without this, you will not be able to generate plots.</p>
+<ol start="2" style="list-style-type: decimal">
+<li><p>Download or clone the <a href="https://github.com/rcc-uchicago/R-intro-divvy">git repository</a> your computer. Click <a href="https://github.com/rcc-uchicago/R-intro-divvy/archive/master.zip">here</a> to download a ZIP file containing all the files</p></li>
+<li><p>Download the Divvy data files into the “data” directory.</p></li>
+<li><p>Launch R or RStudio.</p></li>
+</ol>
+<p>I have provided a script <code>code/retrieve_divvy_data.sh</code> that will automatically retrieve the data files and move them to the expected location. Alternatively, you can view this script and follow the steps by hand. After completing this step, these files should be in the data directory:</p>
 <pre><code>Divvy_Stations_2016_Q1Q2.csv
 Divvy_Stations_2016_Q3.csv
 Divvy_Stations_2016_Q4.csv
@@ -325,12 +333,9 @@ Divvy_Trips_2016_06.csv
 Divvy_Trips_2016_Q1.csv
 Divvy_Trips_2016_Q3.csv
 Divvy_Trips_2016_Q4.csv</code></pre>
-<p>Install <a href="http://cran.r-project.org">R</a> and/or <a href="https://www.rstudio.com/products/rstudio">Rstudio</a>.</p>
-<p>Install the R packages used for the analyses:</p>
-<pre class="r"><code>install.packages(c(&quot;data.table&quot;,&quot;ggplot2&quot;))</code></pre>
-<p>Once you have completed these steps, you may run the R code. When running the code, make sure your working directory is set to the “analysis” directory, e.g.,</p>
+<p>Once you have completed these steps, you may run the R code. When running the code, make sure your working directory is set to the “analysis” directory of the repository. For example, on my MacBook Air the current working directory is</p>
 <pre class="r"><code>getwd()
-# [1] &quot;/Users/pcarbo/git/wflow-divvy/analysis&quot;</code></pre>
+# [1] &quot;/Users/pcarbo/git/R-intro-divvy/analysis&quot;</code></pre>
 <p><br></p>
 </div>
 <div id="session-information" class="section level2">
@@ -362,7 +367,8 @@ Divvy_Trips_2016_Q4.csv</code></pre>
 
 <hr>
 <p>This <a href="http://rmarkdown.rstudio.com">R Markdown</a> site was
-created with <a href="https://github.com/jdblischak/workflowr">workflowr</a>.
+created with <a href="https://github.com/jdblischak/workflowr">workflowr</a>
+0.7.0.
 </p>
 <hr>
 
