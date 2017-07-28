@@ -309,22 +309,23 @@ div.tocify {
 <p><strong>Last updated:</strong> 2017-07-28</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository
  exists and R package git2r is installed -->
-<p><strong>Code version:</strong> 1cef2a7</p>
+<p><strong>Code version:</strong> ef3458b <br></p>
 <div id="about-this-file" class="section level2">
 <h2>About this file</h2>
 <p>This file is either a webpage generated from an R Markdown document, or the original R Markdown file itself.</p>
-<p><a href="http://r4ds.had.co.nz/r-markdown.html">R Markdown</a> combines <a href="http://daringfireball.net/projects/markdown">Markdown</a>, a popular, easy-to-read plain text formatting syntax, with “chunks” of R code. R Markdown notebooks can be easily rendered into various formats (e.g., PDF, HTML) for creating <a href="https://www.oreilly.com/ideas/the-state-of-jupyter">narratives</a> of your code and results.</p>
-<p>There are many benefits to documenting your data analyses in R Markdown—we will not have time to explore all these benefits here.</p>
+<p><a href="http://r4ds.had.co.nz/r-markdown.html">R Markdown</a> combines <a href="http://daringfireball.net/projects/markdown">Markdown</a>, a popular, easy-to-read plain text formatting syntax, with “chunks” of R code. R Markdown notebooks can be easily rendered into various formats (e.g., PDF, HTML) for creating sharable and reproducible <a href="https://www.oreilly.com/ideas/the-state-of-jupyter">narratives</a> of your data analyses.</p>
+<p>There are many benefits to documenting your data analyses in R Markdown—we will not have time to explore all the benefits here. <br></p>
 </div>
 <div id="how-to-use-this-file" class="section level2">
 <h2>How to use this file</h2>
 <p>We will use this R Markdown document <em>interactively.</em></p>
-<p>Although you can easily generate all the output and figures with a single command from the rmarkdown package, in this workshop we will walk through the code and text by typing the lines of code in the R console, or by copying &amp; pasting the code.</p>
+<p>Although you can easily generate all the output and figures with a single command from the <a href="https://cran.r-project.org/package=rmarkdown">rmarkdown package</a>, in this workshop we will walk through the data analyses by typing or copying &amp; pasting the lines of code into the R console. <br></p>
 </div>
 <div id="about-the-divvy-station-data" class="section level2">
 <h2>About the Divvy station data</h2>
-<p>After you launch R or RStudio, please double-check that your working directory is set to the “analysis” directory.</p>
-<pre class="r"><code>getwd()</code></pre>
+<p>After you launch R or RStudio, double-check that your working directory is set to the “analysis” directory. For example, on my MacBook Air the current working directory is</p>
+<pre class="r"><code>getwd()
+# [1] &quot;/Users/pcarbo/git/R-intro-divvy/analysis&quot;</code></pre>
 <p>In the “data” directory, three should be three CSV files containing station data:</p>
 <pre class="r"><code>Sys.glob(&quot;../data/*Stations*&quot;)
 # [1] &quot;../data/Divvy_Stations_2016_Q1Q2.csv&quot;
