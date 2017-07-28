@@ -49,25 +49,94 @@ console, or by copying & pasting the code.
 
 ## About the Divvy station data
 
+After you launch R or RStudio, please double-check that your working
+directory is set to the "analysis" directory.
+
+```{r, eval=FALSE}
+getwd()
+```
+
+In the "data" directory, three should be three CSV files containing
+station data:
+
+```{r}
+Sys.glob("../data/*Stations*")
+```
+
+We will use only the Q4 data since it contains the most up-to-date
+information about the Divvy stations.
+
 ## Loading the Divvy station data
 
 The R environment is where all *variables* and *functions* are stored
 and accessed.
 
-Immediately after launching R, your R environment should be empty.
+Immediately after launching R, your R environment will be empty.
 
-```{r}
+```{r, eval=FALSE}
 ls()
 ```
 
+If it is not, see the [setup](setup.html) instructions for how to
+change the working directory.
+
 We will create a new variable called `station.data` by running
-function `read.table`, and assigning the result of `read.table` to
+function `read.csv`, and assigning the result of `read.csv` to
 `station.data`:
 
-```{r}
-station.data <- read.table
+```{r, eval=FALSE}
+station.data <- read.csv(file = "../data/Divvy_Stations_2016_Q4.csv",
+                         stringsAsFactors = FALSE)
 ```
 
-What kind of variable is
+What does this function do, and what are the function arguments "file"
+and "stringsAsFactors" for? We can quickly find the answers to these
+questions by accessibing the R help documents for this function:
 
-## What is a data frame?
+```{r, eval=FALSE}
+help(read.table)
+```
+
+What kind of variable is `station.data`? We can check this:
+
+```{r, eval=FALSE}
+class(read.table)
+```
+
+So it is a "data frame", which is R's data structure for tables.
+
+Peek at the first few rows of the table:
+
+```{r, eval=FALSE}
+head(station.data)
+```
+
+See the "README.txt" file in the data directory for more information
+about the columns in the table.
+
+Peek at the last few rows of the table:
+
+```{r, eval=FALSE}
+tail(station.data)
+```
+
+Use `summary` to quickly generate an overview of the data (this is a
+general function that works for most types of variables):
+
+```{r, eval=FALSE}
+summary(station.data)
+```
+
+How many stations are there?
+
+```{r, eval=FALSE}
+nrow(station.data)
+ncol(station.data)
+```
+
+We can inspect individual columns and rows:
+
+```{r, eval=FALSE}
+station.data[100,]
+summary(station.data[["dpcapacity"]])
+```

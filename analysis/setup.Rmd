@@ -31,7 +31,9 @@ instructions.
 1. Install [R](http://cran.r-project.org) and/or
 [Rstudio](https://www.rstudio.com/products/rstudio).
 
-*Note:* RStudio 
+*Note:* If you do not use RStudio, you will need to make sure that you
+have the necessary software on your computer to handle X Windows
+graphics. Without this, you will not be able to generate plots.
 
 2. Download or clone the
 [git repository](https://github.com/rcc-uchicago/R-intro-divvy)  your
@@ -61,7 +63,8 @@ Divvy_Trips_2016_Q4.csv
 
 Once you have completed these steps, you may run the R code. When
 running the code, make sure your working directory is set to the
-"analysis" directory, e.g.,
+"analysis" directory of the repository. For example, on my MacBook Air
+the current working directory is
 
 ```{r working-dir}
 getwd()
