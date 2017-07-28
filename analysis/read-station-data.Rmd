@@ -68,8 +68,9 @@ station data:
 Sys.glob("../data/*Stations*")
 ```
 
-We will use only the Q4 data since it contains the most up-to-date
+We will only use the Q4 data since it contains the most up-to-date
 information about the Divvy stations.
+<br>
 
 ## Loading the Divvy station data
 
@@ -85,63 +86,113 @@ ls()
 If it is not, see the [setup](setup.html) instructions for how to
 change the working directory.
 
-We will create a new variable called `station.data` by running
+We will create a new variable called `stations` by running
 function `read.csv`, and assigning the result of `read.csv` to
-`station.data`:
+`stations`:
 
 ```{r, eval=FALSE}
-station.data <- read.csv(file = "../data/Divvy_Stations_2016_Q4.csv",
+stations <- read.csv(file = "../data/Divvy_Stations_2016_Q4.csv",
                          stringsAsFactors = FALSE)
 ```
 
 What does this function do, and what are the function arguments "file"
-and "stringsAsFactors" for? We can quickly find the answers to these
-questions by accessibing the R help documents for this function:
+and "stringsAsFactors" for? We can easily find the answers to these
+questions by accessing the R help documents for this function:
 
 ```{r, eval=FALSE}
 help(read.table)
 ```
+<br>
 
-What kind of variable is `station.data`? We can check this:
+## A first peek at the Divvy station data 
+
+What kind of variable is `stations`? We can check this:
 
 ```{r, eval=FALSE}
 class(read.table)
 ```
 
-So it is a "data frame", which is R's data structure for tables.
+It is a "data frame", which is R's main data structure for tables.
 
 Peek at the first few rows of the table:
 
 ```{r, eval=FALSE}
-head(station.data)
+head(stations)
+```
+
+Peek at the last few rows of the table:
+
+```{r, eval=FALSE}
+tail(stations)
 ```
 
 See the "README.txt" file in the data directory for more information
 about the columns in the table.
 
-Peek at the last few rows of the table:
+Use `summary` to quickly generate an overview of the data:
 
 ```{r, eval=FALSE}
-tail(station.data)
+summary(stations)
 ```
 
-Use `summary` to quickly generate an overview of the data (this is a
-general function that works for most types of variables):
-
-```{r, eval=FALSE}
-summary(station.data)
-```
-
+This is a general function that works for many types of variables.
+ 
 How many stations are there?
 
 ```{r, eval=FALSE}
-nrow(station.data)
-ncol(station.data)
+nrow(stations)
+ncol(stations)
 ```
 
-We can inspect individual columns and rows:
+We can inspect individual rows of the table:
 
 ```{r, eval=FALSE}
-station.data[100,]
-summary(station.data[["dpcapacity"]])
+stations[100,]
 ```
+
+We can also take a closer look at individual columns of the table. For
+example, the "dpcapacity" column
+
+```{r, eval=FALSE}
+class(stations[["dpcapacity"]])
+class(stations$dpcapacity)
+x <- stations$dpcapacity
+summary(x)
+quantile(x,seq(0,1,0.1))
+table(x)
+```
+
+It is interesting that a few of the Divvy bike stations are much
+larger than all the others. Where are these stations? 
+
+```{r, eval=FALSE}
+subset(stations,dpcapacity >= 40)
+```
+<br>
+
+Alternatively, we can sort the table rows and inspect the top rows:
+
+```{r, eval=FALSE}
+rows     <- order(stations$dpcapacity,decreasing = TRUE)
+stations <- stations[rows,]
+head(stations,n = 10)
+```
+
+## Quickly accessing stations in the table by their name
+
+```{r, eval=FALSE}
+i <- which(stations$name == "University Ave & 57th St")
+stations[i,]
+```
+
+```{r, eval=FALSE}
+rownames(stations) <- stations$name
+stations           <- stations[-2]
+head(stations)
+```
+
+```{r, eval=FALSE}
+stations["University Ave & 57th St",]
+```
+
+Summarize what we learned here.
