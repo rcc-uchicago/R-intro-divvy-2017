@@ -21,6 +21,7 @@ knitr::read_chunk("chunks.R")
  exists and R package git2r is installed -->
 ```{r code-version, echo=FALSE, results='asis'}
 ```
+<br>
 
 ## About this file
 
@@ -31,35 +32,39 @@ or the original R Markdown file itself.
 [Markdown](http://daringfireball.net/projects/markdown), a popular,
 easy-to-read plain text formatting syntax, with "chunks" of R code. R
 Markdown notebooks can be easily rendered into various formats (e.g.,
-PDF, HTML) for creating
+PDF, HTML) for creating sharable and reproducible
 [narratives](https://www.oreilly.com/ideas/the-state-of-jupyter) of
-your code and results.
+your data analyses.
 
 There are many benefits to documenting your data analyses in R
-Markdown---we will not have time to explore all these benefits here.
+Markdown---we will not have time to explore all the benefits here.
+<br>
 
 ## How to use this file
 
 We will use this R Markdown document *interactively.*
 
 Although you can easily generate all the output and figures with a
-single command from the rmarkdown package, in this workshop we will
-walk through the code and text by typing the lines of code in the R
-console, or by copying & pasting the code.
+single command from the
+[rmarkdown package](https://cran.r-project.org/package=rmarkdown), in
+this workshop we will walk through the data analyses by typing or
+copying & pasting the lines of code into the R console.
+<br>
 
 ## About the Divvy station data
 
-After you launch R or RStudio, please double-check that your working
-directory is set to the "analysis" directory.
+After you launch R or RStudio, double-check that your working
+directory is set to the "analysis" directory. For example, on my
+MacBook Air the current working directory is
 
-```{r, eval=FALSE}
+```{r, eval=TRUE}
 getwd()
 ```
 
 In the "data" directory, three should be three CSV files containing
 station data:
 
-```{r}
+```{r, eval=TRUE}
 Sys.glob("../data/*Stations*")
 ```
 
