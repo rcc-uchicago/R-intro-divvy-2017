@@ -1,0 +1,48 @@
+---
+title: "Loading the Divvy data into R"
+author: "Peter Carbonetto"
+output: html_document
+---
+
+<!-- Define defaults shared by all workflowr files. -->
+```{r read-chunk, include=FALSE, cache=FALSE}
+knitr::read_chunk("chunks.R")
+```
+
+<!-- Update knitr chunk options -->
+```{r knitr-opts-chunk, include=FALSE}
+```
+
+<!-- Insert the date the file was last updated -->
+```{r last-updated, echo=FALSE, results='asis'}
+```
+
+<!-- Insert the code version (Git commit SHA1) if Git repository
+ exists and R package git2r is installed -->
+```{r code-version, echo=FALSE, results='asis'}
+```
+
+## About this file
+
+This file is either a webpage generated from an R Markdown document,
+or the original R Markdown file itself.
+
+[R Markdown](http://r4ds.had.co.nz/r-markdown.html) combines
+[Markdown](http://daringfireball.net/projects/markdown), a popular,
+easy-to-read plain text formatting syntax, with "chunks" of R code. R
+Markdown notebooks can be easily rendered into various formats (e.g.,
+PDF, HTML) for sharing your code and results.
+
+There are many benefits to documenting your data analyses in R
+Markdown---we will not have time to explore all these benefits here.
+
+## How to use this file
+
+*We will use this R Markdown document interactively.*
+
+Although you can easily generate all the output and figures with a
+single command from the rmarkdown package, in this workshop we will
+walk through the code and text by typing the lines of code in the R
+console, or by copying & pasting the code.
+
+## About the data
