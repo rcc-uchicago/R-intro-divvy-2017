@@ -1,5 +1,5 @@
 ---
-title: "Loading the Divvy data into R"
+title: "Reading the Divvy station data into R"
 author: "Peter Carbonetto"
 output: html_document
 ---
@@ -31,18 +31,43 @@ or the original R Markdown file itself.
 [Markdown](http://daringfireball.net/projects/markdown), a popular,
 easy-to-read plain text formatting syntax, with "chunks" of R code. R
 Markdown notebooks can be easily rendered into various formats (e.g.,
-PDF, HTML) for sharing your code and results.
+PDF, HTML) for creating
+[narratives](https://www.oreilly.com/ideas/the-state-of-jupyter) of
+your code and results.
 
 There are many benefits to documenting your data analyses in R
 Markdown---we will not have time to explore all these benefits here.
 
 ## How to use this file
 
-*We will use this R Markdown document interactively.*
+We will use this R Markdown document *interactively.*
 
 Although you can easily generate all the output and figures with a
 single command from the rmarkdown package, in this workshop we will
 walk through the code and text by typing the lines of code in the R
 console, or by copying & pasting the code.
 
-## About the data
+## About the Divvy station data
+
+## Loading the Divvy station data
+
+The R environment is where all *variables* and *functions* are stored
+and accessed.
+
+Immediately after launching R, your R environment should be empty.
+
+```{r}
+ls()
+```
+
+We will create a new variable called `station.data` by running
+function `read.table`, and assigning the result of `read.table` to
+`station.data`:
+
+```{r}
+station.data <- read.table
+```
+
+What kind of variable is
+
+## What is a data frame?

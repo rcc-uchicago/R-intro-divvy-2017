@@ -1,4 +1,4 @@
----
+s---
 title: "Introduction to R for data analysis"
 output:
   html_document:
@@ -38,7 +38,6 @@ the
 [Software Carpentry approach](http://software-carpentry.org/lessons).
 See also
 [this article](http://dx.doi.org/10.12688/f1000research.3-62.v2).
-
 Please also take a look at the [Code of Conduct](conduct.html), and the
 [license information](license.html).
 
@@ -76,11 +75,15 @@ data.](seasonal-trends.html)
 
 <br>
 
-## Useful R resources
+## Useful resources
 
 + [CRAN](http://cran.r-project.org).
 
 + [RStudio](http://rstudio.com).
+
++ [Using R with conda](https://conda.io/docs/r-with-conda.html).
+
++ [Jupyter](https://jupyter.org) (included with Anaconda).
 
 + [BioConductor](http://bioconductor.org).
 
@@ -89,6 +92,20 @@ data.](seasonal-trends.html)
 + [Data Carpentry](http://www.datacarpentry.org/lessons).
 
 + [R for Data Science](http://r4ds.had.co.nz).
+
++ [Some advanced topics in R](http://adv-r.had.co.nz).
+
++ [Short guide to writing your own R package](http://r-pkgs.had.co.nz).
+
++ [Introductory Statistics with R](http://staff.pubhealth.ku.dk/~pd/ISwR.html)
+(available through [University of Chicago
+library](https://www.lib.uchicago.edu)).
+
++ [Data Analysis for the Life
+Sciences](https://leanpub.com/dataanalysisforthelifesciences).
+
++ [STAT Labs: Mathematical Statistics through
+Applications](https://www.stat.berkeley.edu/~statlabs).
 
 ## Credits
 
