@@ -38,7 +38,6 @@ your data analyses.
 
 There are many benefits to documenting your data analyses in R
 Markdown---we will not have time to explore all the benefits here.
-
 <br>
 
 ## How to use this file
@@ -50,7 +49,6 @@ single command from the
 [rmarkdown package](https://cran.r-project.org/package=rmarkdown), in
 this workshop we will walk through the data analyses by typing or
 copying & pasting the lines of code into the R console.
-
 <br>
 
 ## About the Divvy station data
@@ -72,7 +70,6 @@ Sys.glob("../data/*Stations*")
 
 We will only use the Q4 data since it contains the most up-to-date
 information about the Divvy stations.
-
 <br>
 
 ## Loading the Divvy station data
@@ -154,7 +151,7 @@ stations[100,]
 ```
 
 We can also take a closer look at individual columns of the table,
-e.g., the "dpcapacity" column,
+e.g., the "dpcapacity" column:
 
 ```{r, eval=FALSE}
 class(stations[["dpcapacity"]])
@@ -171,7 +168,6 @@ larger than all the others. Where are these stations?
 ```{r, eval=FALSE}
 subset(stations,dpcapacity >= 40)
 ```
-<br>
 
 Alternatively, we can sort the table rows and inspect the top rows:
 
@@ -180,13 +176,26 @@ rows     <- order(stations$dpcapacity,decreasing = TRUE)
 stations <- stations[rows,]
 head(stations,n = 10)
 ```
+<br>
 
 ## Quickly accessing stations in the table by their name
 
+It is often useful to access rows of a table by their name or label
+instead of using a number. This can be done by setting the row names
+in the data frame.
+
+For example, this is one of the Divvy stations on campus:
+
 ```{r, eval=FALSE}
-i <- which(stations$name == "University Ave & 57th St")
+stn.name <- "University Ave & 57th St"
+i <- which(stations$name == stn.name)
 stations[i,]
 ```
+
+Note that I removed the second column in the table because it is no
+longer needed.
+
+Let's now add row names:
 
 ```{r, eval=FALSE}
 rownames(stations) <- stations$name
@@ -194,8 +203,17 @@ stations           <- stations[-2]
 head(stations)
 ```
 
-```{r, eval=FALSE}
-stations["University Ave & 57th St",]
-```
+Now we have an easier way to access the same information:
 
-Summarize what we learned here.
+```{r, eval=FALSE}
+stations[stn.name,]
+```
+<br>
+
+## Recap
+
+In this first episode, we explored some basic commands for loading
+data from a text file into a dta frame, inspecting the data frame, and
+making a few simple (but useful!) modifications to the data frame.  In
+[the next episode](trips.), we will explore these same tools, but in a
+much larger data table---the Divvy trip data.
