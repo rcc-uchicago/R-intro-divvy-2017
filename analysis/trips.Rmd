@@ -40,9 +40,9 @@ trips <- read.csv(file = "../data/Divvy_Trips_2016.csv",
 ```
 
 On your computer, it probably took a few seconds to read in the first
-100,000 lines in the file. That is tolerable, but consider that there
-is a total of 3.6 million lines! Instead, we will use a function
-implemented in the `data.table` package that is much faster.
+100,000 lines. This is tolerable, but consider that there is a total
+of 3.6 million lines! Instead, we will use a function implemented in
+the `data.table` package that is much faster.
 
 Retrieve and install the package from CRAN:
 
@@ -112,14 +112,28 @@ Let's go ahead and load the data for the 3.6 million trips using the
 ```{r, eval=FALSE}
 trips <- fread("../data/Divvy_Trips_2016.csv",sep = ",",header = TRUE,
                stringsAsFactors = FALSE)
-trips <- read.csv("../data/Divvy_Trips_2016.csv",
-               stringsAsFactors = FALSE)
 ```
 
 On my MacBook Air, this took about 30 seconds---not too bad. It will
 take much longer if you use "read.csv". (Try it!)
 
 ## A first peek at the Divvy trip data
+
+One annoying feature of "fread" is that it returns its own
+"data.table" object format:
+
+```{r, eval=FALSE}
+class(trips)
+```
+
+I prefer working with a data frame since I am more used to it.
+
+```{r, eval=FALSE}
+class(trips) <- "data.frame"
+```
+
+We can use the same commands we used before to quickly get a quick
+overview of the trip data:
 
 ```{r, eval=FALSE}
 nrow(trips)
@@ -129,12 +143,103 @@ tail(trips)
 summary(trips)
 ```
 
+Unfortunately, the "summary" command isn't particularly useful in this
+case. It will be more useful if we first convert some of the columns
+to *factors*.
+
 ## Create some factor columns
 
-*Add text here.*
+A "factor" is also known as a "categorical variable". A couple good
+candidates for categorical variables are the gender and usertype
+columns:
+
+```{r, eval=FALSE}
+class(trips$gender)
+class(trips$usertype)
+summary(trips$gender)
+summary(trips$usertype)
+trips <- transform(trips,gender = factor(gender))
+trips <- transform(trips,usertype = factor(usertype))
+class(trips$gender)
+class(trips$usertype)
+summary(trips$gender)
+summary(trips$usertype)
+```
+
+Here we observe an example of data coding Bad Practice---the missing
+genders are simply empty character strings, which can be confusing. In
+R, these "missing data" should always be assigned the special value NA
+for "not assigned":
+
+```{r, eval=FALSE}
+i               <- which(trips$gender == "")
+trips$gender[i] <- NA
+trips           <- transform(trips,gender = factor(gender))
+summary(trips$gender)
+```
+
+We will also see that it is very convert the "station name" columns to
+factors. 
+
+```{r, eval=FALSE}
+trips <- transform(trips,
+                   from_station_name = factor(from_station_name,
+				                              rownames(stations)),
+                   to_station_name   = factor(to_station_name,
+				                              rownames(stations)))
+```
+
+For example, we can now quickly generate more informative summaries of
+the trips by station:
+
+```{r, eval=FALSE}
+summary(trips$from_station_name)
+```
+
+What is the second argument of function "factor" for? Why did we set
+the second argument of "factor" in this case, and not before?
 
 ## Convert dates and times.
 
-*Add text and code here.*
+In the previous section, we found that converting some table columns
+to factors makes these columns easier to inspect (and eventually
+analyze). Similarly, the dates and times aren't particularly useful
+until we extract them from the character strings. Working with dates &
+times in R is much more complicated so I won't explain in detail what
+this code does, or how it works.
+
+To convert the dates and times, I will use the `lubridate` package.
+
+```{r, eval=FALSE}
+install.packages("lubridate")
+```
+
+Here, I create my own function for parsing the dates and times to
+accommodate the format of the dates and times provided in the Divvy
+CSV files.
+
+```{r, eval=TRUE}
+parse.dt <- function (x) {
+  out    <- suppressWarnings(mdy_hms(x))
+  i      <- is.na(out)
+  out[i] <- mdy_hm(x[i])
+  return(out)
+}
+```
+
+This code chunk parses the dates & times, then creates a new table
+column, "start week":
+
+```{r, eval=FALSE}
+summary(trips$starttime)
+trips <- transform(trips,starttime = parse.dt(starttime))
+trips <- transform(trips,start.week = as.numeric(format(starttime,"%W")))
+summary(trips$starttime)
+summary(trips$startweek)
+```
 
 ## Recap
+
+Working with large data sets is often more difficult than working with
+small data sets because it may require working with specialized
+packages that can process the data efficiently.
