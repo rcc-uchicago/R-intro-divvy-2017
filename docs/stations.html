@@ -309,19 +309,17 @@ div.tocify {
 <p><strong>Last updated:</strong> 2017-07-31</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository
  exists and R package git2r is installed -->
-<p><strong>Code version:</strong> d1a5b6c <br></p>
+<p><strong>Code version:</strong> c369263 <br></p>
 <div id="about-this-file" class="section level2">
 <h2>About this file</h2>
 <p>This file is either a webpage generated from an R Markdown document, or the original R Markdown file itself.</p>
 <p><a href="http://r4ds.had.co.nz/r-markdown.html">R Markdown</a> combines <a href="http://daringfireball.net/projects/markdown">Markdown</a>, a popular, easy-to-read plain text formatting syntax, with “chunks” of R code. R Markdown notebooks can be easily rendered into various formats (e.g., PDF, HTML) for creating sharable and reproducible <a href="https://www.oreilly.com/ideas/the-state-of-jupyter">narratives</a> of your data analyses.</p>
-<p>There are many benefits to documenting your data analyses in R Markdown—we will not have time to explore all the benefits here.</p>
-<p><br></p>
+<p>There are many benefits to documenting your data analyses in R Markdown—we will not have time to explore all the benefits here. <br></p>
 </div>
 <div id="how-to-use-this-file" class="section level2">
 <h2>How to use this file</h2>
 <p>We will use this R Markdown document <em>interactively.</em></p>
-<p>Although you can easily generate all the output and figures with a single command from the <a href="https://cran.r-project.org/package=rmarkdown">rmarkdown package</a>, in this workshop we will walk through the data analyses by typing or copying &amp; pasting the lines of code into the R console.</p>
-<p><br></p>
+<p>Although you can easily generate all the output and figures with a single command from the <a href="https://cran.r-project.org/package=rmarkdown">rmarkdown package</a>, in this workshop we will walk through the data analyses by typing or copying &amp; pasting the lines of code into the R console. <br></p>
 </div>
 <div id="about-the-divvy-station-data" class="section level2">
 <h2>About the Divvy station data</h2>
@@ -333,8 +331,7 @@ div.tocify {
 # [1] &quot;../data/Divvy_Stations_2016_Q1Q2.csv&quot;
 # [2] &quot;../data/Divvy_Stations_2016_Q3.csv&quot;  
 # [3] &quot;../data/Divvy_Stations_2016_Q4.csv&quot;</code></pre>
-<p>We will only use the Q4 data since it contains the most up-to-date information about the Divvy stations.</p>
-<p><br></p>
+<p>We will only use the Q4 data since it contains the most up-to-date information about the Divvy stations. <br></p>
 </div>
 <div id="loading-the-divvy-station-data" class="section level2">
 <h2>Loading the Divvy station data</h2>
@@ -351,7 +348,7 @@ div.tocify {
 </div>
 <div id="a-first-peek-at-the-divvy-station-data" class="section level2">
 <h2>A first peek at the Divvy station data</h2>
-<p>What kind of variable is <code>stations</code>? We can check this:</p>
+<p>What kind of variable is “stations”? We can check this:</p>
 <pre class="r"><code>class(read.table)</code></pre>
 <p>It is a “data frame”, which is R’s main data structure for tables.</p>
 <p>Peek at the first few rows of the table:</p>
@@ -359,15 +356,15 @@ div.tocify {
 <p>Peek at the last few rows of the table:</p>
 <pre class="r"><code>tail(stations)</code></pre>
 <p>See the “README.txt” file in the data directory for more information about the columns in the table.</p>
-<p>Use <code>summary</code> to quickly generate an overview of the data:</p>
+<p>Use <code>summary</code> to quickly generate an overview of the data in the table:</p>
 <pre class="r"><code>summary(stations)</code></pre>
 <p>This is a general function that works for many types of variables.</p>
 <p>How many stations are there?</p>
 <pre class="r"><code>nrow(stations)
 ncol(stations)</code></pre>
-<p>We can inspect individual rows of the table:</p>
+<p>We can inspect individual rows of the table, e.g.,</p>
 <pre class="r"><code>stations[100,]</code></pre>
-<p>We can also take a closer look at individual columns of the table. For example, the “dpcapacity” column</p>
+<p>We can also take a closer look at individual columns of the table, e.g., the “dpcapacity” column:</p>
 <pre class="r"><code>class(stations[[&quot;dpcapacity&quot;]])
 class(stations$dpcapacity)
 x &lt;- stations$dpcapacity
@@ -376,21 +373,31 @@ quantile(x,seq(0,1,0.1))
 table(x)</code></pre>
 <p>It is interesting that a few of the Divvy bike stations are much larger than all the others. Where are these stations?</p>
 <pre class="r"><code>subset(stations,dpcapacity &gt;= 40)</code></pre>
-<p><br></p>
 <p>Alternatively, we can sort the table rows and inspect the top rows:</p>
 <pre class="r"><code>rows     &lt;- order(stations$dpcapacity,decreasing = TRUE)
 stations &lt;- stations[rows,]
 head(stations,n = 10)</code></pre>
+<p><br></p>
 </div>
 <div id="quickly-accessing-stations-in-the-table-by-their-name" class="section level2">
 <h2>Quickly accessing stations in the table by their name</h2>
-<pre class="r"><code>i &lt;- which(stations$name == &quot;University Ave &amp; 57th St&quot;)
+<p>It is often useful to access rows of a table by their name or label instead of using a number. This can be done by setting the row names in the data frame.</p>
+<p>For example, this is one of the Divvy stations on campus:</p>
+<pre class="r"><code>stn.name &lt;- &quot;University Ave &amp; 57th St&quot;
+i &lt;- which(stations$name == stn.name)
 stations[i,]</code></pre>
+<p>Note that I removed the second column in the table because it is no longer needed.</p>
+<p>Let’s now add row names:</p>
 <pre class="r"><code>rownames(stations) &lt;- stations$name
 stations           &lt;- stations[-2]
 head(stations)</code></pre>
-<pre class="r"><code>stations[&quot;University Ave &amp; 57th St&quot;,]</code></pre>
-<p>Summarize what we learned here.</p>
+<p>Now we have an easier way to access the same information:</p>
+<pre class="r"><code>stations[stn.name,]</code></pre>
+<p><br></p>
+</div>
+<div id="recap" class="section level2">
+<h2>Recap</h2>
+<p>In this first episode, we explored some basic commands for loading data from a text file into a dta frame, inspecting the data frame, and making a few simple (but useful!) modifications to the data frame. In <a href="trips.">the next episode</a>, we will explore these same tools, but in a much larger data table—the Divvy trip data.</p>
 </div>
 
 <script type="text/x-mathjax-config">
