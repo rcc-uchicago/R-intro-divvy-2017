@@ -41,11 +41,11 @@ cluster. If you use the RCC cluster, I recommend connecting using
 If you do not have an RCC user account, the instructor can provide you
 with a [Yubikey](yubikey.html).
 
-2. Install R from the [CRAN website](http://cran.r-project.org) and,
-optionally,
+2. If you are not using the RCC cluster, install R from the
+[CRAN website](http://cran.r-project.org) and, optionally,
 [Rstudio Desktop](https://www.rstudio.com/products/rstudio/download).
-*Note:* If you do not use RStudio, you will need to have additional
-software installed for X Windows graphics (e.g.,
+*Note:* If you do not use RStudio Desktop, you will need to have
+additional software installed for X Windows graphics (e.g.,
 [XQuartz](http://xquartz.org) on Mac). Without this, you will not be
 able to create plots.
 
@@ -62,10 +62,10 @@ the prepared data files [here](https://uchicago.box.com/v/divvy), and
 move the files into the "data" directory. The file on Box is about 82
 MB, so it may take a few minutes to download. **More complicated
 approach:** download the data directly from the Divvy website. I have
-provided a script `code/retrieve_divvy_data.sh` to do this
+provided a bash script `code/retrieve_divvy_data.sh` to do this
 automatically. This script will also move the files to the expected
 location, and prepare the files for the analysis in R. This script
-reproduces the data preparation steps starting from the 
+reproduces the data preparation steps starting from the
 [original source](https://www.divvybikes.com/system-data).
 
 5. After completing Step 4, check that you have all the necessary data
@@ -77,8 +77,7 @@ list.files("../data")
 
 6. Launch R or RStudio Desktop. If you are on the compute cluster, you
 need to reserve a compute node, then load an R and/or RStudio
-module. For example, to run RStudio Desktop with R 3.3.2, do the
-following:
+module. For example,
 
 ```
 sinteractive --time=02:00:00 --mem=2G --partition=broadwl
