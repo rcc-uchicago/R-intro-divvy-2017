@@ -294,4 +294,9 @@ save.image(file = "workshop.RData")
 
 Working with large data sets is often more difficult than working with
 small data sets because it may require working with specialized
-packages that can process the data efficiently.
+packages that can process the data efficiently. But once we take the
+effort to process the data carefully, we can quickly get insights into
+the data using basic R commands.
+
+In the [next episode](stations-map.Rmd), we will turn the data into
+some evocative plots.
