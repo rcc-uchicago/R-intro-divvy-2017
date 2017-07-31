@@ -306,10 +306,10 @@ div.tocify {
 <!-- Define defaults shared by all workflowr files. -->
 <!-- Update knitr chunk options -->
 <!-- Insert the date the file was last updated -->
-<p><strong>Last updated:</strong> 2017-07-28</p>
+<p><strong>Last updated:</strong> 2017-07-31</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository
  exists and R package git2r is installed -->
-<p><strong>Code version:</strong> ef3458b <br></p>
+<p><strong>Code version:</strong> 3d1293c <br></p>
 <div id="about-this-file" class="section level2">
 <h2>About this file</h2>
 <p>This file is either a webpage generated from an R Markdown document, or the original R Markdown file itself.</p>
@@ -331,7 +331,7 @@ div.tocify {
 # [1] &quot;../data/Divvy_Stations_2016_Q1Q2.csv&quot;
 # [2] &quot;../data/Divvy_Stations_2016_Q3.csv&quot;  
 # [3] &quot;../data/Divvy_Stations_2016_Q4.csv&quot;</code></pre>
-<p>We will use only the Q4 data since it contains the most up-to-date information about the Divvy stations.</p>
+<p>We will only use the Q4 data since it contains the most up-to-date information about the Divvy stations. <br></p>
 </div>
 <div id="loading-the-divvy-station-data" class="section level2">
 <h2>Loading the Divvy station data</h2>
@@ -339,27 +339,55 @@ div.tocify {
 <p>Immediately after launching R, your R environment will be empty.</p>
 <pre class="r"><code>ls()</code></pre>
 <p>If it is not, see the <a href="setup.html">setup</a> instructions for how to change the working directory.</p>
-<p>We will create a new variable called <code>station.data</code> by running function <code>read.csv</code>, and assigning the result of <code>read.csv</code> to <code>station.data</code>:</p>
-<pre class="r"><code>station.data &lt;- read.csv(file = &quot;../data/Divvy_Stations_2016_Q4.csv&quot;,
+<p>We will create a new variable called <code>stations</code> by running function <code>read.csv</code>, and assigning the result of <code>read.csv</code> to <code>stations</code>:</p>
+<pre class="r"><code>stations &lt;- read.csv(file = &quot;../data/Divvy_Stations_2016_Q4.csv&quot;,
                          stringsAsFactors = FALSE)</code></pre>
-<p>What does this function do, and what are the function arguments “file” and “stringsAsFactors” for? We can quickly find the answers to these questions by accessibing the R help documents for this function:</p>
+<p>What does this function do, and what are the function arguments “file” and “stringsAsFactors” for? We can easily find the answers to these questions by accessing the R help documents for this function:</p>
 <pre class="r"><code>help(read.table)</code></pre>
-<p>What kind of variable is <code>station.data</code>? We can check this:</p>
+<p><br></p>
+</div>
+<div id="a-first-peek-at-the-divvy-station-data" class="section level2">
+<h2>A first peek at the Divvy station data</h2>
+<p>What kind of variable is <code>stations</code>? We can check this:</p>
 <pre class="r"><code>class(read.table)</code></pre>
-<p>So it is a “data frame”, which is R’s data structure for tables.</p>
+<p>It is a “data frame”, which is R’s main data structure for tables.</p>
 <p>Peek at the first few rows of the table:</p>
-<pre class="r"><code>head(station.data)</code></pre>
-<p>See the “README.txt” file in the data directory for more information about the columns in the table.</p>
+<pre class="r"><code>head(stations)</code></pre>
 <p>Peek at the last few rows of the table:</p>
-<pre class="r"><code>tail(station.data)</code></pre>
-<p>Use <code>summary</code> to quickly generate an overview of the data (this is a general function that works for most types of variables):</p>
-<pre class="r"><code>summary(station.data)</code></pre>
+<pre class="r"><code>tail(stations)</code></pre>
+<p>See the “README.txt” file in the data directory for more information about the columns in the table.</p>
+<p>Use <code>summary</code> to quickly generate an overview of the data:</p>
+<pre class="r"><code>summary(stations)</code></pre>
+<p>This is a general function that works for many types of variables.</p>
 <p>How many stations are there?</p>
-<pre class="r"><code>nrow(station.data)
-ncol(station.data)</code></pre>
-<p>We can inspect individual columns and rows:</p>
-<pre class="r"><code>station.data[100,]
-summary(station.data[[&quot;dpcapacity&quot;]])</code></pre>
+<pre class="r"><code>nrow(stations)
+ncol(stations)</code></pre>
+<p>We can inspect individual rows of the table:</p>
+<pre class="r"><code>stations[100,]</code></pre>
+<p>We can also take a closer look at individual columns of the table. For example, the “dpcapacity” column</p>
+<pre class="r"><code>class(stations[[&quot;dpcapacity&quot;]])
+class(stations$dpcapacity)
+x &lt;- stations$dpcapacity
+summary(x)
+quantile(x,seq(0,1,0.1))
+table(x)</code></pre>
+<p>It is interesting that a few of the Divvy bike stations are much larger than all the others. Where are these stations?</p>
+<pre class="r"><code>subset(stations,dpcapacity &gt;= 40)</code></pre>
+<p><br></p>
+<p>Alternatively, we can sort the table rows and inspect the top rows:</p>
+<pre class="r"><code>rows     &lt;- order(stations$dpcapacity,decreasing = TRUE)
+stations &lt;- stations[rows,]
+head(stations,n = 10)</code></pre>
+</div>
+<div id="quickly-accessing-stations-in-the-table-by-their-name" class="section level2">
+<h2>Quickly accessing stations in the table by their name</h2>
+<pre class="r"><code>i &lt;- which(stations$name == &quot;University Ave &amp; 57th St&quot;)
+stations[i,]</code></pre>
+<pre class="r"><code>rownames(stations) &lt;- stations$name
+stations           &lt;- stations[-2]
+head(stations)</code></pre>
+<pre class="r"><code>stations[&quot;University Ave &amp; 57th St&quot;,]</code></pre>
+<p>Summarize what we learned here.</p>
 </div>
 
 <script type="text/x-mathjax-config">
