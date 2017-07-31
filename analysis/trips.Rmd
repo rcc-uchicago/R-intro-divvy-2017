@@ -247,6 +247,39 @@ summary(trips$startweek)
 ```
 <br>
 
+## Trips from University of Chicago
+
+After having prepared the data more carefully, let's take a close look
+at the trip data at the University of Chicago.
+
+```{r, eval=FALSE}
+stn.name <- "University Ave & 57th St"
+uc.trips <- subset(trips,from_station_name == stn.name)
+summary(uc.trips)
+summary(uc.trips$start.day)
+summary(uc.trips$to_station_name)
+```
+
+It is fun to look in more detail at the final destinations of all
+people who started riding from the on-campus station:
+
+```{r, eval=FALSE}
+uc.dests <- summary(uc.trips$to_station_name)
+i        <- which(uc.dests > 0)
+uc.dests <- uc.dests[i]
+```
+<br>
+
+## Save your session
+
+Before moving to the next episode, let's save our current session to
+be safe.
+
+```{r, eval=FALSE}
+save.image(file = "workshop.RData")
+```
+<br>
+
 ## Recap
 
 Working with large data sets is often more difficult than working with
