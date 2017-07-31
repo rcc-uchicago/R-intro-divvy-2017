@@ -309,17 +309,17 @@ div.tocify {
 <p><strong>Last updated:</strong> 2017-07-31</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository
  exists and R package git2r is installed -->
-<p><strong>Code version:</strong> fedeb5e <br></p>
+<p><strong>Code version:</strong> d9282d0</p>
 <div id="about-this-file" class="section level2">
 <h2>About this file</h2>
 <p>This file is either a webpage generated from an R Markdown document, or the original R Markdown file itself.</p>
 <p><a href="http://r4ds.had.co.nz/r-markdown.html">R Markdown</a> combines <a href="http://daringfireball.net/projects/markdown">Markdown</a>, a popular, easy-to-read plain text formatting syntax, with “chunks” of R code. R Markdown notebooks can be easily rendered into various formats (e.g., PDF, HTML) for creating sharable and reproducible <a href="https://www.oreilly.com/ideas/the-state-of-jupyter">narratives</a> of your data analyses.</p>
-<p>There are many benefits to documenting your data analyses in R Markdown—we will not have time to explore all the benefits here. <br></p>
+<p>There are many benefits to documenting your data analyses in R Markdown—we will not have time to explore all the benefits here. <br> <br></p>
 </div>
 <div id="how-to-use-this-file" class="section level2">
 <h2>How to use this file</h2>
 <p>We will use this R Markdown document <em>interactively.</em></p>
-<p>Although you can easily generate all the output and figures with a single command from the <a href="https://cran.r-project.org/package=rmarkdown">rmarkdown package</a>, in this workshop we will walk through the data analyses by typing or copying &amp; pasting the lines of code into the R console. <br></p>
+<p>Although you can easily generate all the output and figures with a single command from the <a href="https://cran.r-project.org/package=rmarkdown">rmarkdown package</a>, in this workshop we will walk through the data analyses by typing or copying &amp; pasting the lines of code into the R console. <br> <br></p>
 </div>
 <div id="about-the-divvy-station-data" class="section level2">
 <h2>About the Divvy station data</h2>
@@ -331,7 +331,7 @@ div.tocify {
 # [1] &quot;../data/Divvy_Stations_2016_Q1Q2.csv&quot;
 # [2] &quot;../data/Divvy_Stations_2016_Q3.csv&quot;  
 # [3] &quot;../data/Divvy_Stations_2016_Q4.csv&quot;</code></pre>
-<p>We will only use the Q4 data since it contains the most up-to-date information about the Divvy stations. <br></p>
+<p>We will only use the Q4 data since it contains the most up-to-date information about the Divvy stations. <br> <br></p>
 </div>
 <div id="loading-the-divvy-station-data" class="section level2">
 <h2>Loading the Divvy station data</h2>
@@ -341,7 +341,7 @@ div.tocify {
 <p>If it is not, see the <a href="setup.html">setup</a> instructions for how to change the working directory.</p>
 <p>We will create a new variable called “stations” by running function “read.csv”, and assigning the result of “read.csv” to “stations”:</p>
 <pre class="r"><code>stations &lt;- read.csv(file = &quot;../data/Divvy_Stations_2016_Q4.csv&quot;,
-                         stringsAsFactors = FALSE)</code></pre>
+                     stringsAsFactors = FALSE)</code></pre>
 <p>What does this function do, and what are the function arguments “file” and “stringsAsFactors” for? We can easily find the answers to these questions by accessing the R help documents for this function:</p>
 <pre class="r"><code>help(read.table)</code></pre>
 <p><br></p>
@@ -393,6 +393,12 @@ head(stations)</code></pre>
 <p>Note that I removed the second column in the table because it is no longer needed once we have the row names.</p>
 <p>Once we have row names, we have an easier way to access the same information:</p>
 <pre class="r"><code>stations[stn.name,]</code></pre>
+<p><br></p>
+</div>
+<div id="save-your-session" class="section level2">
+<h2>Save your session</h2>
+<p>This is a good time to save your current R environment just in case you accidentally quit or lose your connection to the cluster.</p>
+<pre class="r"><code>save.image(file = &quot;workshop.RData&quot;)</code></pre>
 <p><br></p>
 </div>
 <div id="recap" class="section level2">
