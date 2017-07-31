@@ -14,37 +14,80 @@ knitr::read_chunk("chunks.R")
 ```
 
 <!-- Insert the date the file was last updated -->
-```{r last-updated, echo=FALSE, results='asis'}
+```{r last-updated, echo=FALSE, results="asis"}
 ```
 
 <!-- Insert the code version (Git commit SHA1) if Git repository
  exists and R package git2r is installed -->
-```{r code-version, echo=FALSE, results='asis'}
+```{r code-version, echo=FALSE, results="asis"}
 ```
+
+For this part of the lesson, I'm assuming you have worked through the
+code in the [previous episode](stations.html), and your R session is
+still open. If you have saved your R session using `save.image`, you
+can load it by running `load("workshop.RData")`.
+
+<br>
 
 ## Installing the data.table package
 
-Explain why we can't use `read.csv` as we did before.
+Before, we used the `read.csv` function to read in the data. However,
+if we try to use it for the Divvy Trip data, we will see that it is
+very slow:
+
+```{r, eval=FALSE}
+trips <- read.csv(file = "../data/Divvy_Trips_2016.csv",
+                  stringsAsFactors = FALSE,nrows = 1e5)
+```
+
+On your computer, it probably took a few seconds to read in the first
+100,000 lines, but there is a total of 3.6 million lines! Instead, we
+will use a function implemented in the `data.table` package that is
+much faster.
+
+Retrieve and install the package from CRAN:
 
 ```{r, eval=FALSE}
 install.packages("data.table")
 ```
 
+Load the package functions into your environment:
+
 ```{r, eval=TRUE}
 library(data.table)
 ```
 
-Getting help on the package.
+What functions were loaded? What can you do with this package? Use
+this command to access the package documentation:
 
 ```{r, eval=FALSE}
-help(package=data.table)
+help(package = data.table)
 ```
+
+Package "vignettes" are also a great way to learn about a package,
+e.g.,
 
 ```{r, eval=FALSE}
-vignette("datable-intro")
+vignette("datatable-intro")
 ```
 
-## Where are your packages?
+## Where are the packages?
 
-*Text goes here.*
+*Add text here.*
+
+## Use data.table to load the Divvy trip data
+
+```{r, eval=FALSE}
+```
+
+## Inspect the data
+
+## Create some factor columns
+
+*Add text here.*
+
+## Convert dates and times.
+
+*Add text and code here.*
+
 

@@ -23,7 +23,8 @@ knitr::read_chunk("chunks.R")
 ```
 
 In the previous two episodes, we've done lots of work importing and
-manipulating the Divvy data, so now let's do something fun with it.
+manipulating the Divvy data. Now let's do something fun with these
+data.
 
 In this analysis, I will use the Divvy trip and station data to
 generate a map of Chicago.

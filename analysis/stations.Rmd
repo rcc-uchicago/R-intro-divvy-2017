@@ -14,12 +14,12 @@ knitr::read_chunk("chunks.R")
 ```
 
 <!-- Insert the date the file was last updated -->
-```{r last-updated, echo=FALSE, results='asis'}
+```{r last-updated, echo=FALSE, results="asis"}
 ```
 
 <!-- Insert the code version (Git commit SHA1) if Git repository
  exists and R package git2r is installed -->
-```{r code-version, echo=FALSE, results='asis'}
+```{r code-version, echo=FALSE, results="asis"}
 ```
 <br>
 
@@ -92,7 +92,7 @@ function "read.csv", and assigning the result of "read.csv" to
 
 ```{r, eval=FALSE}
 stations <- read.csv(file = "../data/Divvy_Stations_2016_Q4.csv",
-                         stringsAsFactors = FALSE)
+                     stringsAsFactors = FALSE)
 ```
 
 What does this function do, and what are the function arguments "file"
@@ -209,6 +209,16 @@ information:
 
 ```{r, eval=FALSE}
 stations[stn.name,]
+```
+<br>
+
+## Save your session
+
+This is a good time to save your current R environment just in case
+you accidentally quit or lose your connection to the cluster.
+
+```{r, eval=FALSE}
+save.image(file = "workshop.RData")
 ```
 <br>
 
