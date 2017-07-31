@@ -33,12 +33,13 @@ library(ggplot2)
 To work through the lessons on your own computer, please follow these
 setup instructions first.
 
-1. You have two options for running R or Rstudio for this workshop: (a)
-you can run R/RStudio on your computer, or; (b) if you have an RCC
-account, you can run R/RStudio on the RCC compute cluster. If you use
-the RCC cluster, I recommend connecting using
+1. You have two options for running R or Rstudio Desktop for this
+workshop: (a) you can run R/RStudio on your computer, or; (b) if you
+have an RCC user account, you can run R/RStudio on the RCC compute
+cluster. If you use the RCC cluster, I recommend connecting using
 [ThinLinc](https://rcc.uchicago.edu/docs/connecting/#connecting-with-thinlinc).
-If you do 
+If you do not have an RCC user account, the instructor can provide you
+with a [Yubikey](yubikey.html).
 
 2. Install R from the [CRAN website](http://cran.r-project.org) and,
 optionally,
@@ -74,9 +75,19 @@ files in the "data" directory. For example, on my MacBook Air, I have:
 list.files("../data")
 ```
 
-4. Launch R or RStudio.
+6. Launch R or RStudio Desktop. If you are on the compute cluster, you
+need to reserve a compute node, then load an R and/or RStudio
+module. For example, to run RStudio Desktop with R 3.3.2, do the
+following:
 
-5. Make sure your working directory in R or RStudio is set to the
+```
+sinteractive --time=02:00:00 --mem=2G --partition=broadwl
+module load R/3.3
+module load rstudio
+rstudio
+```
+
+7. Make sure your working directory in R or RStudio is set to the
 "analysis" directory of the local git repository. For example, on my
 MacBook Air, the current working directory in R is
 

@@ -27,7 +27,7 @@ knitr::read_chunk("chunks.R")
 
 If you do not already have a [user account on
 midway](http://rcc.uchicago.edu/getting-started/request-account), the
-instructor or helpers can provide you with a
+instructor can provide you with a
 [YubiKey](https://www.yubico.com/start). This will allow you to access
 the RCC cluster (*midway*) for the duration of the workshop. (After
 the workshop, you can request a proper user account
