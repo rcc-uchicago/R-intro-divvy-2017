@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+<meta name="author" content="Peter Carbonetto" />
+
+
+<title>Plotting a map of the Divvy stations</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-1.1/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-1.1/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 66px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+
+.section h2 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+.section h3 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+.section h4 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+.section h5 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+.section h6 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Intro R data analysis</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Overview</a>
+</li>
+<li>
+  <a href="setup.html">Setup</a>
+</li>
+<li>
+  <a href="license.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/rcc-uchicago/R-intro-divvy">source</a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Plotting a map of the Divvy stations</h1>
+<h4 class="author"><em>Peter Carbonetto</em></h4>
+
+</div>
+
+
+<!-- Define defaults shared by all workflowr files. -->
+<!-- Update knitr chunk options -->
+<!-- Insert the date the file was last updated -->
+<p><strong>Last updated:</strong> 2017-07-31</p>
+<!-- Insert the code version (Git commit SHA1) if Git repository
+ exists and R package git2r is installed -->
+<p><strong>Code version:</strong> 378ce7e</p>
+<p>In the previous two episodes, we’ve done lots of work importing and manipulating the Divvy data. Now let’s do something fun with these data. we will use the Divvy trip and station data to generate a map of Chicago. <br> <br></p>
+<div id="our-first-plot-of-the-divvy-stations" class="section level2">
+<h2>Our first plot of the Divvy stations</h2>
+<p><a href="http://ggplot2.tidyverse.org">ggplot2</a> has emerged as the most popular R package for creating visualizations from data. Although most people find the interface initially unintuitive, once you get used to it, it is a very powerful tool, and can create sophisticated plots in only a few lines of code.</p>
+<pre class="r"><code>install.packages(&quot;ggplot2&quot;)</code></pre>
+<p>For example, in only one line of code we can create a plot of the Divvy stations by geographic location (latitude &amp; longitude).</p>
+<pre class="r"><code>library(ggplot2)
+ggplot(stations,aes(x = longitude,y = latitude)) + geom_point()</code></pre>
+<p>I’d like to suggest a couple adjustments to the plotting parameters:</p>
+<pre class="r"><code>ggplot(stations,aes(x = longitude,y = latitude)) +
+  geom_point(shape = 21,fill = &quot;darkblue&quot;,color = &quot;white&quot;,size = 2.5)</code></pre>
+<p>ggplot implements transformation and adjustments with separate functions by modifying the initial plot using the “+” operator. Here’s an example:</p>
+<pre class="r"><code>ggplot(stations,aes(x = longitude,y = latitude)) +
+  geom_point(shape = 21,fill = &quot;darkblue&quot;,color = &quot;white&quot;,size = 2.5) +
+  theme_minimal() +
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank())</code></pre>
+</div>
+<div id="scale-the-area-of-each-station-by-total-number-of-departures" class="section level2">
+<h2>Scale the area of each station by total number of departures</h2>
+<p>So far, our plot traces the outlines of the City of Chicago and the Lake Michigan shore. I would like to add an additional piece of information to this visualization: the number of trips from each station.</p>
+<p>To do this, we need to add this information to the “stations” data frame. Let’s create a new variable containing the counts of the number of departures at each station:</p>
+<pre class="r"><code>counts &lt;- table(trips$from_station_name)</code></pre>
+<p>Let’s double-check that the stations in the “counts” variable are listed in the same order as the stations in the data frame:</p>
+<pre class="r"><code>all(names(counts) == rownames(stations))</code></pre>
+<p>Looks good, so we can use this variable to create a new column in the stations data frame:</p>
+<pre class="r"><code>counts   &lt;- as.vector(counts)
+counts   &lt;- data.frame(departures = counts)
+stations &lt;- cbind(stations,counts)
+head(stations)
+summary(stations$departures)</code></pre>
+<p>Now that we have the additional “departures” column in the data frame, we can incorporate these data into the new plot:</p>
+<pre class="r"><code>ggplot(stations,aes(x = longitude,y = latitude, size = departures)) +
+  geom_point(shape = 21,fill = &quot;darkblue&quot;,color = &quot;white&quot;) +
+  theme_minimal() +
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank())</code></pre>
+<p>This looks nice, but isn’t doesn’t accomplish <em>exactly</em> what I wanted because I wanted to scale the <em>area</em> of each circle by the number of departures, not the diameter of each circle. This requires one change to our plotting code.</p>
+<pre class="r"><code>ggplot(stations,aes(x = longitude,y = latitude, size = sqrt(departures))) +
+  geom_point(shape = 21,fill = &quot;darkblue&quot;,color = &quot;white&quot;) +
+  theme_minimal() +
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank())</code></pre>
+<p>Notice that the location of the downtown is now apparent, and that there generally more departures per station on the North Side (although Hyde Park has a decent amount of hiking activity).</p>
+<p>Do you observe any other interesting trends?</p>
+</div>
+<div id="visualizing-seasonal-biking-trends" class="section level2">
+<h2>Visualizing seasonal biking trends</h2>
+<p>Let’s now use the Divvy trip data to examine biking trends in Chicago over the course of one year.</p>
+<p>Convert the “start week” column to a factor, then we can easily count the total number of Divvy trips per week of the year.</p>
+<pre class="r"><code>trips       &lt;- transform(trips,start.week = factor(start.week))
+counts.week &lt;- table(trips$start.week)
+counts.week &lt;- as.vector(counts.week)
+counts.week &lt;- data.frame(week = 0:52,departures = counts.week)
+head(counts.week)
+tail(counts.week)</code></pre>
+<pre class="r"><code>ggplot(counts.week,aes(x = week,y = departures)) +
+  geom_point(color = &quot;darkblue&quot;) +
+  geom_line(color = &quot;darkblue&quot;) +
+  theme_minimal() +
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank())</code></pre>
+<p>What expected or surprising trends do you notice from this plot? What improvements would you make to this figure to better highlight the interesting trends?</p>
+</div>
+<div id="save-your-session" class="section level2">
+<h2>Save your session</h2>
+<p>Before moving to the next episode, let’s save our current session.</p>
+<pre class="r"><code>save.image(file = &quot;workshop.RData&quot;)</code></pre>
+<p><br></p>
+</div>
+<div id="recap" class="section level2">
+<h2>Recap</h2>
+<p>In this episode, we illustrated how ggplot can be used. We only explored the most basic features of ggplot, and it has many, many more. The key point is that ggplot works very well provided you take the time beforehand to organize your data into a data frame, and (e.g., factors).</p>
+</div>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+<hr>
+<p>This <a href="http://rmarkdown.rstudio.com">R Markdown</a> site was
+created with <a href="https://github.com/jdblischak/workflowr">workflowr</a>
+0.7.0.
+</p>
+<hr>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
