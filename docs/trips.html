@@ -309,15 +309,15 @@ div.tocify {
 <p><strong>Last updated:</strong> 2017-07-31</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository
  exists and R package git2r is installed -->
-<p><strong>Code version:</strong> fe86804</p>
+<p><strong>Code version:</strong> f4c83f8</p>
 <p>For this part of the lesson, I’m assuming you have worked through the code in the <a href="stations.html">previous episode</a>, and your R session is still open. If you have saved your R session using <code>save.image</code>, you can load it by running <code>load(&quot;workshop.RData&quot;)</code>.</p>
 <p><br></p>
 <div id="installing-the-data.table-package" class="section level2">
 <h2>Installing the data.table package</h2>
-<p>Before, we used the <code>read.csv</code> function to read in the data. However, if we try to use it for the Divvy Trip data, we will see that it is very slow:</p>
+<p>Previously, we used “read.csv” to read in the data. However, if we try to use it for the Divvy Trip data, we will see that it is very slow:</p>
 <pre class="r"><code>trips &lt;- read.csv(file = &quot;../data/Divvy_Trips_2016.csv&quot;,
                   stringsAsFactors = FALSE,nrows = 1e5)</code></pre>
-<p>On your computer, it probably took a few seconds to read in the first 100,000 lines, but there is a total of 3.6 million lines! Instead, we will use a function implemented in the <code>data.table</code> package that is much faster.</p>
+<p>On your computer, it probably took a few seconds to read in the first 100,000 lines in the file. That is tolerable, but consider that there is a total of 3.6 million lines! Instead, we will use a function implemented in the <code>data.table</code> package that is much faster.</p>
 <p>Retrieve and install the package from CRAN:</p>
 <pre class="r"><code>install.packages(&quot;data.table&quot;)</code></pre>
 <p>Load the package functions into your environment:</p>
@@ -326,16 +326,37 @@ div.tocify {
 <pre class="r"><code>help(package = data.table)</code></pre>
 <p>Package “vignettes” are also a great way to learn about a package, e.g.,</p>
 <pre class="r"><code>vignette(&quot;datatable-intro&quot;)</code></pre>
+<p><br></p>
 </div>
-<div id="where-are-the-packages" class="section level2">
-<h2>Where are the packages?</h2>
-<p><em>Add text here.</em></p>
+<div id="where-are-my-packages" class="section level2">
+<h2>Where are my packages?</h2>
+<p>In most cases, packages are either installed in R software directory, or in your home directory. This will give you the list of package installation locations:</p>
+<pre class="r"><code>.libPaths()</code></pre>
+<p>When you install a new package, by default it is installed in the first location.</p>
+<p>To get the full list of packages, run</p>
+<pre class="r"><code>installed.packages()</code></pre>
+<p>or</p>
+<pre class="r"><code>rownames(installed.packages)</code></pre>
+<p>If you want to find out which packages are installed in each location, run these commands:</p>
+<pre class="r"><code>rownames(installed.packages(lib = .libPaths()[1]))
+rownames(installed.packages(lib = .libPaths()[2]))</code></pre>
 </div>
 <div id="use-data.table-to-load-the-divvy-trip-data" class="section level2">
 <h2>Use data.table to load the Divvy trip data</h2>
+<p>Let’s go ahead and load the data for the 3.6 million trips using the “fread” funtion from the <code>data.table</code> package:</p>
+<pre class="r"><code>trips &lt;- fread(&quot;../data/Divvy_Trips_2016.csv&quot;,sep = &quot;,&quot;,header = TRUE,
+               stringsAsFactors = FALSE)
+trips &lt;- read.csv(&quot;../data/Divvy_Trips_2016.csv&quot;,
+               stringsAsFactors = FALSE)</code></pre>
+<p>On my MacBook Air, this took about 30 seconds—not too bad. It will take much longer if you use “read.csv”. (Try it!)</p>
 </div>
-<div id="inspect-the-data" class="section level2">
-<h2>Inspect the data</h2>
+<div id="a-first-peek-at-the-divvy-trip-data" class="section level2">
+<h2>A first peek at the Divvy trip data</h2>
+<pre class="r"><code>nrow(trips)
+ncol(trips)
+head(trips)
+tail(trips)
+summary(trips)</code></pre>
 </div>
 <div id="create-some-factor-columns" class="section level2">
 <h2>Create some factor columns</h2>
@@ -344,6 +365,9 @@ div.tocify {
 <div id="convert-dates-and-times." class="section level2">
 <h2>Convert dates and times.</h2>
 <p><em>Add text and code here.</em></p>
+</div>
+<div id="recap" class="section level2">
+<h2>Recap</h2>
 </div>
 
 <script type="text/x-mathjax-config">
