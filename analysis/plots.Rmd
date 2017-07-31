@@ -161,6 +161,29 @@ What expected or surprising trends do you notice from this plot? What
 improvements would you make to this figure to better highlight the
 interesting trends?
 
+## Seasonal trends at the University of Chicago
+
+```{r, eval=FALSE}
+trips.uofc <- subset(trips,from_station_name == "University Ave & 57th St")
+counts.week.uofc <-
+  data.frame(week       = 0:52,
+             departures = as.vector(table(trips.uofc$start.week)))
+```
+
+```{r, eval=FALSE}
+ggplot(counts.week.uofc,aes(x = week,y = departures)) +
+  geom_point(color = "darkblue") +
+  geom_line(color = "darkblue") +
+  theme_minimal() +
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank())
+```
+
+When we analyze trips taken at the University of Chicago bike station,
+the "bump" during warmer months flattens out. This is probably because
+a large fraction of University of Chicago students leave during the
+summer.
+
 ## Save your session
 
 Before moving to the next episode, let's save our current session.
@@ -176,4 +199,7 @@ In this episode, we illustrated how ggplot can be used. We only
 explored the most basic features of ggplot, and it has many, many
 more. The key point is that ggplot works very well provided you take
 the time beforehand to organize your data into a data frame, and
-(e.g., factors).
+(e.g., factors, dates & times).
+
+In the [final episode](), we will take a closer look at the biking
+trends at the University of Chicago.

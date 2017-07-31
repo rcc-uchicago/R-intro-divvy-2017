@@ -223,7 +223,7 @@ install.packages("lubridate")
 ```
 
 Here, I create my own function for parsing the dates and times to
-accommodate the format of the dates and times provided in the Divvy
+accommodate the format of the date & time data stored in the Divvy
 CSV files.
 
 ```{r, eval=TRUE}
@@ -298,5 +298,5 @@ packages that can process the data efficiently. But once we take the
 effort to process the data carefully, we can quickly get insights into
 the data using basic R commands.
 
-In the [next episode](stations-map.Rmd), we will turn the data into
-some evocative plots.
+In the [next episode](plots.Rmd), we will use the station and trip
+data to generate some insightful plots.
