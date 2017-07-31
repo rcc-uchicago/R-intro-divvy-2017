@@ -22,6 +22,7 @@ knitr::read_chunk("chunks.R")
  package git2r is installed -->
 ```{r code-version, echo=FALSE, results="asis"}
 ```
+<br>
 
 ## Setup instructions
 
@@ -53,7 +54,7 @@ able to create plots.
 [git repository](https://github.com/rcc-uchicago/R-intro-divvy). Click
 [here](https://github.com/rcc-uchicago/R-intro-divvy/archive/master.zip)
 to download a Zip file containing all the files. If you are on the
-cluster, you can use `wget` or `git clone` to download the git
+cluster, you can use "wget" or "git clone" to download the git
 repository.
 
 4. Download the Divvy data files into the "data" directory, and
@@ -96,6 +97,7 @@ getwd()
 
 Once you have completed these steps, you are ready to move on to the
 lessons.
+<br>
 <br>
 
 ## Session information
