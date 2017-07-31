@@ -310,14 +310,14 @@ shared across the workflowr files. -->
 <p><strong>Last updated:</strong> 2017-07-31</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository exists and R
  package git2r is installed -->
-<p><strong>Code version:</strong> f2e225f</p>
+<p><strong>Code version:</strong> df84401</p>
 <div id="setup-instructions" class="section level2">
 <h2>Setup instructions</h2>
-<p>To work through the lessons on your own computer, please first follow these setup instructions.</p>
+<p>To work through the lessons on your own computer, please follow these setup instructions first.</p>
 <ol style="list-style-type: decimal">
 <li><p>Install <a href="http://cran.r-project.org">R</a> and, optionally, <a href="https://www.rstudio.com/products/rstudio">Rstudio</a>. <em>Note:</em> If you do not use RStudio, you will need to have additional software installed for X Windows graphics (e.g., <a href="http://xquartz.org">XQuartz</a> on Mac). Without this, you will not be able to create plots.</p></li>
-<li><p>Download or clone the <a href="https://github.com/rcc-uchicago/R-intro-divvy">git repository</a> to your computer. Click <a href="https://github.com/rcc-uchicago/R-intro-divvy/archive/master.zip">here</a> to download a ZIP file containing all the files.</p></li>
-<li><p>Download the Divvy data files into the “data” directory, and prepare the data files for analysis. The <strong>easiest way</strong> to this is to download the prepared data files <a href="https://uchicago.box.com/v/divvy">here</a>, and move the files into the “data” directory. The file on Box is about 82 MB, so it may take a few minutes to download. The <strong>more complicated way</strong> to do this is to download the data directly from the Divvy website. I have provided a script <code>code/retrieve_divvy_data.sh</code> to do this automatically, and will move the files to the expected location, and prepare the files for the analysis in R. This shows how the data were obtained from the <a href="https://www.divvybikes.com/system-data">original source</a>.</p></li>
+<li><p>Download or clone the <a href="https://github.com/rcc-uchicago/R-intro-divvy">git repository</a> to your computer. Click <a href="https://github.com/rcc-uchicago/R-intro-divvy/archive/master.zip">here</a> to download a Zip file containing all the files.</p></li>
+<li><p>Download the Divvy data files into the “data” directory, and prepare the data files for analysis. The <strong>easiest way</strong> to this is to download the prepared data files <a href="https://uchicago.box.com/v/divvy">here</a>, and move the files into the “data” directory. The file on Box is about 82 MB, so it may take a few minutes to download. The <strong>more complicated way</strong> to do this is to download the data directly from the Divvy website. I have provided a script <code>code/retrieve_divvy_data.sh</code> to do this automatically. This script will also move the files to the expected location, and prepare the files for the analysis in R. This script reproduces how the data were obtained from the <a href="https://www.divvybikes.com/system-data">original source</a>.</p></li>
 <li><p>After completing Step 3, check that you have all the necessary data files in the “data” directory. For example, on my MacBook Air, I have:</p></li>
 </ol>
 <pre class="r"><code>list.files(&quot;../data&quot;)
@@ -330,21 +330,11 @@ shared across the workflowr files. -->
 </ol>
 <pre class="r"><code>getwd()
 # [1] &quot;/Users/pcarbo/git/R-intro-divvy/analysis&quot;</code></pre>
-<p>I have provided a script <code>code/retrieve_divvy_data.sh</code> that will automatically retrieve the data files and move them to the expected location. Alternatively, you can view this script and follow the steps by hand. After completing this step, these files should be in the data directory:</p>
-<pre><code>Divvy_Stations_2016_Q1Q2.csv
-Divvy_Stations_2016_Q3.csv
-Divvy_Stations_2016_Q4.csv
-Divvy_Trips_2016_04.csv
-Divvy_Trips_2016_05.csv
-Divvy_Trips_2016_06.csv
-Divvy_Trips_2016_Q1.csv
-Divvy_Trips_2016_Q3.csv
-Divvy_Trips_2016_Q4.csv</code></pre>
 <p>Once you have completed these steps, you are ready to move on to the lessons. <br></p>
 </div>
 <div id="session-information" class="section level2">
 <h2>Session information</h2>
-<p>This is my version of R and the packages that I used to generate the webpages from the R Markdown documents.</p>
+<p>Calling <code>sessionInfo()</code> shows the version of R I am using, and the packages that I used to generate the webpages from the R Markdown documents.</p>
 <pre class="r"><code>sessionInfo()
 # R version 3.3.2 (2016-10-31)
 # Platform: x86_64-apple-darwin13.4.0 (64-bit)
