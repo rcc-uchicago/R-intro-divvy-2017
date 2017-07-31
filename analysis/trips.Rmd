@@ -275,6 +275,8 @@ people who started riding from the on-campus station:
 uc.dests <- summary(uc.trips$to_station_name)
 i        <- which(uc.dests > 0)
 uc.dests <- uc.dests[i]
+uc.dests
+data.frame(uc.dests)
 ```
 <br>
 
