@@ -310,14 +310,20 @@ shared across the workflowr files. -->
 <p><strong>Last updated:</strong> 2017-07-31</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository exists and R
  package git2r is installed -->
-<p><strong>Code version:</strong> df84401</p>
+<p><strong>Code version:</strong> 0a63e18</p>
 <div id="setup-instructions" class="section level2">
 <h2>Setup instructions</h2>
 <p>To work through the lessons on your own computer, please follow these setup instructions first.</p>
 <ol style="list-style-type: decimal">
-<li><p>Install <a href="http://cran.r-project.org">R</a> and, optionally, <a href="https://www.rstudio.com/products/rstudio">Rstudio</a>. <em>Note:</em> If you do not use RStudio, you will need to have additional software installed for X Windows graphics (e.g., <a href="http://xquartz.org">XQuartz</a> on Mac). Without this, you will not be able to create plots.</p></li>
-<li><p>Download or clone the <a href="https://github.com/rcc-uchicago/R-intro-divvy">git repository</a> to your computer. Click <a href="https://github.com/rcc-uchicago/R-intro-divvy/archive/master.zip">here</a> to download a Zip file containing all the files.</p></li>
-<li><p>Download the Divvy data files into the “data” directory, and prepare the data files for analysis. The <strong>easiest way</strong> to this is to download the prepared data files <a href="https://uchicago.box.com/v/divvy">here</a>, and move the files into the “data” directory. The file on Box is about 82 MB, so it may take a few minutes to download. The <strong>more complicated way</strong> to do this is to download the data directly from the Divvy website. I have provided a script <code>code/retrieve_divvy_data.sh</code> to do this automatically. This script will also move the files to the expected location, and prepare the files for the analysis in R. This script reproduces how the data were obtained from the <a href="https://www.divvybikes.com/system-data">original source</a>.</p></li>
+<li>You have two options for running R or Rstudio for this workshop:</li>
+</ol>
+<ol style="list-style-type: lower-alpha">
+<li>you can run R/RStudio on your computer, or; (b) if you have an RCC account, you can run R/RStudio on the RCC compute cluster. If you use the RCC cluster, I recommend connecting using <a href="https://rcc.uchicago.edu/docs/connecting/#connecting-with-thinlinc">ThinLinc</a>.</li>
+</ol>
+<ol style="list-style-type: decimal">
+<li><p>Install R from the <a href="http://cran.r-project.org">CRAN website</a> and, optionally, <a href="https://www.rstudio.com/products/rstudio/download">Rstudio Desktop</a>. <em>Note:</em> If you do not use RStudio, you will need to have additional software installed for X Windows graphics (e.g., <a href="http://xquartz.org">XQuartz</a> on Mac). Without this, you will not be able to create plots.</p></li>
+<li><p>Download or clone the <a href="https://github.com/rcc-uchicago/R-intro-divvy">git repository</a>. Click <a href="https://github.com/rcc-uchicago/R-intro-divvy/archive/master.zip">here</a> to download a Zip file containing all the files. If you are on the cluster, you can use <code>wget</code> or <code>git clone</code> to download the git repository.</p></li>
+<li><p>Download the Divvy data files into the “data” directory, and prepare the data files for analysis. <strong>Easiest approach:</strong> t download the prepared data files <a href="https://uchicago.box.com/v/divvy">here</a>, and move the files into the “data” directory. The file on Box is about 82 MB, so it may take a few minutes to download. <strong>More complicated approach</strong> download the data directly from the Divvy website. I have provided a script <code>code/retrieve_divvy_data.sh</code> to do this automatically. This script will also move the files to the expected location, and prepare the files for the analysis in R. This script reproduces how the data were obtained from the <a href="https://www.divvybikes.com/system-data">original source</a>.</p></li>
 <li><p>After completing Step 3, check that you have all the necessary data files in the “data” directory. For example, on my MacBook Air, I have:</p></li>
 </ol>
 <pre class="r"><code>list.files(&quot;../data&quot;)
@@ -326,7 +332,7 @@ shared across the workflowr files. -->
 # [5] &quot;README.txt&quot;</code></pre>
 <ol start="4" style="list-style-type: decimal">
 <li><p>Launch R or RStudio.</p></li>
-<li><p>Make sure your working directory in R or RStudio is set to the “analysis” directory of the git repository on your computer. For example, on my MacBook Air, the current working directory in R is</p></li>
+<li><p>Make sure your working directory in R or RStudio is set to the “analysis” directory of the local git repository. For example, on my MacBook Air, the current working directory in R is</p></li>
 </ol>
 <pre class="r"><code>getwd()
 # [1] &quot;/Users/pcarbo/git/R-intro-divvy/analysis&quot;</code></pre>
