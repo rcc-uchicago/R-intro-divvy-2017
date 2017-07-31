@@ -260,7 +260,15 @@ summary(uc.trips$start.day)
 summary(uc.trips$to_station_name)
 ```
 
-It is fun to look in more detail at the final destinations of all
+It is interesting to compare the day-of-the-week trends at University
+of Chicago compared the rest of the city:
+
+```{r, eval=FALSE}
+rbind(summary(trips$start.day),
+      summary(uc.trips$start.day))
+```
+
+It is also fun to look in more detail at the final destinations of all
 people who started riding from the on-campus station:
 
 ```{r, eval=FALSE}
