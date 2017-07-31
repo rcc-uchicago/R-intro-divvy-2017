@@ -230,5 +230,7 @@ save.image(file = "workshop.RData")
 In this first episode, we explored some basic commands for loading
 data from a text file into a data frame in R, inspecting the data in
 the data frame, and making a few simple (but useful!) modifications to
-the data.  In [the next episode](trips.html), we will explore these same
+the data.
+
+In [the next episode](trips.html), we will explore these same
 techniques, but in a much larger table---the Divvy trip data.

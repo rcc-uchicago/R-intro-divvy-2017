@@ -28,6 +28,7 @@ knitr::read_chunk("chunks.R")
 
 ```{r, echo=FALSE, results="hide", eval=TRUE}
 library(data.table)
+library(lubridate)
 library(ggplot2)
 ```
 

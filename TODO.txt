@@ -1,2 +1,2 @@
+* Clean up files in repository.
 * Load all packages that I used in setup.Rmd.
-
