@@ -15,33 +15,62 @@ knitr::read_chunk("chunks.R")
 ```
 
 <!-- Insert the date the file was last updated -->
-```{r last-updated, echo=FALSE, results='asis'}
+```{r last-updated, echo=FALSE, results="asis"}
 ```
 
 <!-- Insert the code version (Git commit SHA1) if Git repository exists and R
  package git2r is installed -->
-```{r code-version, echo=FALSE, results='asis'}
+```{r code-version, echo=FALSE, results="asis"}
 ```
 
 ## Setup instructions
 
-To follow the lessons on your own computer, please follow these setup
-instructions.
+```{r, echo=FALSE, results="hide", eval=TRUE}
+library(data.table)
+library(ggplot2)
+```
 
-1. Install [R](http://cran.r-project.org) and/or
-[Rstudio](https://www.rstudio.com/products/rstudio).
+To work through the lessons on your own computer, please first follow
+these setup instructions.
 
-*Note:* If you do not use RStudio, you will need to make sure that you
-have the necessary software on your computer to handle X Windows
-graphics. Without this, you will not be able to generate plots.
+1. Install [R](http://cran.r-project.org) and, optionally,
+[Rstudio](https://www.rstudio.com/products/rstudio). *Note:* If you do
+not use RStudio, you will need to have additional software installed
+for X Windows graphics (e.g., [XQuartz](http://xquartz.org) on
+Mac). Without this, you will not be able to create plots.
 
 2. Download or clone the
-[git repository](https://github.com/rcc-uchicago/R-intro-divvy)  your
-computer. Click [here](https://github.com/rcc-uchicago/R-intro-divvy/archive/master.zip) to download a ZIP file containing all the files
+[git repository](https://github.com/rcc-uchicago/R-intro-divvy) to your
+computer. Click [here](https://github.com/rcc-uchicago/R-intro-divvy/archive/master.zip) to download a ZIP file containing all the files.
 
-3. Download the Divvy data files into the "data" directory.
+3. Download the Divvy data files into the "data" directory, and
+prepare the data files for analysis. The **easiest way** to this is to
+download the prepared data files
+[here](https://uchicago.box.com/v/divvy), and move the files into the
+"data" directory. The file on Box is about 82 MB, so it may take a few
+minutes to download. The **more complicated way** to do this is to
+download the data directly from the Divvy website. I have provided a
+script `code/retrieve_divvy_data.sh` to do this automatically, and
+will move the files to the expected location, and prepare the files
+for the analysis in R. This shows how the data were obtained from the
+[original source](https://www.divvybikes.com/system-data).
+
+3. After completing Step 3, check that you have all the necessary data
+files in the "data" directory. For example, on my MacBook Air, I have:
+
+```{r}
+ls.files()
+```
 
 4. Launch R or RStudio.
+
+5. Make sure your working directory in R or RStudio is set to the
+"analysis" directory of the git repository on your computer. For
+example, on my MacBook Air, the current working directory in R is
+
+```{r}
+getwd()
+```
 
 I have provided a script `code/retrieve_divvy_data.sh` that
 will automatically retrieve the data files and move them to the
@@ -61,20 +90,14 @@ Divvy_Trips_2016_Q3.csv
 Divvy_Trips_2016_Q4.csv
 ```
 
-Once you have completed these steps, you may run the R code. When
-running the code, make sure your working directory is set to the
-"analysis" directory of the repository. For example, on my MacBook Air
-the current working directory is
-
-```{r working-dir}
-getwd()
-```
+Once you have completed these steps, you are ready to move on to the
+lessons.
 <br>
 
 ## Session information
 
-This is the version of R and the packages that were used to generate
-the results from the R Markdown documents.
+This is my version of R and the packages that I used to generate
+the webpages from the R Markdown documents.
 
 ```{r session-info}
 ```

@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# This script will automatically download and prepare the data for the
+# analyses in R.
+
 # Move to the data directory.
 cd ../data
 
