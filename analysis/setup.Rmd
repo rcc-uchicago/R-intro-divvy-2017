@@ -33,13 +33,14 @@ library(ggplot2)
 To work through the lessons on your own computer, please follow these
 setup instructions first.
 
-1. You have two options for running R or Rstudio for this workshop:
-(a) you can run R/RStudio on your computer, or; (b) if you have an RCC
+1. You have two options for running R or Rstudio for this workshop: (a)
+you can run R/RStudio on your computer, or; (b) if you have an RCC
 account, you can run R/RStudio on the RCC compute cluster. If you use
 the RCC cluster, I recommend connecting using
 [ThinLinc](https://rcc.uchicago.edu/docs/connecting/#connecting-with-thinlinc).
+If you do 
 
-1. Install R from the [CRAN website](http://cran.r-project.org) and,
+2. Install R from the [CRAN website](http://cran.r-project.org) and,
 optionally,
 [Rstudio Desktop](https://www.rstudio.com/products/rstudio/download).
 *Note:* If you do not use RStudio, you will need to have additional
@@ -47,26 +48,26 @@ software installed for X Windows graphics (e.g.,
 [XQuartz](http://xquartz.org) on Mac). Without this, you will not be
 able to create plots.
 
-2. Download or clone the
+3. Download or clone the
 [git repository](https://github.com/rcc-uchicago/R-intro-divvy). Click
 [here](https://github.com/rcc-uchicago/R-intro-divvy/archive/master.zip)
 to download a Zip file containing all the files. If you are on the
 cluster, you can use `wget` or `git clone` to download the git
 repository.
 
-3. Download the Divvy data files into the "data" directory, and
-prepare the data files for analysis. **Easiest approach:** t download
+4. Download the Divvy data files into the "data" directory, and
+prepare the data files for analysis. **Easiest approach:** download
 the prepared data files [here](https://uchicago.box.com/v/divvy), and
 move the files into the "data" directory. The file on Box is about 82
 MB, so it may take a few minutes to download. **More complicated
-approach** download the data directly from the Divvy website. I have
+approach:** download the data directly from the Divvy website. I have
 provided a script `code/retrieve_divvy_data.sh` to do this
 automatically. This script will also move the files to the expected
 location, and prepare the files for the analysis in R. This script
-reproduces how the data were obtained from the
+reproduces the data preparation steps starting from the 
 [original source](https://www.divvybikes.com/system-data).
 
-3. After completing Step 3, check that you have all the necessary data
+5. After completing Step 4, check that you have all the necessary data
 files in the "data" directory. For example, on my MacBook Air, I have:
 
 ```{r}

@@ -1,3 +1,2 @@
-* Upload prepared Divvy data to UChicago Box.
-
 * Load all packages that I used in setup.Rmd.
+
