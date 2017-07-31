@@ -309,7 +309,7 @@ div.tocify {
 <p><strong>Last updated:</strong> 2017-07-31</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository
  exists and R package git2r is installed -->
-<p><strong>Code version:</strong> c369263 <br></p>
+<p><strong>Code version:</strong> fedeb5e <br></p>
 <div id="about-this-file" class="section level2">
 <h2>About this file</h2>
 <p>This file is either a webpage generated from an R Markdown document, or the original R Markdown file itself.</p>
@@ -382,22 +382,22 @@ head(stations,n = 10)</code></pre>
 <div id="quickly-accessing-stations-in-the-table-by-their-name" class="section level2">
 <h2>Quickly accessing stations in the table by their name</h2>
 <p>It is often useful to access rows of a table by their name or label instead of using a number. This can be done by setting the row names in the data frame.</p>
-<p>For example, this is one of the Divvy stations on campus:</p>
+<p>For example, this is one of the Divvy stations on the University of Chicago campus:</p>
 <pre class="r"><code>stn.name &lt;- &quot;University Ave &amp; 57th St&quot;
 i &lt;- which(stations$name == stn.name)
 stations[i,]</code></pre>
-<p>Note that I removed the second column in the table because it is no longer needed.</p>
 <p>Let’s now add row names:</p>
 <pre class="r"><code>rownames(stations) &lt;- stations$name
 stations           &lt;- stations[-2]
 head(stations)</code></pre>
-<p>Now we have an easier way to access the same information:</p>
+<p>Note that I removed the second column in the table because it is no longer needed once we have the row names.</p>
+<p>Once we have row names, we have an easier way to access the same information:</p>
 <pre class="r"><code>stations[stn.name,]</code></pre>
 <p><br></p>
 </div>
 <div id="recap" class="section level2">
 <h2>Recap</h2>
-<p>In this first episode, we explored some basic commands for loading data from a text file into a dta frame, inspecting the data frame, and making a few simple (but useful!) modifications to the data frame. In <a href="trips.">the next episode</a>, we will explore these same tools, but in a much larger data table—the Divvy trip data.</p>
+<p>In this first episode, we explored some basic commands for loading data from a text file into a data frame in R, inspecting the data in the data frame, and making a few simple (but useful!) modifications to the data. In <a href="trips.html">the next episode</a>, we will explore these same techniques, but in a much larger table—the Divvy trip data.</p>
 </div>
 
 <script type="text/x-mathjax-config">
