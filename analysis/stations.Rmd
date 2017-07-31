@@ -38,6 +38,7 @@ your data analyses.
 
 There are many benefits to documenting your data analyses in R
 Markdown---we will not have time to explore all the benefits here.
+
 <br>
 
 ## How to use this file
@@ -49,6 +50,7 @@ single command from the
 [rmarkdown package](https://cran.r-project.org/package=rmarkdown), in
 this workshop we will walk through the data analyses by typing or
 copying & pasting the lines of code into the R console.
+
 <br>
 
 ## About the Divvy station data
@@ -70,11 +72,12 @@ Sys.glob("../data/*Stations*")
 
 We will only use the Q4 data since it contains the most up-to-date
 information about the Divvy stations.
+
 <br>
 
 ## Loading the Divvy station data
 
-The R environment is where all *variables* and *functions* are stored
+The R environment is where all *variables and functions* are stored
 and accessed.
 
 Immediately after launching R, your R environment will be empty.
@@ -86,9 +89,9 @@ ls()
 If it is not, see the [setup](setup.html) instructions for how to
 change the working directory.
 
-We will create a new variable called `stations` by running
-function `read.csv`, and assigning the result of `read.csv` to
-`stations`:
+We will create a new variable called "stations" by running
+function "read.csv", and assigning the result of "read.csv" to
+"stations":
 
 ```{r, eval=FALSE}
 stations <- read.csv(file = "../data/Divvy_Stations_2016_Q4.csv",

@@ -75,7 +75,7 @@ data.](seasonal-trends.html)
 
 <br>
 
-## Useful resources
+## Other useful resources
 
 + [CRAN](http://cran.r-project.org).
 
