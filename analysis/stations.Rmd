@@ -109,7 +109,7 @@ help(read.table)
 
 ## A first peek at the Divvy station data 
 
-What kind of variable is `stations`? We can check this:
+What kind of variable is "stations"? We can check this:
 
 ```{r, eval=FALSE}
 class(read.table)
@@ -132,7 +132,7 @@ tail(stations)
 See the "README.txt" file in the data directory for more information
 about the columns in the table.
 
-Use `summary` to quickly generate an overview of the data:
+Use `summary` to quickly generate an overview of the data in the table:
 
 ```{r, eval=FALSE}
 summary(stations)
@@ -147,14 +147,14 @@ nrow(stations)
 ncol(stations)
 ```
 
-We can inspect individual rows of the table:
+We can inspect individual rows of the table, e.g.,
 
 ```{r, eval=FALSE}
 stations[100,]
 ```
 
-We can also take a closer look at individual columns of the table. For
-example, the "dpcapacity" column
+We can also take a closer look at individual columns of the table,
+e.g., the "dpcapacity" column,
 
 ```{r, eval=FALSE}
 class(stations[["dpcapacity"]])
