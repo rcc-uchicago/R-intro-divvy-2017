@@ -184,16 +184,14 @@ It is often useful to access rows of a table by their name or label
 instead of using a number. This can be done by setting the row names
 in the data frame.
 
-For example, this is one of the Divvy stations on campus:
+For example, this is one of the Divvy stations on the University of
+Chicago campus:
 
 ```{r, eval=FALSE}
 stn.name <- "University Ave & 57th St"
 i <- which(stations$name == stn.name)
 stations[i,]
 ```
-
-Note that I removed the second column in the table because it is no
-longer needed.
 
 Let's now add row names:
 
@@ -203,7 +201,11 @@ stations           <- stations[-2]
 head(stations)
 ```
 
-Now we have an easier way to access the same information:
+Note that I removed the second column in the table because it is no
+longer needed once we have the row names.
+
+Once we have row names, we have an easier way to access the same
+information:
 
 ```{r, eval=FALSE}
 stations[stn.name,]
@@ -213,7 +215,7 @@ stations[stn.name,]
 ## Recap
 
 In this first episode, we explored some basic commands for loading
-data from a text file into a dta frame, inspecting the data frame, and
-making a few simple (but useful!) modifications to the data frame.  In
-[the next episode](trips.), we will explore these same tools, but in a
-much larger data table---the Divvy trip data.
+data from a text file into a data frame in R, inspecting the data in
+the data frame, and making a few simple (but useful!) modifications to
+the data.  In [the next episode](trips.html), we will explore these same
+techniques, but in a much larger table---the Divvy trip data.
