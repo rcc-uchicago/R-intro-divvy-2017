@@ -309,7 +309,7 @@ div.tocify {
 <p><strong>Last updated:</strong> 2017-07-31</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository
  exists and R package git2r is installed -->
-<p><strong>Code version:</strong> 3b4278c <br></p>
+<p><strong>Code version:</strong> 93e5b42 <br></p>
 <p>For this part of the lesson, I’m assuming you have worked through the code in the <a href="stations.html">previous episode</a>, and your R session is still open. If you have saved your R session using “save.image”, you can load it by running <code>load(&quot;workshop.RData&quot;)</code>. <br> <br></p>
 <div id="installing-the-data.table-package" class="section level2">
 <h2>Installing the data.table package</h2>
@@ -424,7 +424,9 @@ summary(uc.trips$to_station_name)</code></pre>
 <p>It is also fun to look in more detail at the final destinations of all people who started riding from the on-campus station:</p>
 <pre class="r"><code>uc.dests &lt;- summary(uc.trips$to_station_name)
 i        &lt;- which(uc.dests &gt; 0)
-uc.dests &lt;- uc.dests[i]</code></pre>
+uc.dests &lt;- uc.dests[i]
+uc.dests
+data.frame(uc.dests)</code></pre>
 <p><br></p>
 </div>
 <div id="save-your-session" class="section level2">
