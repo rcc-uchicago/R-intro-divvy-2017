@@ -59,7 +59,7 @@ for the analysis in R. This shows how the data were obtained from the
 files in the "data" directory. For example, on my MacBook Air, I have:
 
 ```{r}
-ls.files()
+list.files("../data")
 ```
 
 4. Launch R or RStudio.
