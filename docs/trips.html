@@ -309,9 +309,8 @@ div.tocify {
 <p><strong>Last updated:</strong> 2017-07-31</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository
  exists and R package git2r is installed -->
-<p><strong>Code version:</strong> 1a2de37</p>
-<p>For this part of the lesson, I’m assuming you have worked through the code in the <a href="stations.html">previous episode</a>, and your R session is still open. If you have saved your R session using <code>save.image</code>, you can load it by running <code>load(&quot;workshop.RData&quot;)</code>.</p>
-<p><br></p>
+<p><strong>Code version:</strong> 90f3363 <br></p>
+<p>For this part of the lesson, I’m assuming you have worked through the code in the <a href="stations.html">previous episode</a>, and your R session is still open. If you have saved your R session using “save.image”, you can load it by running <code>load(&quot;workshop.RData&quot;)</code>. <br> <br></p>
 <div id="installing-the-data.table-package" class="section level2">
 <h2>Installing the data.table package</h2>
 <p>Previously, we used “read.csv” to read in the data. However, if we try to use it for the Divvy Trip data, we will see that it is very slow:</p>
@@ -340,13 +339,14 @@ div.tocify {
 <p>If you want to find out which packages are installed in each location, run these commands:</p>
 <pre class="r"><code>rownames(installed.packages(lib = .libPaths()[1]))
 rownames(installed.packages(lib = .libPaths()[2]))</code></pre>
+<p><br></p>
 </div>
 <div id="use-data.table-to-load-the-divvy-trip-data" class="section level2">
 <h2>Use data.table to load the Divvy trip data</h2>
 <p>Let’s go ahead and load the data for the 3.6 million trips using the “fread” funtion from the <code>data.table</code> package:</p>
 <pre class="r"><code>trips &lt;- fread(&quot;../data/Divvy_Trips_2016.csv&quot;,sep = &quot;,&quot;,header = TRUE,
                stringsAsFactors = FALSE)</code></pre>
-<p>On my MacBook Air, this took about 30 seconds—not too bad. It will take much longer if you use “read.csv”. (Try it!)</p>
+<p>On my MacBook Air, this took about 30 seconds—not too bad. It will take much longer if you use “read.csv”. (Try it!) <br> <br></p>
 </div>
 <div id="a-first-peek-at-the-divvy-trip-data" class="section level2">
 <h2>A first peek at the Divvy trip data</h2>
@@ -360,7 +360,7 @@ ncol(trips)
 head(trips)
 tail(trips)
 summary(trips)</code></pre>
-<p>Unfortunately, the “summary” command isn’t particularly useful in this case. It will be more useful if we first convert some of the columns to <em>factors</em>.</p>
+<p>Unfortunately, the “summary” command isn’t particularly useful in this case. It will be more useful if we first convert some of the columns to <em>factors</em>. <br> <br></p>
 </div>
 <div id="create-some-factor-columns" class="section level2">
 <h2>Create some factor columns</h2>
@@ -388,10 +388,10 @@ summary(trips$gender)</code></pre>
                                               rownames(stations)))</code></pre>
 <p>For example, we can now quickly generate more informative summaries of the trips by station:</p>
 <pre class="r"><code>summary(trips$from_station_name)</code></pre>
-<p>What is the second argument of function “factor” for? Why did we set the second argument of “factor” in this case, and not before?</p>
+<p>What is the second argument of function “factor” for? Why did we set the second argument of “factor” in this case, and not before? <br> <br></p>
 </div>
-<div id="convert-dates-and-times." class="section level2">
-<h2>Convert dates and times.</h2>
+<div id="convert-the-dates-and-times" class="section level2">
+<h2>Convert the dates and times</h2>
 <p>In the previous section, we found that converting some table columns to factors makes these columns easier to inspect (and eventually analyze). Similarly, the dates and times aren’t particularly useful until we extract them from the character strings. Working with dates &amp; times in R is much more complicated so I won’t explain in detail what this code does, or how it works.</p>
 <p>To convert the dates and times, I will use the <code>lubridate</code> package.</p>
 <pre class="r"><code>install.packages(&quot;lubridate&quot;)</code></pre>
@@ -408,6 +408,7 @@ trips &lt;- transform(trips,starttime = parse.dt(starttime))
 trips &lt;- transform(trips,start.week = as.numeric(format(starttime,&quot;%W&quot;)))
 summary(trips$starttime)
 summary(trips$startweek)</code></pre>
+<p><br></p>
 </div>
 <div id="recap" class="section level2">
 <h2>Recap</h2>
