@@ -309,7 +309,7 @@ div.tocify {
 <p><strong>Last updated:</strong> 2017-07-31</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository
  exists and R package git2r is installed -->
-<p><strong>Code version:</strong> f4c83f8</p>
+<p><strong>Code version:</strong> 1a2de37</p>
 <p>For this part of the lesson, I’m assuming you have worked through the code in the <a href="stations.html">previous episode</a>, and your R session is still open. If you have saved your R session using <code>save.image</code>, you can load it by running <code>load(&quot;workshop.RData&quot;)</code>.</p>
 <p><br></p>
 <div id="installing-the-data.table-package" class="section level2">
@@ -317,7 +317,7 @@ div.tocify {
 <p>Previously, we used “read.csv” to read in the data. However, if we try to use it for the Divvy Trip data, we will see that it is very slow:</p>
 <pre class="r"><code>trips &lt;- read.csv(file = &quot;../data/Divvy_Trips_2016.csv&quot;,
                   stringsAsFactors = FALSE,nrows = 1e5)</code></pre>
-<p>On your computer, it probably took a few seconds to read in the first 100,000 lines in the file. That is tolerable, but consider that there is a total of 3.6 million lines! Instead, we will use a function implemented in the <code>data.table</code> package that is much faster.</p>
+<p>On your computer, it probably took a few seconds to read in the first 100,000 lines. This is tolerable, but consider that there is a total of 3.6 million lines! Instead, we will use a function implemented in the <code>data.table</code> package that is much faster.</p>
 <p>Retrieve and install the package from CRAN:</p>
 <pre class="r"><code>install.packages(&quot;data.table&quot;)</code></pre>
 <p>Load the package functions into your environment:</p>
@@ -345,29 +345,73 @@ rownames(installed.packages(lib = .libPaths()[2]))</code></pre>
 <h2>Use data.table to load the Divvy trip data</h2>
 <p>Let’s go ahead and load the data for the 3.6 million trips using the “fread” funtion from the <code>data.table</code> package:</p>
 <pre class="r"><code>trips &lt;- fread(&quot;../data/Divvy_Trips_2016.csv&quot;,sep = &quot;,&quot;,header = TRUE,
-               stringsAsFactors = FALSE)
-trips &lt;- read.csv(&quot;../data/Divvy_Trips_2016.csv&quot;,
                stringsAsFactors = FALSE)</code></pre>
 <p>On my MacBook Air, this took about 30 seconds—not too bad. It will take much longer if you use “read.csv”. (Try it!)</p>
 </div>
 <div id="a-first-peek-at-the-divvy-trip-data" class="section level2">
 <h2>A first peek at the Divvy trip data</h2>
+<p>One annoying feature of “fread” is that it returns its own “data.table” object format:</p>
+<pre class="r"><code>class(trips)</code></pre>
+<p>I prefer working with a data frame since I am more used to it.</p>
+<pre class="r"><code>class(trips) &lt;- &quot;data.frame&quot;</code></pre>
+<p>We can use the same commands we used before to quickly get a quick overview of the trip data:</p>
 <pre class="r"><code>nrow(trips)
 ncol(trips)
 head(trips)
 tail(trips)
 summary(trips)</code></pre>
+<p>Unfortunately, the “summary” command isn’t particularly useful in this case. It will be more useful if we first convert some of the columns to <em>factors</em>.</p>
 </div>
 <div id="create-some-factor-columns" class="section level2">
 <h2>Create some factor columns</h2>
-<p><em>Add text here.</em></p>
+<p>A “factor” is also known as a “categorical variable”. A couple good candidates for categorical variables are the gender and usertype columns:</p>
+<pre class="r"><code>class(trips$gender)
+class(trips$usertype)
+summary(trips$gender)
+summary(trips$usertype)
+trips &lt;- transform(trips,gender = factor(gender))
+trips &lt;- transform(trips,usertype = factor(usertype))
+class(trips$gender)
+class(trips$usertype)
+summary(trips$gender)
+summary(trips$usertype)</code></pre>
+<p>Here we observe an example of data coding Bad Practice—the missing genders are simply empty character strings, which can be confusing. In R, these “missing data” should always be assigned the special value NA for “not assigned”:</p>
+<pre class="r"><code>i               &lt;- which(trips$gender == &quot;&quot;)
+trips$gender[i] &lt;- NA
+trips           &lt;- transform(trips,gender = factor(gender))
+summary(trips$gender)</code></pre>
+<p>We will also see that it is very convert the “station name” columns to factors.</p>
+<pre class="r"><code>trips &lt;- transform(trips,
+                   from_station_name = factor(from_station_name,
+                                              rownames(stations)),
+                   to_station_name   = factor(to_station_name,
+                                              rownames(stations)))</code></pre>
+<p>For example, we can now quickly generate more informative summaries of the trips by station:</p>
+<pre class="r"><code>summary(trips$from_station_name)</code></pre>
+<p>What is the second argument of function “factor” for? Why did we set the second argument of “factor” in this case, and not before?</p>
 </div>
 <div id="convert-dates-and-times." class="section level2">
 <h2>Convert dates and times.</h2>
-<p><em>Add text and code here.</em></p>
+<p>In the previous section, we found that converting some table columns to factors makes these columns easier to inspect (and eventually analyze). Similarly, the dates and times aren’t particularly useful until we extract them from the character strings. Working with dates &amp; times in R is much more complicated so I won’t explain in detail what this code does, or how it works.</p>
+<p>To convert the dates and times, I will use the <code>lubridate</code> package.</p>
+<pre class="r"><code>install.packages(&quot;lubridate&quot;)</code></pre>
+<p>Here, I create my own function for parsing the dates and times to accommodate the format of the dates and times provided in the Divvy CSV files.</p>
+<pre class="r"><code>parse.dt &lt;- function (x) {
+  out    &lt;- suppressWarnings(mdy_hms(x))
+  i      &lt;- is.na(out)
+  out[i] &lt;- mdy_hm(x[i])
+  return(out)
+}</code></pre>
+<p>This code chunk parses the dates &amp; times, then creates a new table column, “start week”:</p>
+<pre class="r"><code>summary(trips$starttime)
+trips &lt;- transform(trips,starttime = parse.dt(starttime))
+trips &lt;- transform(trips,start.week = as.numeric(format(starttime,&quot;%W&quot;)))
+summary(trips$starttime)
+summary(trips$startweek)</code></pre>
 </div>
 <div id="recap" class="section level2">
 <h2>Recap</h2>
+<p>Working with large data sets is often more difficult than working with small data sets because it may require working with specialized packages that can process the data efficiently.</p>
 </div>
 
 <script type="text/x-mathjax-config">
