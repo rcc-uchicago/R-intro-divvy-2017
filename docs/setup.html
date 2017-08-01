@@ -12,7 +12,7 @@
 <meta name="author" content="Peter Carbonetto" />
 
 
-<title>Setup for Divvy data analysis</title>
+<title>Setup for analysis of Divvy data</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -297,7 +297,7 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Setup for Divvy data analysis</h1>
+<h1 class="title toc-ignore">Setup for analysis of Divvy data</h1>
 <h4 class="author"><em>Peter Carbonetto</em></h4>
 
 </div>
@@ -310,15 +310,15 @@ shared across the workflowr files. -->
 <p><strong>Last updated:</strong> 2017-07-31</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository exists and R
  package git2r is installed -->
-<p><strong>Code version:</strong> 32ec032 <br></p>
+<p><strong>Code version:</strong> 8fccbde <br></p>
 <div id="setup-instructions" class="section level2">
 <h2>Setup instructions</h2>
 <p>To work through the lessons on your computer, please follow these setup instructions first.</p>
 <ol style="list-style-type: decimal">
 <li><p>You have two options for running R or Rstudio Desktop for this workshop: (a) you can use your computer, or; (b) you can use the RCC compute cluster. If you use the RCC cluster, I recommend connecting with <a href="https://rcc.uchicago.edu/docs/connecting/#connecting-with-thinlinc">ThinLinc</a>. If you do not have an RCC user account, the instructor can provide you with a <a href="yubikeys.html">Yubikey</a>.</p></li>
-<li><p>If you are not using the RCC cluster, install R from the <a href="http://cran.r-project.org">CRAN website</a> and, optionally, <a href="https://www.rstudio.com/products/rstudio/download">Rstudio Desktop</a>. <em>Note:</em> If you do not use RStudio Desktop, you will need to have additional software installed for X Windows graphics (e.g., <a href="http://xquartz.org">XQuartz</a> on Mac). Without this, you will not be able to create plots.</p></li>
+<li><p>If you are not using the RCC cluster, install R from the <a href="http://cran.r-project.org">CRAN website</a> and, optionally, <a href="https://www.rstudio.com/products/rstudio/download">RStudio Desktop</a>. <em>Note:</em> If you do not use RStudio Desktop, you will need to have additional software installed for X Windows graphics (e.g., <a href="http://xquartz.org">XQuartz</a> on Mac). Without this, you will not be able to create plots.</p></li>
 <li><p>Download or clone the <a href="https://github.com/rcc-uchicago/R-intro-divvy">git repository</a>. Click <a href="https://github.com/rcc-uchicago/R-intro-divvy/archive/master.zip">here</a> to download a Zip file containing all the files. If you are on the cluster, you can use “wget” or “git clone” to download the git repository.</p></li>
-<li><p>Download the Divvy data files into the “data” directory, and prepare the data files for analysis. <strong>Easiest approach:</strong> download the prepared data files <a href="https://uchicago.box.com/v/divvy">here</a>, and move the files into the “data” directory. The file on Box is about 82 MB, so it may take a few minutes to download. <strong>More complicated approach:</strong> download the data directly from the Divvy website. I have provided a bash script <code>code/retrieve_divvy_data.sh</code> to do this automatically. This script will also move the files to the expected location, and prepare the files for the analysis in R. This script reproduces the data preparation steps starting from the <a href="https://www.divvybikes.com/system-data">original source</a>.</p></li>
+<li><p>Download the Divvy data files into the “data” directory, and prepare the data files for analysis. <strong>Easiest approach:</strong> download the prepared data files <a href="https://uchicago.box.com/v/divvy">here</a>, and move the files into the “data” directory. The file on Box is about 82 MB, so it may take a few minutes to download. <strong>More complicated approach:</strong> download the data directly from the Divvy website. I have provided a bash script <code>code/retrieve_divvy_data.sh</code> to do this automatically. This script will also move the files to the expected location, and prepare the files for the analysis in R. This script reproduces the data processing steps starting with the <a href="https://www.divvybikes.com/system-data">original source</a>.</p></li>
 <li><p>After completing Step 4, check that you have all the necessary data files in the “data” directory. For example, on my MacBook Air, I have:</p></li>
 </ol>
 <pre class="r"><code>list.files(&quot;../data&quot;)
@@ -333,7 +333,7 @@ module load R/3.3
 module load rstudio
 rstudio</code></pre>
 <ol start="7" style="list-style-type: decimal">
-<li>Make sure your working directory in R or RStudio is set to the “analysis” directory of the local git repository. For example, on my MacBook Air, the current working directory in R is</li>
+<li>Make sure your working directory in R or RStudio is set to the “analysis” directory of the git repository. For example, on my MacBook Air, the current working directory in R is</li>
 </ol>
 <pre class="r"><code>getwd()
 # [1] &quot;/Users/pcarbo/git/R-intro-divvy/analysis&quot;</code></pre>
@@ -341,7 +341,7 @@ rstudio</code></pre>
 </div>
 <div id="session-information" class="section level2">
 <h2>Session information</h2>
-<p>Calling <code>sessionInfo()</code> shows the version of R I am using, and the packages that I used to generate the webpages from the R Markdown documents.</p>
+<p>The “sessionInfo” function shows the version of R I am using, and the packages that I used to generate the webpages from the R Markdown documents.</p>
 <pre class="r"><code>sessionInfo()
 # R version 3.3.2 (2016-10-31)
 # Platform: x86_64-apple-darwin13.4.0 (64-bit)
