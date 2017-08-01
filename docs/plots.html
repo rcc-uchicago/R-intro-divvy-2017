@@ -309,7 +309,7 @@ div.tocify {
 <p><strong>Last updated:</strong> 2017-07-31</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository
  exists and R package git2r is installed -->
-<p><strong>Code version:</strong> 4c9ed11</p>
+<p><strong>Code version:</strong> a582f23</p>
 <p>Up to this point, we have done lots of work importing and manipulating the Divvy data. Now let’s do something fun with these data—in this episode we will use the Divvy trip and station data to generate some evocative plots. <br> <br></p>
 <div id="our-first-plot-of-the-divvy-stations" class="section level2">
 <h2>Our first plot of the Divvy stations</h2>
@@ -331,6 +331,7 @@ library(ggplot2)</code></pre>
   theme_minimal() +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank())</code></pre>
+<p><br></p>
 </div>
 <div id="scale-the-area-of-each-station-by-total-number-of-departures" class="section level2">
 <h2>Scale the area of each station by total number of departures</h2>
@@ -359,7 +360,7 @@ summary(stations$departures)</code></pre>
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank())</code></pre>
 <p>Notice that the location of the downtown is now more apparent, and that. Also observe, unsurprisingly, that there are generally more departures per station on the North Side, and, interestingly, Hyde Park has a good amount of hiking activity.</p>
-<p>Do else interesting do you observe from this plot?</p>
+<p>What else interesting do you observe from this plot? <br> <br></p>
 </div>
 <div id="visualizing-seasonal-biking-trends" class="section level2">
 <h2>Visualizing seasonal biking trends</h2>
@@ -395,7 +396,7 @@ counts.week.uofc &lt;-
 </div>
 <div id="save-your-session" class="section level2">
 <h2>Save your session</h2>
-<p>Before moving to the next episode, let’s save our current session.</p>
+<p>It is time to the current state of our session before moving to the <a href="uofc.html">next episode</a>.</p>
 <pre class="r"><code>save.image(file = &quot;workshop.RData&quot;)</code></pre>
 <p><br></p>
 </div>
