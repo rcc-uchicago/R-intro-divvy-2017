@@ -292,6 +292,12 @@ div.tocify {
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
 
 <div class="fluid-row" id="header">
 
@@ -309,8 +315,8 @@ div.tocify {
 <p><strong>Last updated:</strong> 2017-08-01</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository
  exists and R package git2r is installed -->
-<p><strong>Code version:</strong> a917d5e</p>
-<p>Up to this point, we have done lots of work importing and manipulating the Divvy data. Now let’s do something fun with these data. In this episode, we will use the Divvy trip and station data to generate some interesting plots. <br> <br></p>
+<p><strong>Code version:</strong> be9767e</p>
+<p>Up to this point, we have done lots of work importing and manipulating the Divvy data. Now let’s do something fun with these data. In this episode, we will use the Divvy trip and station data to generate some interesting plots.</p>
 <div id="our-first-plot-a-map-of-the-divvy-stations" class="section level2">
 <h2>Our first plot: a map of the Divvy stations</h2>
 <p><a href="http://ggplot2.tidyverse.org">ggplot2</a> has emerged as the most popular R package for generating data visualizations. Although the interface can be initially unintuitive, it is a very powerful tool, and can create surprisingly sophisticated plots in only a few lines of code.</p>
@@ -333,7 +339,6 @@ library(ggplot2)</code></pre>
   theme_minimal() +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank())</code></pre>
-<p><br></p>
 </div>
 <div id="scale-the-area-of-each-station-by-total-number-of-departures" class="section level2">
 <h2>Scale the area of each station by total number of departures</h2>
@@ -365,7 +370,7 @@ summary(stations$departures)</code></pre>
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank())</code></pre>
 <p>Notice that the location of the downtown is apparent by the higher density of biking activity. Also observe that there are generally more departures per station on the North Side of Chicago, and, interestingly, Hyde Park also appears to have a good amount of biking activity.</p>
-<p>What else interesting do you observe from this plot? <br> <br></p>
+<p>What else interesting do you observe from this plot?</p>
 </div>
 <div id="visualizing-seasonal-biking-trends" class="section level2">
 <h2>Visualizing seasonal biking trends</h2>
@@ -406,14 +411,13 @@ counts.week.uofc &lt;-
 </div>
 <div id="save-your-session" class="section level2">
 <h2>Save your session</h2>
-<p>It is time to the current state of our session before moving to the <a href="uofc.html">next episode</a>.</p>
+<p>It is time to save the current state of our session.</p>
 <pre class="r"><code>save.image(file = &quot;workshop.RData&quot;)</code></pre>
-<p><br></p>
 </div>
 <div id="recap" class="section level2">
 <h2>Recap</h2>
 <p>In this episode, we illustrated how ggplot can be used. We only explored the most basic features of ggplot, and it has many, many more. The key point is that ggplot works very well provided you take the time beforehand to organize your data into a data frame, and (e.g., factors, dates &amp; times).</p>
-<p>In the <a href="">final episode</a>, we will take a closer look at the biking trends at the University of Chicago.</p>
+<p>In the <a href="uofc.html">final episode</a>, we will take a closer look at the biking trends at the University of Chicago.</p>
 </div>
 
 <script type="text/x-mathjax-config">

@@ -292,6 +292,12 @@ div.tocify {
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
 
 <div class="fluid-row" id="header">
 
@@ -309,17 +315,17 @@ div.tocify {
 <p><strong>Last updated:</strong> 2017-08-01</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository
  exists and R package git2r is installed -->
-<p><strong>Code version:</strong> a917d5e <br></p>
+<p><strong>Code version:</strong> be9767e</p>
 <div id="about-this-file" class="section level2">
 <h2>About this file</h2>
 <p>This file is either a webpage generated from an R Markdown document, or the original R Markdown file itself.</p>
 <p><a href="http://r4ds.had.co.nz/r-markdown.html">R Markdown</a> combines <a href="http://daringfireball.net/projects/markdown">Markdown</a> with “chunks” of R code. R Markdown notebooks can be easily rendered into various formats (e.g., PDF, HTML) for creating sharable and reproducible <a href="https://www.oreilly.com/ideas/the-state-of-jupyter">narratives</a> of your data analyses.</p>
-<p>There are many benefits to documenting your data analyses in R Markdown—we will not have time to explore all the benefits here. <br> <br></p>
+<p>There are many benefits to documenting your data analyses in R Markdown—we will not have time to explore all the benefits here.</p>
 </div>
 <div id="how-to-use-this-file" class="section level2">
 <h2>How to use this file</h2>
 <p>We will use this R Markdown document <em>interactively.</em></p>
-<p>Although you can easily generate all the output and figures with a single command from the <a href="https://cran.r-project.org/package=rmarkdown">rmarkdown package</a>, in this workshop we will walk through the data analyses by typing or copying &amp; pasting the lines of code into the R console. <br> <br></p>
+<p>Although you can easily generate all the output and figures with a single command from the <a href="https://cran.r-project.org/package=rmarkdown">rmarkdown package</a>, in this workshop we will walk through the data analyses by typing or copying &amp; pasting the lines of code into the R console.</p>
 </div>
 <div id="about-the-divvy-station-data" class="section level2">
 <h2>About the Divvy station data</h2>
@@ -329,7 +335,7 @@ div.tocify {
 <p>If it is not, see the <a href="setup.html">setup</a> instructions for how to change the working directory.</p>
 <p>In the “data” directory, you should see 3 CSV files containing station data:</p>
 <p><code>{r, eval=TRUE}divvy Sys.glob(&quot;../data/*Stations*&quot;)</code></p>
-<p>We will only use the Q4 data since it contains the most up-to-date information about the Divvy bike stations. <br> <br></p>
+<p>We will only use the Q4 data since it contains the most up-to-date information about the Divvy bike stations.</p>
 </div>
 <div id="loading-the-divvy-station-data" class="section level2">
 <h2>Loading the Divvy station data</h2>
@@ -341,7 +347,6 @@ div.tocify {
                      stringsAsFactors = FALSE)</code></pre>
 <p>What does this function do, and what are the function arguments “file” and “stringsAsFactors” for? We can easily find the answers to these questions by accessing the R help documents for this function:</p>
 <pre class="r"><code>help(read.table)</code></pre>
-<p><br></p>
 </div>
 <div id="a-first-peek-at-the-divvy-station-data" class="section level2">
 <h2>A first peek at the Divvy station data</h2>
@@ -374,7 +379,6 @@ quantile(x,seq(0,1,0.1))</code></pre>
 <pre class="r"><code>rows     &lt;- order(stations$dpcapacity,decreasing = TRUE)
 stations &lt;- stations[rows,]
 head(stations,n = 8)</code></pre>
-<p><br></p>
 </div>
 <div id="quickly-accessing-stations-in-the-table-by-their-name" class="section level2">
 <h2>Quickly accessing stations in the table by their name</h2>
@@ -390,13 +394,11 @@ head(stations)</code></pre>
 <p>Note that I removed the second column in the table because it is no longer needed.</p>
 <p>Once we have row names, we can more easily access the row corresponding to the Divvy bike station on the university campus:</p>
 <pre class="r"><code>stations[uofcstn,]</code></pre>
-<p><br></p>
 </div>
 <div id="save-your-session" class="section level2">
 <h2>Save your session</h2>
 <p>This is a good time to save your current R environment just in case you accidentally quit or lose your connection to the cluster.</p>
 <pre class="r"><code>save.image(file = &quot;workshop.RData&quot;)</code></pre>
-<p><br></p>
 </div>
 <div id="recap" class="section level2">
 <h2>Recap</h2>

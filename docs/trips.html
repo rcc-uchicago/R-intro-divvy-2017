@@ -292,6 +292,12 @@ div.tocify {
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
 
 <div class="fluid-row" id="header">
 
@@ -309,8 +315,8 @@ div.tocify {
 <p><strong>Last updated:</strong> 2017-08-01</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository
  exists and R package git2r is installed -->
-<p><strong>Code version:</strong> a917d5e <br></p>
-<p>For this part of the lesson, I’m assuming you have worked through the code in the <a href="stations.html">previous episode</a>, and your R session is still open. If you have saved your R session using the “save.image” command, you can load the session data by running <code>load(&quot;workshop.RData&quot;)</code>. <br> <br></p>
+<p><strong>Code version:</strong> be9767e</p>
+<p>For this part of the lesson, I’m assuming you have worked through the code in the <a href="stations.html">previous episode</a>, and your R session is still open. If you have saved your R session using the “save.image” command, you can load the session data by running <code>load(&quot;workshop.RData&quot;)</code>.</p>
 <div id="installing-the-data.table-package" class="section level2">
 <h2>Installing the data.table package</h2>
 <p>Previously, we used “read.csv” to read in the data. However, if we try to use it for the Divvy Trip data, we will see that it is very slow:</p>
@@ -325,7 +331,6 @@ div.tocify {
 <pre class="r"><code>help(package = data.table)</code></pre>
 <p>“Vignettes” are also a great way to learn about a package; e.g.,</p>
 <pre class="r"><code>vignette(&quot;datatable-intro&quot;)</code></pre>
-<p><br></p>
 </div>
 <div id="where-are-my-packages" class="section level2">
 <h2>Where are my packages?</h2>
@@ -339,14 +344,13 @@ div.tocify {
 <p>If you want to find out which packages are installed in each location, run these commands:</p>
 <pre class="r"><code>rownames(installed.packages(lib = .libPaths()[1]))
 rownames(installed.packages(lib = .libPaths()[2]))</code></pre>
-<p><br></p>
 </div>
 <div id="use-data.table-to-load-the-divvy-trip-data" class="section level2">
 <h2>Use data.table to load the Divvy trip data</h2>
 <p>Let’s go ahead and load the data for the 3.6 million trips using the “fread” funtion from the <code>data.table</code> package:</p>
 <pre class="r"><code>trips &lt;- fread(&quot;../data/Divvy_Trips_2016.csv&quot;,sep = &quot;,&quot;,header = TRUE,
                stringsAsFactors = FALSE)</code></pre>
-<p>On my MacBook Air, this took about 30 seconds—not too bad. It will take much longer if you use “read.csv”. (Try it!) <br> <br></p>
+<p>On my MacBook Air, this took about 30 seconds—not too bad. It will take much longer if you use “read.csv”. (Try it!)</p>
 </div>
 <div id="a-first-peek-at-the-divvy-trip-data" class="section level2">
 <h2>A first peek at the Divvy trip data</h2>
@@ -360,7 +364,7 @@ ncol(trips)
 head(trips)
 tail(trips)
 summary(trips)</code></pre>
-<p>Unfortunately, the “summary” command isn’t particularly informative for this data frame. It will be more useful if we first convert some of the columns to <em>factors</em>. <br> <br></p>
+<p>Unfortunately, the “summary” command isn’t particularly informative for this data frame. It will be more useful if we first convert some of the columns to <em>factors</em>.</p>
 </div>
 <div id="create-some-factor-columns" class="section level2">
 <h2>Create some factor columns</h2>
@@ -388,7 +392,7 @@ summary(trips$gender)</code></pre>
                                               rownames(stations)))</code></pre>
 <p>For example, we can now quickly generate more informative summaries of the trips by station:</p>
 <pre class="r"><code>summary(trips$from_station_name)</code></pre>
-<p>What is the second argument of function “factor” for? Why did we set the second argument of “factor” in this case, and not before? <br> <br></p>
+<p>What is the second argument of function “factor” for? Why did we set the second argument of “factor” in this case, and not before?</p>
 </div>
 <div id="convert-the-dates-and-times" class="section level2">
 <h2>Convert the dates and times</h2>
@@ -414,7 +418,6 @@ trips &lt;- transform(trips,
 summary(trips$starttime)
 summary(trips$start.day)
 summary(trips$start.week)</code></pre>
-<p><br></p>
 </div>
 <div id="trips-from-university-of-chicago" class="section level2">
 <h2>Trips from University of Chicago</h2>
@@ -433,13 +436,11 @@ i        &lt;- which(uc.dests &gt; 0)
 uc.dests &lt;- uc.dests[i]
 uc.dests
 data.frame(uc.dests)</code></pre>
-<p><br></p>
 </div>
 <div id="save-your-session" class="section level2">
 <h2>Save your session</h2>
 <p>Before moving to the next episode, let’s save our current session to be safe.</p>
 <pre class="r"><code>save.image(file = &quot;workshop.RData&quot;)</code></pre>
-<p><br></p>
 </div>
 <div id="recap" class="section level2">
 <h2>Recap</h2>
