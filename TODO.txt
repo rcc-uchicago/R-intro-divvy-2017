@@ -1,2 +1,3 @@
 * Add PDF of slides to repository.
+* Complete plots.html.
 * Complete uofc.html.
