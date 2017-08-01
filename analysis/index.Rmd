@@ -45,21 +45,6 @@ Please also take a look at the [Code of Conduct](conduct.html), and the
 <br>
 <br>
 
-## Aims
-
-1. Understand why R has become important for many areas of research.
-
-2. Set up your laptop or RCC cluster account to do interactive
-programming in R.
-
-3. Learn how to install & use R packages.
-
-4. Learn basic elements of R data analysis by example. 
-
-5. Work with "R Markdown" documents.
-<br>
-<br>
-
 ## Outline
 
 During this workshop, we will explore city-wide biking trends by
