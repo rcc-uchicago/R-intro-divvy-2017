@@ -12,7 +12,7 @@
 <meta name="author" content="Peter Carbonetto" />
 
 
-<title>Importing and inspecting the Divvy trip data</title>
+<title>Import and inspect the Divvy trip data</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -297,7 +297,7 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Importing and inspecting the Divvy trip data</h1>
+<h1 class="title toc-ignore">Import and inspect the Divvy trip data</h1>
 <h4 class="author"><em>Peter Carbonetto</em></h4>
 
 </div>
@@ -309,7 +309,7 @@ div.tocify {
 <p><strong>Last updated:</strong> 2017-07-31</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository
  exists and R package git2r is installed -->
-<p><strong>Code version:</strong> 378ce7e <br></p>
+<p><strong>Code version:</strong> c5f5092 <br></p>
 <p>For this part of the lesson, I’m assuming you have worked through the code in the <a href="stations.html">previous episode</a>, and your R session is still open. If you have saved your R session using “save.image”, you can load it by running <code>load(&quot;workshop.RData&quot;)</code>. <br> <br></p>
 <div id="installing-the-data.table-package" class="section level2">
 <h2>Installing the data.table package</h2>
@@ -395,7 +395,7 @@ summary(trips$gender)</code></pre>
 <p>In the previous section, we found that converting some table columns to factors makes these columns easier to inspect (and eventually analyze). Similarly, the dates and times aren’t particularly useful until we extract them from the character strings. Working with dates &amp; times in R is much more complicated so I won’t explain in detail what this code does, or how it works.</p>
 <p>To convert the dates and times, I will use the <code>lubridate</code> package.</p>
 <pre class="r"><code>install.packages(&quot;lubridate&quot;)</code></pre>
-<p>Here, I create my own function for parsing the dates and times to accommodate the format of the dates and times provided in the Divvy CSV files.</p>
+<p>Here, I create my own function for parsing the dates and times to accommodate the format of the date &amp; time data stored in the Divvy CSV files.</p>
 <pre class="r"><code>parse.dt &lt;- function (x) {
   out    &lt;- suppressWarnings(mdy_hms(x))
   i      &lt;- is.na(out)
@@ -438,7 +438,7 @@ data.frame(uc.dests)</code></pre>
 <div id="recap" class="section level2">
 <h2>Recap</h2>
 <p>Working with large data sets is often more difficult than working with small data sets because it may require working with specialized packages that can process the data efficiently. But once we take the effort to process the data carefully, we can quickly get insights into the data using basic R commands.</p>
-<p>In the <a href="stations-map.Rmd">next episode</a>, we will turn the data into some evocative plots.</p>
+<p>In the <a href="plots.Rmd">next episode</a>, we will use the station and trip data to generate some insightful plots.</p>
 </div>
 
 <script type="text/x-mathjax-config">

@@ -12,7 +12,7 @@
 <meta name="author" content="Peter Carbonetto" />
 
 
-<title>Plotting a map of the Divvy stations</title>
+<title>Create plots using the Divvy station and trip data</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -297,7 +297,7 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Plotting a map of the Divvy stations</h1>
+<h1 class="title toc-ignore">Create plots using the Divvy station and trip data</h1>
 <h4 class="author"><em>Peter Carbonetto</em></h4>
 
 </div>
@@ -309,7 +309,7 @@ div.tocify {
 <p><strong>Last updated:</strong> 2017-07-31</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository
  exists and R package git2r is installed -->
-<p><strong>Code version:</strong> 378ce7e</p>
+<p><strong>Code version:</strong> c5f5092</p>
 <p>In the previous two episodes, we’ve done lots of work importing and manipulating the Divvy data. Now let’s do something fun with these data. we will use the Divvy trip and station data to generate a map of Chicago. <br> <br></p>
 <div id="our-first-plot-of-the-divvy-stations" class="section level2">
 <h2>Our first plot of the Divvy stations</h2>
@@ -374,6 +374,20 @@ tail(counts.week)</code></pre>
         panel.grid.minor = element_blank())</code></pre>
 <p>What expected or surprising trends do you notice from this plot? What improvements would you make to this figure to better highlight the interesting trends?</p>
 </div>
+<div id="seasonal-trends-at-the-university-of-chicago" class="section level2">
+<h2>Seasonal trends at the University of Chicago</h2>
+<pre class="r"><code>trips.uofc &lt;- subset(trips,from_station_name == &quot;University Ave &amp; 57th St&quot;)
+counts.week.uofc &lt;-
+  data.frame(week       = 0:52,
+             departures = as.vector(table(trips.uofc$start.week)))</code></pre>
+<pre class="r"><code>ggplot(counts.week.uofc,aes(x = week,y = departures)) +
+  geom_point(color = &quot;darkblue&quot;) +
+  geom_line(color = &quot;darkblue&quot;) +
+  theme_minimal() +
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank())</code></pre>
+<p>When we analyze trips taken at the University of Chicago bike station, the “bump” during warmer months flattens out. This is probably because a large fraction of University of Chicago students leave during the summer.</p>
+</div>
 <div id="save-your-session" class="section level2">
 <h2>Save your session</h2>
 <p>Before moving to the next episode, let’s save our current session.</p>
@@ -382,7 +396,8 @@ tail(counts.week)</code></pre>
 </div>
 <div id="recap" class="section level2">
 <h2>Recap</h2>
-<p>In this episode, we illustrated how ggplot can be used. We only explored the most basic features of ggplot, and it has many, many more. The key point is that ggplot works very well provided you take the time beforehand to organize your data into a data frame, and (e.g., factors).</p>
+<p>In this episode, we illustrated how ggplot can be used. We only explored the most basic features of ggplot, and it has many, many more. The key point is that ggplot works very well provided you take the time beforehand to organize your data into a data frame, and (e.g., factors, dates &amp; times).</p>
+<p>In the <a href="">final episode</a>, we will take a closer look at the biking trends at the University of Chicago.</p>
 </div>
 
 <script type="text/x-mathjax-config">
