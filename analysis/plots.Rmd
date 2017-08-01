@@ -23,13 +23,13 @@ knitr::read_chunk("chunks.R")
 ```
 
 Up to this point, we have done lots of work importing and manipulating
-the Divvy data. Now let's do something fun with these data---in this
-episode we will use the Divvy trip and station data to generate some
-evocative plots.
+the Divvy data. Now let's do something fun with these data. In this
+episode, we will use the Divvy trip and station data to generate some
+interesting plots.
 <br>
 <br>
 
-## Our first plot of the Divvy stations
+## Our first plot: a map of the Divvy stations
 
 [ggplot2](http://ggplot2.tidyverse.org) has emerged as the most
 popular R package for generating data visualizations. Although the
