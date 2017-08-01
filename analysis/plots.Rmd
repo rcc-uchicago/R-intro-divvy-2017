@@ -160,22 +160,36 @@ What else interesting do you observe from this plot?
 ## Visualizing seasonal biking trends
 
 Let's now use the Divvy trip data to examine biking trends over the
-course of one year in Chicago.
+course of one year in Chicago. 
 
-Convert the "start week" column to a factor, then we can easily count
-the total number of Divvy trips per week of the year.
+First, let's convert the "start week" column to a factor.
 
 ```{r, eval=FALSE}
-trips       <- transform(trips,start.week = factor(start.week))
+trips <- transform(trips,start.week = factor(start.week))
+summary(trips$start.week)
+```
+
+Now that the column is a factor, we can easily count the total number
+of Divvy trips each week of the year, from January to December. We
+will use these counts to create a new data frame. Remember that
+ggplot works best with data frames.
+
+```{r, eval=FALSE}
 counts.week <- table(trips$start.week)
 counts.week <- as.vector(counts.week)
-counts.week <- data.frame(week = 0:52,departures = counts.week)
+counts.week <- data.frame(week       = 0:52,
+                          departures = counts.week)
 head(counts.week)
 tail(counts.week)
 ```
 
+To illustrate the ability of ggplot to easily combine multiple
+*layers* into a single plot, in this plot let's add both points and
+lines.
+
 ```{r, eval=FALSE}
-ggplot(counts.week,aes(x = week,y = departures)) +
+ggplot(data    = counts.week,
+       mapping = aes(x = week,y = departures)) +
   geom_point(color = "darkblue") +
   geom_line(color = "darkblue") +
   theme_minimal() +
