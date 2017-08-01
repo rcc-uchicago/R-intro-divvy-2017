@@ -47,7 +47,7 @@ Please also take a look at the [Code of Conduct](conduct.html), and the
 
 ## Aims
 
-1. Understand why R has become important in many areas of research.
+1. Understand why R has become important for many areas of research.
 
 2. Set up your laptop or RCC cluster account to do interactive
 programming in R.
@@ -65,7 +65,7 @@ programming in R.
 During this workshop, we will explore city-wide biking trends by
 analyzing the
 [Divvy trip data](https://www.divvybikes.com/system-data). We will
-analyze in more detail the trip data from a bike station at the
+analyze in more detail the Divvy trip data from a bike station at the
 University of Chicago.
 
 1. [Setup instructions](setup.html).

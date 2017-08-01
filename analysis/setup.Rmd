@@ -26,22 +26,22 @@ knitr::read_chunk("chunks.R")
 
 ## Setup instructions
 
-```{r, echo=FALSE, results="hide", eval=TRUE}
+```{r, echo=FALSE, results="hide", eval=TRUE, messages=FALSE}
 library(data.table)
 library(lubridate)
 library(ggplot2)
 ```
 
-To work through the lessons on your own computer, please follow these
+To work through the lessons on your computer, please follow these
 setup instructions first.
 
 1. You have two options for running R or Rstudio Desktop for this
-workshop: (a) you can run R/RStudio on your computer, or; (b) if you
-have an RCC user account, you can run R/RStudio on the RCC compute
-cluster. If you use the RCC cluster, I recommend connecting using
+workshop: (a) you can use your computer, or; (b) you can use the RCC
+compute cluster. If you use the RCC cluster, I recommend connecting
+with
 [ThinLinc](https://rcc.uchicago.edu/docs/connecting/#connecting-with-thinlinc).
 If you do not have an RCC user account, the instructor can provide you
-with a [Yubikey](yubikey.html).
+with a [Yubikey](yubikeys.html).
 
 2. If you are not using the RCC cluster, install R from the
 [CRAN website](http://cran.r-project.org) and, optionally,
