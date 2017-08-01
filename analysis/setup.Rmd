@@ -26,7 +26,7 @@ knitr::read_chunk("chunks.R")
 
 ## Setup instructions
 
-```{r, echo=FALSE, results="hide", eval=TRUE, messages=FALSE}
+```{r, echo=FALSE, results="hide", eval=TRUE, message=FALSE}
 library(data.table)
 library(lubridate)
 library(ggplot2)
