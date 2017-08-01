@@ -49,7 +49,7 @@ Please also take a look at the [Code of Conduct](conduct.html), and the
 
 + Understand why R has become important in many areas of research.
 
-+ Setting up your laptop or your RCC cluster account to do interactive
++ Set up your laptop or RCC cluster account to do interactive
 programming in R.
 
 + Learn how to install & use R packages.
@@ -64,15 +64,19 @@ programming in R.
 
 During this workshop, we will explore city-wide biking trends by
 analyzing the
-[Divvy trip data](https://www.divvybikes.com/system-data). Also, we
-will examine trip data from one bike station at the University of
-Chicago.
+[Divvy trip data](https://www.divvybikes.com/system-data). We will
+also look closely at trip data from one bike station at the University
+of Chicago.
 
-1. 
+1. [Setup instructions](setup.html).
 
-2. [Station data](stations.html).
+2. [Import and inspect the Divvy station data](stations.html).
 
-3. [Trip data](trips.html).
+3. [Import and inspect the Divvy trip data](trips.html).
+
+4. [Create plots using the Divvy station and trip data](plots.html).
+
+5. [Analyze U of C biking trends from Divvy data](uofc.html).
 <br>
 <br>
 
