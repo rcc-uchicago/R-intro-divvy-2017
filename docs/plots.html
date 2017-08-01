@@ -315,7 +315,7 @@ div.section {
 <p><strong>Last updated:</strong> 2017-08-01</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository
  exists and R package git2r is installed -->
-<p><strong>Code version:</strong> 07783cb</p>
+<p><strong>Code version:</strong> 07b7a93</p>
 <p>Up to this point, we have done lots of work importing and manipulating the Divvy data. Now let’s do something fun with these data. In this episode, we will use the Divvy trip and station data to generate some interesting plots.</p>
 <div id="our-first-plot-a-map-of-the-divvy-stations" class="section level2">
 <h2>Our first plot: a map of the Divvy stations</h2>
@@ -423,7 +423,7 @@ plot_grid(plot1 + ggtitle(&quot;city-wide&quot;),
           plot2 + ggtitle(&quot;University of Chicago&quot;),
           nrow = 2)</code></pre>
 <p>Notice how easy it was to add additional layers after the creating initial plot.</p>
-<p>The cowplot package also comes with a nice theme, so let’s use it. Also, the “plot_grid” function has a great feature for aligning plots along the axes for better comparison.</p>
+<p>The cowplot package comes with a nice theme, so let’s use it. Also, the “plot_grid” function has a great feature for aligning plots along the axes for better comparison.</p>
 <pre class="r"><code>plot_grid(plot1 + ggtitle(&quot;city-wide&quot;) + theme_cowplot(),
           plot2 + ggtitle(&quot;University of Chicago&quot;) + theme_cowplot(),
           nrow = 2,align = &quot;v&quot;)</code></pre>
@@ -436,7 +436,7 @@ plot_grid(plot1 + ggtitle(&quot;city-wide&quot;),
 </div>
 <div id="recap" class="section level2">
 <h2>Recap</h2>
-<p>In this episode, we illustrated how ggplot can be used. We only explored the most basic features of ggplot, and it has many, many more. The key point is that ggplot works very well provided you take the time beforehand to organize your data into a data frame, and (e.g., factors, dates &amp; times).</p>
+<p>In this episode, we illustrated how ggplot can be used. We only explored basic features of ggplot, and it has many, many more that we do not have time to explore here. The key point is that ggplot works well provided you take the time beforehand to organize your data into a data frame, and transform your table columns into suitable formats (e.g., factors, dates &amp; times).</p>
 <p>In the <a href="uofc.html">final episode</a>, we will take a closer look at the biking trends at the University of Chicago.</p>
 </div>
 
