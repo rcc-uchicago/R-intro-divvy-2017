@@ -309,7 +309,7 @@ div.tocify {
 <p><strong>Last updated:</strong> 2017-07-31</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository
  exists and R package git2r is installed -->
-<p><strong>Code version:</strong> 9056e8e <br></p>
+<p><strong>Code version:</strong> 3413718 <br></p>
 <p>For this part of the lesson, I’m assuming you have worked through the code in the <a href="stations.html">previous episode</a>, and your R session is still open. If you have saved your R session using the “save.image” command, you can load the session data by running <code>load(&quot;workshop.RData&quot;)</code>. <br> <br></p>
 <div id="installing-the-data.table-package" class="section level2">
 <h2>Installing the data.table package</h2>
@@ -407,17 +407,22 @@ library(lubridate)</code></pre>
 <pre class="r"><code>summary(trips$starttime)
 trips &lt;- transform(trips,starttime = parse.dt(starttime))
 trips &lt;- transform(trips,start.week = as.numeric(format(starttime,&quot;%W&quot;)))
-summary(trips$starttime)
+trips &lt;- transform(trips,
+           start.day = factor(weekdays(as.Date(starttime)),
+                              c(&quot;Monday&quot;,&quot;Tuesday&quot;,&quot;Wednesday&quot;,&quot;Thursday&quot;,
+                                &quot;Friday&quot;,&quot;Saturday&quot;,&quot;Sunday&quot;)))
+summary(trips$start.time)
+summary(trips$start.day)
 summary(trips$start.week)</code></pre>
 <p><br></p>
 </div>
 <div id="trips-from-university-of-chicago" class="section level2">
 <h2>Trips from University of Chicago</h2>
 <p>After having prepared the data more carefully, let’s take a close look at the trip data at the University of Chicago.</p>
-<pre class="r"><code>stn.name &lt;- &quot;University Ave &amp; 57th St&quot;
-uc.trips &lt;- subset(trips,from_station_name == stn.name)
+<pre class="r"><code>uofcstn  &lt;- &quot;University Ave &amp; 57th St&quot;
+uc.trips &lt;- subset(trips,from_station_name == uofcstn)
 summary(uc.trips)
-summary(uc.trips$start.day)
+summary(uc.trips$start.week)
 summary(uc.trips$to_station_name)</code></pre>
 <p>It is interesting to compare the day-of-the-week trends at University of Chicago compared the rest of the city:</p>
 <pre class="r"><code>rbind(summary(trips$start.day),
@@ -438,8 +443,8 @@ data.frame(uc.dests)</code></pre>
 </div>
 <div id="recap" class="section level2">
 <h2>Recap</h2>
-<p>Working with large data sets is often more difficult than working with small data sets because it may require working with specialized packages that can process the data efficiently. But once we take the effort to process the data carefully, we can quickly get insights into the data using basic R commands.</p>
-<p>In the <a href="plots.Rmd">next episode</a>, we will use the station and trip data to generate some insightful plots.</p>
+<p>Working with large data sets is often more difficult than working with small data sets because it can require the use of specialized packages to process the data efficiently. However, once we take the effort to process the data carefully, we can quickly learn about the data using basic R commands such as “summary”.</p>
+<p>In the <a href="plots.html">next episode</a>, we will use the station and trip data to generate some insightful plots.</p>
 </div>
 
 <script type="text/x-mathjax-config">
