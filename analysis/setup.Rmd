@@ -1,5 +1,5 @@
 ---
-title: "Setup for Divvy data analysis"
+title: "Setup for analysis of Divvy data"
 author: "Peter Carbonetto"
 output: html_document
 ---
@@ -45,7 +45,7 @@ with a [Yubikey](yubikeys.html).
 
 2. If you are not using the RCC cluster, install R from the
 [CRAN website](http://cran.r-project.org) and, optionally,
-[Rstudio Desktop](https://www.rstudio.com/products/rstudio/download).
+[RStudio Desktop](https://www.rstudio.com/products/rstudio/download).
 *Note:* If you do not use RStudio Desktop, you will need to have
 additional software installed for X Windows graphics (e.g.,
 [XQuartz](http://xquartz.org) on Mac). Without this, you will not be
@@ -67,7 +67,7 @@ approach:** download the data directly from the Divvy website. I have
 provided a bash script `code/retrieve_divvy_data.sh` to do this
 automatically. This script will also move the files to the expected
 location, and prepare the files for the analysis in R. This script
-reproduces the data preparation steps starting from the
+reproduces the data processing steps starting with the
 [original source](https://www.divvybikes.com/system-data).
 
 5. After completing Step 4, check that you have all the necessary data
@@ -89,8 +89,8 @@ rstudio
 ```
 
 7. Make sure your working directory in R or RStudio is set to the
-"analysis" directory of the local git repository. For example, on my
-MacBook Air, the current working directory in R is
+"analysis" directory of the git repository. For example, on my MacBook
+Air, the current working directory in R is
 
 ```{r}
 getwd()
@@ -103,7 +103,7 @@ lessons.
 
 ## Session information
 
-Calling `sessionInfo()` shows the version of R I am using, and the
+The "sessionInfo" function shows the version of R I am using, and the
 packages that I used to generate the webpages from the R Markdown
 documents.
 
