@@ -246,7 +246,12 @@ column, "start week":
 summary(trips$starttime)
 trips <- transform(trips,starttime = parse.dt(starttime))
 trips <- transform(trips,start.week = as.numeric(format(starttime,"%W")))
-summary(trips$starttime)
+trips <- transform(trips,
+           start.day = factor(weekdays(as.Date(starttime)),
+                              c("Monday","Tuesday","Wednesday","Thursday",
+                                "Friday","Saturday","Sunday")))
+summary(trips$start.time)
+summary(trips$start.day)
 summary(trips$start.week)
 ```
 <br>
@@ -257,10 +262,10 @@ After having prepared the data more carefully, let's take a close look
 at the trip data at the University of Chicago.
 
 ```{r, eval=FALSE}
-stn.name <- "University Ave & 57th St"
-uc.trips <- subset(trips,from_station_name == stn.name)
+uofcstn  <- "University Ave & 57th St"
+uc.trips <- subset(trips,from_station_name == uofcstn)
 summary(uc.trips)
-summary(uc.trips$start.day)
+summary(uc.trips$start.week)
 summary(uc.trips$to_station_name)
 ```
 
@@ -297,10 +302,10 @@ save.image(file = "workshop.RData")
 ## Recap
 
 Working with large data sets is often more difficult than working with
-small data sets because it may require working with specialized
-packages that can process the data efficiently. But once we take the
-effort to process the data carefully, we can quickly get insights into
-the data using basic R commands.
+small data sets because it can require the use of specialized packages
+to process the data efficiently. However, once we take the effort to
+process the data carefully, we can quickly learn about the data using
+basic R commands such as "summary".
 
-In the [next episode](plots.Rmd), we will use the station and trip
+In the [next episode](plots.html), we will use the station and trip
 data to generate some insightful plots.
