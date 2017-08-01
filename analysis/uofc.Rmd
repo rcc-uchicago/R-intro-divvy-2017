@@ -22,9 +22,77 @@ knitr::read_chunk("chunks.R")
 ```{r code-version, echo=FALSE, results='asis'}
 ```
 
-## Section title
+## Visualizing the usage patterns of University of Chicago Divvy users
 
-*Text goes here.*
+```{r, eval=FALSE}
+summary(trips.uofc$to_station_name)
+```
+
+```{r, eval=FALSE}
+uofc.arrival.counts <- as.vector(table(trips.uofc$to_station_name))
+head(uofc.arrival.counts)
+```
+
+```{r, eval=FALSE}
+uofcstn <- "University Ave & 57th St"
+uofc.station.dists <-
+  sqrt((stations[uofcstn,"latitude"] - stations$latitude)^2 +
+       (stations[uofcstn,"longitude"] - stations$longitude)^2)
+head(uofc.station.dists)
+```
+
+Let's combine these two variables into a single data frame so that we
+can plot the relationship between these two variables using ggplot.
+
+```{r, eval=FALSE}
+uofc.arrivals <- data.frame(dist  = uofc.station.dists,
+                            count = uofc.arrival.counts)
+rownames(uofc.arrivals) <- rownames(stations)
+head(uofc.arrivals)
+```
+
+Note that we are able to combine these data into one data frame only
+because we were careful earlier to create factors with levels given in
+the same order as the stations in the "stations" data frame.
+
+```{r, eval=FALSE}
+ggplot(data    = uofc.arrivals,
+       mapping = aes(x = dist,y = count)) +
+  geom_point()
+```
+
+```{r, eval=FALSE}
+ggplot(data    = uofc.arrivals,
+       mapping = aes(x = dist,y = count)) +
+  geom_point() +
+  scale_x_log10() +
+  scale_y_log10()
+```
+
+```{r, eval=FALSE}
+plot3 <- ggplot(data    = subset(uofc.arrivals,count > 0 & dist > 0),
+                mapping = aes(x = dist,y = count)) +
+  geom_point(shape = 4,color = "darkblue") +
+  scale_x_log10() +
+  scale_y_log10(breaks = c(1,10,100,1000))
+```
+
+### Analyzing the linear relationship between two variables
+
+```{r, eval=FALSE}
+fit <- lm(data    = subset(uofc.arrivals,count > 0 & dist > 0),
+          formula = log10(count) ~ log10(dist))
+```
+
+```{r, eval=FALSE}
+summary(fit)
+```
+
+```{r, eval=FALSE}
+b <- coef(fit)
+plot3 + geom_abline(intercept = b["(Intercept)"],slope = b["log10(dist)"],
+                    color = "red",linetype = "dotted")
+```
 
 ## Recap
 
