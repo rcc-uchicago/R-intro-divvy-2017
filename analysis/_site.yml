@@ -18,7 +18,8 @@ output:
   html_document:
     toc: true
     toc_float: true
-    theme: readable
+    theme: flatly
     highlight: textmate
     include:
+      before_body: include/header.html
       after_body: include/footer.html
