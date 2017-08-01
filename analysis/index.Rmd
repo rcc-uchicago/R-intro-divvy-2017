@@ -95,7 +95,7 @@ demo](https://stephenslab.github.io/wflow-divvy).
 + [Short guide to writing your own R package](http://r-pkgs.had.co.nz).
 
 + [Introductory Statistics with R](http://staff.pubhealth.ku.dk/~pd/ISwR.html)
-(available through [University of Chicago
+(available through the [University of Chicago
 library](https://www.lib.uchicago.edu)).
 
 + [Data Analysis for the Life
