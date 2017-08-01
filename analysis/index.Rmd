@@ -64,9 +64,9 @@ Chicago.
 
 1. 
 
-1. [Station data](stations.html).
+2. [Station data](stations.html).
 
-2. [Trip data](trips.html).
+3. [Trip data](trips.html).
 
 ## Great resources for R
 
