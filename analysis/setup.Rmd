@@ -96,6 +96,9 @@ Air, the current working directory in R is
 getwd()
 ```
 
+If you are not in the analysis directory, use the "setwd" function or
+the RStudio menus to change the working directory.
+
 Once you have completed these steps, you are ready to move on to the
 lessons.
 <br>
