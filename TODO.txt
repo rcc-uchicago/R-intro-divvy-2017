@@ -1,1 +1,4 @@
 * Add PDF of slides to repository.
+* Go through trips.html one last time.
+* Complete plots.html.
+* Complete uofc.html.
