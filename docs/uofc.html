@@ -315,7 +315,7 @@ div.section {
 <p><strong>Last updated:</strong> 2017-08-01</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository
  exists and R package git2r is installed -->
-<p><strong>Code version:</strong> a16ae0a</p>
+<p><strong>Code version:</strong> 3f9f864</p>
 <div id="visualizing-the-usage-patterns-of-university-of-chicago-divvy-users" class="section level2">
 <h2>Visualizing the usage patterns of University of Chicago Divvy users</h2>
 <p>Earlier, when we were inspecting the University of Chicago trip data, we noticed an interesting trend: the trips end up much more frequently at some stations than others.</p>
@@ -372,6 +372,7 @@ print(plot3)</code></pre>
 <p>As before, we can get a detailed summary of the linear regression using the “summary” function:</p>
 <pre class="r"><code>class(fit)
 summary(fit)</code></pre>
+<p>Among other things, the summary tells us that about 50% of the variation in trip arrival counts is explained by geographic distance.</p>
 <p>We can also add the fitted regression line to the scatterplot we created earlier:</p>
 <pre class="r"><code>b &lt;- coef(fit)
 plot3 + geom_abline(intercept = b[&quot;(Intercept)&quot;],slope = b[&quot;log10(dist)&quot;],
