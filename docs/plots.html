@@ -315,7 +315,7 @@ div.section {
 <p><strong>Last updated:</strong> 2017-08-01</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository
  exists and R package git2r is installed -->
-<p><strong>Code version:</strong> be9767e</p>
+<p><strong>Code version:</strong> f59aaf8</p>
 <p>Up to this point, we have done lots of work importing and manipulating the Divvy data. Now let’s do something fun with these data. In this episode, we will use the Divvy trip and station data to generate some interesting plots.</p>
 <div id="our-first-plot-a-map-of-the-divvy-stations" class="section level2">
 <h2>Our first plot: a map of the Divvy stations</h2>
@@ -386,27 +386,47 @@ counts.week &lt;- data.frame(week       = 0:52,
 head(counts.week)
 tail(counts.week)</code></pre>
 <p>To illustrate the ability of ggplot to easily combine multiple <em>layers</em> into a single plot, in this plot let’s add both points and lines.</p>
-<pre class="r"><code>ggplot(data    = counts.week,
-       mapping = aes(x = week,y = departures)) +
+<pre class="r"><code>plot1 &lt;- ggplot(data    = counts.week,
+                mapping = aes(x = week,y = departures)) +
   geom_point(color = &quot;darkblue&quot;) +
   geom_line(color = &quot;darkblue&quot;) +
   theme_minimal() +
   theme(panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank())</code></pre>
+        panel.grid.minor = element_blank())
+print(plot1)</code></pre>
+<p>Also, I assigned the output of “ggplot” to a variable to save the plot for later.</p>
 <p>What expected or surprising trends do you notice from this plot? What improvements would you make to this figure to better highlight the interesting trends?</p>
 </div>
 <div id="seasonal-trends-at-the-university-of-chicago" class="section level2">
 <h2>Seasonal trends at the University of Chicago</h2>
+<p>Let’s repeat the same analysis, but this time let’s focus our attention on trip data from a single bike station on the University of Chicago campus. First, we create a new data frame containing only the trips departing at the U of C bike station.</p>
 <pre class="r"><code>trips.uofc &lt;- subset(trips,from_station_name == &quot;University Ave &amp; 57th St&quot;)
-counts.week.uofc &lt;-
+head(trips.uofc)
+nrow(trips.uofc)</code></pre>
+<p>As before, let’s create a data frame with the total number of trips in each week.</p>
+<pre class="r"><code>counts.week.uofc &lt;-
   data.frame(week       = 0:52,
              departures = as.vector(table(trips.uofc$start.week)))</code></pre>
-<pre class="r"><code>ggplot(counts.week.uofc,aes(x = week,y = departures)) +
+<p>Then we can generate a plot from this data frame:</p>
+<pre class="r"><code>plot2 &lt;- ggplot(data    = counts.week.uofc,
+                mapping = aes(x = week,y = departures)) +
   geom_point(color = &quot;darkblue&quot;) +
   geom_line(color = &quot;darkblue&quot;) +
   theme_minimal() +
   theme(panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank())</code></pre>
+        panel.grid.minor = element_blank())
+print(plot2)</code></pre>
+<p>It would be nice to compare this plot against the previous plot. Let’s use the <a href="https://cran.r-project.org/package=cowplot">cowplot package</a> to arrange the two plots in one figure:</p>
+<pre class="r"><code>install.packages(&quot;cowplot&quot;)
+library(cowplot)
+plot_grid(plot1 + ggtitle(&quot;city-wide&quot;),
+          plot2 + ggtitle(&quot;University of Chicago&quot;),
+          nrow = 2)</code></pre>
+<p>Notice how easy it was to add additional layers after the creating initial plot.</p>
+<p>The cowplot package also comes with a nice theme, so let’s use it. Also, the “plot_grid” function has a great feature for aligning plots along the axes for better comparison.</p>
+<pre class="r"><code>plot_grid(plot1 + ggtitle(&quot;city-wide&quot;) + theme_cowplot(),
+          plot2 + ggtitle(&quot;University of Chicago&quot;) + theme_cowplot(),
+          nrow = 2,align = &quot;v&quot;)</code></pre>
 <p>When we analyze trips taken at the University of Chicago bike station, the “bump” during warmer months flattens out. This is probably because a large fraction of University of Chicago students leave during the summer.</p>
 </div>
 <div id="save-your-session" class="section level2">
