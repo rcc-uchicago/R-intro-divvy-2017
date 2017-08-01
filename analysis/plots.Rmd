@@ -250,9 +250,9 @@ plot_grid(plot1 + ggtitle("city-wide"),
 Notice how easy it was to add additional layers after the creating
 initial plot.
 
-The cowplot package also comes with a nice theme, so let's use
-it. Also, the "plot_grid" function has a great feature for aligning
-plots along the axes for better comparison.
+The cowplot package comes with a nice theme, so let's use it. Also,
+the "plot_grid" function has a great feature for aligning plots along
+the axes for better comparison.
 
 ```{r, eval=FALSE}
 plot_grid(plot1 + ggtitle("city-wide") + theme_cowplot(),
@@ -276,9 +276,10 @@ save.image(file = "workshop.RData")
 ## Recap
 
 In this episode, we illustrated how ggplot can be used. We only
-explored the most basic features of ggplot, and it has many, many
-more. The key point is that ggplot works very well provided you take
-the time beforehand to organize your data into a data frame, and
+explored basic features of ggplot, and it has many, many more that we
+do not have time to explore here. The key point is that ggplot works
+well provided you take the time beforehand to organize your data into
+a data frame, and transform your table columns into suitable formats
 (e.g., factors, dates & times).
 
 In the [final episode](uofc.html), we will take a closer look at the
