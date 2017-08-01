@@ -309,32 +309,32 @@ div.tocify {
 <p><strong>Last updated:</strong> 2017-07-31</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository
  exists and R package git2r is installed -->
-<p><strong>Code version:</strong> c5f5092 <br></p>
-<p>For this part of the lesson, I’m assuming you have worked through the code in the <a href="stations.html">previous episode</a>, and your R session is still open. If you have saved your R session using “save.image”, you can load it by running <code>load(&quot;workshop.RData&quot;)</code>. <br> <br></p>
+<p><strong>Code version:</strong> 9056e8e <br></p>
+<p>For this part of the lesson, I’m assuming you have worked through the code in the <a href="stations.html">previous episode</a>, and your R session is still open. If you have saved your R session using the “save.image” command, you can load the session data by running <code>load(&quot;workshop.RData&quot;)</code>. <br> <br></p>
 <div id="installing-the-data.table-package" class="section level2">
 <h2>Installing the data.table package</h2>
 <p>Previously, we used “read.csv” to read in the data. However, if we try to use it for the Divvy Trip data, we will see that it is very slow:</p>
 <pre class="r"><code>trips &lt;- read.csv(file = &quot;../data/Divvy_Trips_2016.csv&quot;,
                   stringsAsFactors = FALSE,nrows = 1e5)</code></pre>
-<p>On your computer, it probably took a few seconds to read in the first 100,000 lines. This is tolerable, but consider that there is a total of 3.6 million lines! Instead, we will use a function implemented in the <code>data.table</code> package that is much faster.</p>
+<p>On your computer, it probably took a few seconds to read in the first 100,000 lines. This is tolerable, but consider that there is a total of 3.6 million lines in the CSV file! Instead, we will use a function implemented in the <a href="https://github.com/Rdatatable/data.table/wiki">data.table package</a> that is much faster.</p>
 <p>Retrieve and install the package from CRAN:</p>
 <pre class="r"><code>install.packages(&quot;data.table&quot;)</code></pre>
 <p>Load the package functions into your environment:</p>
 <pre class="r"><code>library(data.table)</code></pre>
 <p>What functions were loaded? What can you do with this package? Use this command to access the package documentation:</p>
 <pre class="r"><code>help(package = data.table)</code></pre>
-<p>Package “vignettes” are also a great way to learn about a package, e.g.,</p>
+<p>“Vignettes” are also a great way to learn about a package; e.g.,</p>
 <pre class="r"><code>vignette(&quot;datatable-intro&quot;)</code></pre>
 <p><br></p>
 </div>
 <div id="where-are-my-packages" class="section level2">
 <h2>Where are my packages?</h2>
-<p>In most cases, packages are either installed in R software directory, or in your home directory. This will give you the list of package installation locations:</p>
+<p>In most cases, packages are either installed in the directory where the R software is installed, or in your home directory. This will give you the current list of package installation locations:</p>
 <pre class="r"><code>.libPaths()</code></pre>
 <p>When you install a new package, by default it is installed in the first location.</p>
 <p>To get the full list of packages, run</p>
 <pre class="r"><code>installed.packages()</code></pre>
-<p>or</p>
+<p>or, for a more concise list,</p>
 <pre class="r"><code>rownames(installed.packages)</code></pre>
 <p>If you want to find out which packages are installed in each location, run these commands:</p>
 <pre class="r"><code>rownames(installed.packages(lib = .libPaths()[1]))
@@ -354,17 +354,17 @@ rownames(installed.packages(lib = .libPaths()[2]))</code></pre>
 <pre class="r"><code>class(trips)</code></pre>
 <p>I prefer working with a data frame since I am more used to it.</p>
 <pre class="r"><code>class(trips) &lt;- &quot;data.frame&quot;</code></pre>
-<p>We can use the same commands we used before to quickly get a quick overview of the trip data:</p>
+<p>We can use the same commands we used before to quickly get an overview of the trip data:</p>
 <pre class="r"><code>nrow(trips)
 ncol(trips)
 head(trips)
 tail(trips)
 summary(trips)</code></pre>
-<p>Unfortunately, the “summary” command isn’t particularly useful in this case. It will be more useful if we first convert some of the columns to <em>factors</em>. <br> <br></p>
+<p>Unfortunately, the “summary” command isn’t particularly informative for this data frame. It will be more useful if we first convert some of the columns to <em>factors</em>. <br> <br></p>
 </div>
 <div id="create-some-factor-columns" class="section level2">
 <h2>Create some factor columns</h2>
-<p>A “factor” is also known as a “categorical variable”. A couple good candidates for categorical variables are the gender and usertype columns:</p>
+<p>You may know a “factor” as a “categorical variable”. In R, the categories are called “levels”. A couple good candidates for factors are the gender and usertype columns:</p>
 <pre class="r"><code>class(trips$gender)
 class(trips$usertype)
 summary(trips$gender)
@@ -375,12 +375,12 @@ class(trips$gender)
 class(trips$usertype)
 summary(trips$gender)
 summary(trips$usertype)</code></pre>
-<p>Here we observe an example of data coding Bad Practice—the missing genders are simply empty character strings, which can be confusing. In R, these “missing data” should always be assigned the special value NA for “not assigned”:</p>
+<p>Unfortunately, we have stumbled upon an example of Bad Practice in data encoding—the missing genders are simply empty character strings. In R, “missing data” should always be assigned the special value NA, short for “not assigned”:</p>
 <pre class="r"><code>i               &lt;- which(trips$gender == &quot;&quot;)
 trips$gender[i] &lt;- NA
 trips           &lt;- transform(trips,gender = factor(gender))
 summary(trips$gender)</code></pre>
-<p>We will also see that it is very convert the “station name” columns to factors.</p>
+<p>We will also see soon that it is useful to convert the “station name” columns to factors.</p>
 <pre class="r"><code>trips &lt;- transform(trips,
                    from_station_name = factor(from_station_name,
                                               rownames(stations)),
@@ -392,10 +392,11 @@ summary(trips$gender)</code></pre>
 </div>
 <div id="convert-the-dates-and-times" class="section level2">
 <h2>Convert the dates and times</h2>
-<p>In the previous section, we found that converting some table columns to factors makes these columns easier to inspect (and eventually analyze). Similarly, the dates and times aren’t particularly useful until we extract them from the character strings. Working with dates &amp; times in R is much more complicated so I won’t explain in detail what this code does, or how it works.</p>
-<p>To convert the dates and times, I will use the <code>lubridate</code> package.</p>
-<pre class="r"><code>install.packages(&quot;lubridate&quot;)</code></pre>
-<p>Here, I create my own function for parsing the dates and times to accommodate the format of the date &amp; time data stored in the Divvy CSV files.</p>
+<p>In the previous section, we explained that converting some table columns to factors makes these columns easier to inspect (and eventually analyze). Similarly, the dates and times aren’t particularly useful until we extract them from the character strings. Working with dates &amp; times in R is much more complicated so I won’t explain in detail what this code does exactly, or how it works.</p>
+<p>To convert the dates and times, I will install and load the <code>lubridate</code> package.</p>
+<pre class="r"><code>install.packages(&quot;lubridate&quot;)
+library(lubridate)</code></pre>
+<p>Here, I create my own function for parsing the dates and times to accommodate the inconsistent format of the date &amp; time data stored in the Divvy CSV files.</p>
 <pre class="r"><code>parse.dt &lt;- function (x) {
   out    &lt;- suppressWarnings(mdy_hms(x))
   i      &lt;- is.na(out)
@@ -407,7 +408,7 @@ summary(trips$gender)</code></pre>
 trips &lt;- transform(trips,starttime = parse.dt(starttime))
 trips &lt;- transform(trips,start.week = as.numeric(format(starttime,&quot;%W&quot;)))
 summary(trips$starttime)
-summary(trips$startweek)</code></pre>
+summary(trips$start.week)</code></pre>
 <p><br></p>
 </div>
 <div id="trips-from-university-of-chicago" class="section level2">
