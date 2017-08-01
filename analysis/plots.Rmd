@@ -42,7 +42,7 @@ install.packages("ggplot2")
 library(ggplot2)
 ```
 
-For example, in only one line of code we can create a plot of the
+For example, in only a few lines of code, we can create a plot of the
 Divvy stations by geographic location (latitude & longitude).
 
 ```{r, eval=FALSE}
@@ -51,20 +51,27 @@ ggplot(data    = stations,
   geom_point()
 ```
 
-I'd like to suggest a couple adjustments to the plotting parameters:
+What geographic features does this plot evoke?
+
+I'd like to suggest a couple adjustments to the plotting parameters. 
 
 ```{r, eval=FALSE}
-ggplot(data = stations,
+ggplot(data    = stations,
        mapping = aes(x = longitude,y = latitude)) +
   geom_point(shape = 21,fill = "darkblue",color = "white",size = 2.5)
 ```
 
-There are many functions in ggplot2 for adjusting the plot
+You can consult `help(geom_point)` for more information about the
+plotting parameters. I also find
+[this website](http://ggplot2.tidyverse.org) to be a great reference
+on ggplot.
+
+There are many functions in the ggplot2 package for adjusting the plot
 setting. All changes to a plot are implemented using the "+" operator.
 Here's an example:
 
 ```{r, eval=FALSE}
-ggplot(data = stations,
+ggplot(data    = stations,
        mapping = aes(x = longitude,y = latitude)) +
   geom_point(shape = 21,fill = "darkblue",color = "white",size = 2.5) +
   theme_minimal() +
@@ -75,15 +82,16 @@ ggplot(data = stations,
 
 ## Scale the area of each station by total number of departures
 
-So far, our plot traces the outlines of the City of Chicago and Lake
-Michigan. I would like to add an additional piece of information to
-this visualization: the amount of activity at each station, which
-should be a rough proxy for population density in Chicago.
+So far, the plot we have created traces the outlines of the City of
+Chicago and Lake Michigan. I would like to add an additional piece of
+information to this visualization: the amount of activity at each
+station, which should be a rough proxy for population density in
+Chicago.
 
 To do this, we need to add this information to the "stations" data
-frame, because this is the data frame we have been providing to
-ggplot. Let's create a new variable containing the counts of the
-number of departures at each station:
+frame because this is the data frame we have been providing as an
+input to "ggplot". Let's create a new variable containing the counts of
+the number of departures at each station:
 
 ```{r, eval=FALSE}
 counts <- table(trips$from_station_name)
@@ -96,12 +104,12 @@ listed in the same order as the stations in the data frame:
 all(names(counts) == rownames(stations))
 ```
 
-This should output TRUE because above we were careful to make sure
-that the factor levels are in the same order as the rows of the
-"stations" table.
+This should output TRUE---remember that we were careful to create the
+factors in the trips data frame so that the levels were ordered in the
+same way as the stations in the stations table. 
 
-Assuming all looks good, let's use this new variable to create a new
-column in the stations data frame:
+Let's use this new variable to create a new column in the stations
+data frame:
 
 ```{r, eval=FALSE}
 counts   <- as.vector(counts)
@@ -112,10 +120,12 @@ summary(stations$departures)
 ```
 
 Now that we have the additional "departures" column in the data frame,
-we can incorporate these data into the new plot:
+we can use these data in our new plot:
 
 ```{r, eval=FALSE}
-ggplot(stations,aes(x = longitude,y = latitude, size = departures)) +
+ggplot(data    = stations,
+       mapping = aes(x = longitude,y = latitude,
+                     size = departures)) +
   geom_point(shape = 21,fill = "darkblue",color = "white") +
   theme_minimal() +
   theme(panel.grid.major = element_blank(),
@@ -124,21 +134,24 @@ ggplot(stations,aes(x = longitude,y = latitude, size = departures)) +
 
 This looks nice, but isn't doesn't accomplish *exactly* what I wanted
 because I wanted to scale the *area* of each circle by the number of
-departures, and not the diameter of each circle. This requires only
-one change to our plotting code.
+departures, and not the diameter of each circle. Because ggplot can
+also plot *expressions*, this requires only one change to our plotting
+code.
 
 ```{r, eval=FALSE}
-ggplot(stations,aes(x = longitude,y = latitude, size = sqrt(departures))) +
+ggplot(data    = stations,
+       mapping = aes(x = longitude,y = latitude,size = sqrt(departures))) +
   geom_point(shape = 21,fill = "darkblue",color = "white") +
   theme_minimal() +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank())
 ```
 
-Notice that the location of the downtown is now more apparent, and
-that. Also observe, unsurprisingly, that there are generally more
-departures per station on the North Side, and, interestingly, Hyde
-Park has a good amount of hiking activity.
+Notice that the location of the downtown is apparent by the higher
+density of biking activity. Also observe that there are generally more
+departures per station on the North Side of Chicago, and,
+interestingly, Hyde Park also appears to have a good amount of biking
+activity.
 
 What else interesting do you observe from this plot?
 <br>
