@@ -315,7 +315,7 @@ div.section {
 <p><strong>Last updated:</strong> 2017-08-01</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository
  exists and R package git2r is installed -->
-<p><strong>Code version:</strong> be9767e</p>
+<p><strong>Code version:</strong> 07783cb</p>
 <p>For this part of the lesson, I’m assuming you have worked through the code in the <a href="stations.html">previous episode</a>, and your R session is still open. If you have saved your R session using the “save.image” command, you can load the session data by running <code>load(&quot;workshop.RData&quot;)</code>.</p>
 <div id="installing-the-data.table-package" class="section level2">
 <h2>Installing the data.table package</h2>
@@ -397,7 +397,7 @@ summary(trips$gender)</code></pre>
 <div id="convert-the-dates-and-times" class="section level2">
 <h2>Convert the dates and times</h2>
 <p>In the previous section, we explained that converting some table columns to factors makes these columns easier to inspect (and eventually analyze). Similarly, the dates and times aren’t particularly useful until we extract them from the character strings. Working with dates &amp; times in R is much more complicated so I won’t explain in detail what this code does exactly, or how it works.</p>
-<p>To convert the dates and times, I will install and load the <code>lubridate</code> package.</p>
+<p>To convert the dates and times, install and load the <a href="http://lubridate.tidyverse.org">lubridate package</a>.</p>
 <pre class="r"><code>install.packages(&quot;lubridate&quot;)
 library(lubridate)</code></pre>
 <p>Here, I create my own function for parsing the dates and times to accommodate the inconsistent format of the date &amp; time data stored in the Divvy CSV files.</p>
