@@ -29,10 +29,9 @@ This file is either a webpage generated from an R Markdown document,
 or the original R Markdown file itself.
 
 [R Markdown](http://r4ds.had.co.nz/r-markdown.html) combines
-[Markdown](http://daringfireball.net/projects/markdown), a popular,
-easy-to-read plain text formatting syntax, with "chunks" of R code. R
-Markdown notebooks can be easily rendered into various formats (e.g.,
-PDF, HTML) for creating sharable and reproducible
+[Markdown](http://daringfireball.net/projects/markdown) with "chunks"
+of R code. R Markdown notebooks can be easily rendered into various
+formats (e.g., PDF, HTML) for creating sharable and reproducible
 [narratives](https://www.oreilly.com/ideas/the-state-of-jupyter) of
 your data analyses.
 
@@ -63,15 +62,18 @@ MacBook Air the current working directory is
 getwd()
 ```
 
-In the "data" directory, three should be three CSV files containing
+If it is not, see the [setup](setup.html) instructions for how to
+change the working directory.
+
+In the "data" directory, you should see 3 CSV files containing
 station data:
 
-```{r, eval=TRUE}
+```{r, eval=TRUE}divvy
 Sys.glob("../data/*Stations*")
 ```
 
 We will only use the Q4 data since it contains the most up-to-date
-information about the Divvy stations.
+information about the Divvy bike stations.
 <br>
 <br>
 
@@ -85,9 +87,6 @@ Immediately after launching R, your R environment will be empty.
 ```{r, eval=FALSE}
 ls()
 ```
-
-If it is not, see the [setup](setup.html) instructions for how to
-change the working directory.
 
 We will create a new variable called "stations" by running
 function "read.csv", and assigning the result of "read.csv" to
@@ -112,7 +111,7 @@ help(read.table)
 What kind of variable is "stations"? We can check this:
 
 ```{r, eval=FALSE}
-class(read.table)
+class(stations)
 ```
 
 It is a "data frame", which is R's main data structure for tables.
@@ -132,7 +131,7 @@ tail(stations)
 See the "README.txt" file in the data directory for more information
 about the columns in the table.
 
-Use `summary` to quickly generate an overview of the data in the table:
+Use `summary` to quickly generate an overview of the table:
 
 ```{r, eval=FALSE}
 summary(stations)
@@ -161,8 +160,8 @@ class(stations[["dpcapacity"]])
 class(stations$dpcapacity)
 x <- stations$dpcapacity
 summary(x)
-quantile(x,seq(0,1,0.1))
 table(x)
+quantile(x,seq(0,1,0.1))
 ```
 
 It is interesting that a few of the Divvy bike stations are much
@@ -177,22 +176,22 @@ Alternatively, we can sort the table rows and inspect the top rows:
 ```{r, eval=FALSE}
 rows     <- order(stations$dpcapacity,decreasing = TRUE)
 stations <- stations[rows,]
-head(stations,n = 10)
+head(stations,n = 8)
 ```
 <br>
 
 ## Quickly accessing stations in the table by their name
 
-It is often useful to access rows of a table by their name or label
-instead of using a number. This can be done by setting the row names
-in the data frame.
+It is often useful to access rows of a table by their name instead of
+using a number. This can be done by setting the row names in the data
+frame.
 
 For example, this is one of the Divvy stations on the University of
 Chicago campus:
 
 ```{r, eval=FALSE}
-stn.name <- "University Ave & 57th St"
-i <- which(stations$name == stn.name)
+uofcstn <- "University Ave & 57th St"
+i       <- which(stations$name == uofcstn)
 stations[i,]
 ```
 
@@ -205,13 +204,13 @@ head(stations)
 ```
 
 Note that I removed the second column in the table because it is no
-longer needed once we have the row names.
+longer needed.
 
-Once we have row names, we have an easier way to access the same
-information:
+Once we have row names, we can more easily access the row
+corresponding to the Divvy bike station on the university campus:
 
 ```{r, eval=FALSE}
-stations[stn.name,]
+stations[uofcstn,]
 ```
 <br>
 
@@ -228,9 +227,8 @@ save.image(file = "workshop.RData")
 ## Recap
 
 In this first episode, we explored some basic commands for loading
-data from a text file into a data frame in R, inspecting the data in
-the data frame, and making a few simple (but useful!) modifications to
-the data.
+data from a text file into R, inspecting data in a data frame, and
+making a few useful changes to the data.
 
 In [the next episode](trips.html), we will explore these same
-techniques, but in a much larger table---the Divvy trip data.
+techniques, but on a larger scale, using the Divvy trip data.
