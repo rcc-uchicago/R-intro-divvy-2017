@@ -309,23 +309,25 @@ div.tocify {
 <p><strong>Last updated:</strong> 2017-08-01</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository
  exists and R package git2r is installed -->
-<p><strong>Code version:</strong> af836ad</p>
+<p><strong>Code version:</strong> 4019913</p>
 <p>Up to this point, we have done lots of work importing and manipulating the Divvy data. Now let’s do something fun with these data. In this episode, we will use the Divvy trip and station data to generate some interesting plots. <br> <br></p>
 <div id="our-first-plot-a-map-of-the-divvy-stations" class="section level2">
 <h2>Our first plot: a map of the Divvy stations</h2>
 <p><a href="http://ggplot2.tidyverse.org">ggplot2</a> has emerged as the most popular R package for generating data visualizations. Although the interface can be initially unintuitive, it is a very powerful tool, and can create surprisingly sophisticated plots in only a few lines of code.</p>
 <pre class="r"><code>install.packages(&quot;ggplot2&quot;)
 library(ggplot2)</code></pre>
-<p>For example, in only one line of code we can create a plot of the Divvy stations by geographic location (latitude &amp; longitude).</p>
+<p>For example, in only a few lines of code, we can create a plot of the Divvy stations by geographic location (latitude &amp; longitude).</p>
 <pre class="r"><code>ggplot(data    = stations,
        mapping = aes(x = longitude,y = latitude)) +
   geom_point()</code></pre>
-<p>I’d like to suggest a couple adjustments to the plotting parameters:</p>
-<pre class="r"><code>ggplot(data = stations,
+<p>What geographic features does this plot evoke?</p>
+<p>I’d like to suggest a couple adjustments to the plotting parameters.</p>
+<pre class="r"><code>ggplot(data    = stations,
        mapping = aes(x = longitude,y = latitude)) +
   geom_point(shape = 21,fill = &quot;darkblue&quot;,color = &quot;white&quot;,size = 2.5)</code></pre>
-<p>There are many functions in ggplot2 for adjusting the plot setting. All changes to a plot are implemented using the “+” operator. Here’s an example:</p>
-<pre class="r"><code>ggplot(data = stations,
+<p>You can consult <code>help(geom_point)</code> for more information about the plotting parameters. I also find <a href="http://ggplot2.tidyverse.org">this website</a> to be a great reference on ggplot.</p>
+<p>There are many functions in the ggplot2 package for adjusting the plot setting. All changes to a plot are implemented using the “+” operator. Here’s an example:</p>
+<pre class="r"><code>ggplot(data    = stations,
        mapping = aes(x = longitude,y = latitude)) +
   geom_point(shape = 21,fill = &quot;darkblue&quot;,color = &quot;white&quot;,size = 2.5) +
   theme_minimal() +
@@ -335,31 +337,34 @@ library(ggplot2)</code></pre>
 </div>
 <div id="scale-the-area-of-each-station-by-total-number-of-departures" class="section level2">
 <h2>Scale the area of each station by total number of departures</h2>
-<p>So far, our plot traces the outlines of the City of Chicago and Lake Michigan. I would like to add an additional piece of information to this visualization: the amount of activity at each station, which should be a rough proxy for population density in Chicago.</p>
-<p>To do this, we need to add this information to the “stations” data frame, because this is the data frame we have been providing to ggplot. Let’s create a new variable containing the counts of the number of departures at each station:</p>
+<p>So far, the plot we have created traces the outlines of the City of Chicago and Lake Michigan. I would like to add an additional piece of information to this visualization: the amount of activity at each station, which should be a rough proxy for population density in Chicago.</p>
+<p>To do this, we need to add this information to the “stations” data frame because this is the data frame we have been providing as an input to “ggplot”. Let’s create a new variable containing the counts of the number of departures at each station:</p>
 <pre class="r"><code>counts &lt;- table(trips$from_station_name)</code></pre>
 <p>Let’s double-check that the stations in the “counts” variable are listed in the same order as the stations in the data frame:</p>
 <pre class="r"><code>all(names(counts) == rownames(stations))</code></pre>
-<p>This should output TRUE because above we were careful to make sure that the factor levels are in the same order as the rows of the “stations” table.</p>
-<p>Assuming all looks good, let’s use this new variable to create a new column in the stations data frame:</p>
+<p>This should output TRUE—remember that we were careful to create the factors in the trips data frame so that the levels were ordered in the same way as the stations in the stations table.</p>
+<p>Let’s use this new variable to create a new column in the stations data frame:</p>
 <pre class="r"><code>counts   &lt;- as.vector(counts)
 counts   &lt;- data.frame(departures = counts)
 stations &lt;- cbind(stations,counts)
 head(stations)
 summary(stations$departures)</code></pre>
-<p>Now that we have the additional “departures” column in the data frame, we can incorporate these data into the new plot:</p>
-<pre class="r"><code>ggplot(stations,aes(x = longitude,y = latitude, size = departures)) +
+<p>Now that we have the additional “departures” column in the data frame, we can use these data in our new plot:</p>
+<pre class="r"><code>ggplot(data    = stations,
+       mapping = aes(x = longitude,y = latitude,
+                     size = departures)) +
   geom_point(shape = 21,fill = &quot;darkblue&quot;,color = &quot;white&quot;) +
   theme_minimal() +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank())</code></pre>
-<p>This looks nice, but isn’t doesn’t accomplish <em>exactly</em> what I wanted because I wanted to scale the <em>area</em> of each circle by the number of departures, and not the diameter of each circle. This requires only one change to our plotting code.</p>
-<pre class="r"><code>ggplot(stations,aes(x = longitude,y = latitude, size = sqrt(departures))) +
+<p>This looks nice, but isn’t doesn’t accomplish <em>exactly</em> what I wanted because I wanted to scale the <em>area</em> of each circle by the number of departures, and not the diameter of each circle. Because ggplot can also plot <em>expressions</em>, this requires only one change to our plotting code.</p>
+<pre class="r"><code>ggplot(data    = stations,
+       mapping = aes(x = longitude,y = latitude,size = sqrt(departures))) +
   geom_point(shape = 21,fill = &quot;darkblue&quot;,color = &quot;white&quot;) +
   theme_minimal() +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank())</code></pre>
-<p>Notice that the location of the downtown is now more apparent, and that. Also observe, unsurprisingly, that there are generally more departures per station on the North Side, and, interestingly, Hyde Park has a good amount of hiking activity.</p>
+<p>Notice that the location of the downtown is apparent by the higher density of biking activity. Also observe that there are generally more departures per station on the North Side of Chicago, and, interestingly, Hyde Park also appears to have a good amount of biking activity.</p>
 <p>What else interesting do you observe from this plot? <br> <br></p>
 </div>
 <div id="visualizing-seasonal-biking-trends" class="section level2">
