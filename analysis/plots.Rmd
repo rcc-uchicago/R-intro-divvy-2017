@@ -1,5 +1,5 @@
 ---
-title: "Create plots using the Divvy station and trip data"
+title: "Create plots from the Divvy station & trip data"
 author: "Peter Carbonetto"
 output: html_document
 ---
@@ -22,46 +22,50 @@ knitr::read_chunk("chunks.R")
 ```{r code-version, echo=FALSE, results='asis'}
 ```
 
-In the previous two episodes, we've done lots of work importing and
-manipulating the Divvy data. Now let's do something fun with these
-data. we will use the Divvy trip and station data to generate a map of
-Chicago.
+Up to this point, we have done lots of work importing and manipulating
+the Divvy data. Now let's do something fun with these data---in this
+episode we will use the Divvy trip and station data to generate some
+evocative plots.
 <br>
 <br>
 
 ## Our first plot of the Divvy stations
 
 [ggplot2](http://ggplot2.tidyverse.org) has emerged as the most
-popular R package for creating visualizations from data.  Although
-most people find the interface initially unintuitive, once you get
-used to it, it is a very powerful tool, and can create sophisticated
-plots in only a few lines of code.
+popular R package for generating data visualizations. Although the
+interface can be initially unintuitive, it is a very powerful tool,
+and can create surprisingly sophisticated plots in only a few lines of
+code.
 
 ```{r, eval=FALSE}
 install.packages("ggplot2")
+library(ggplot2)
 ```
 
 For example, in only one line of code we can create a plot of the
 Divvy stations by geographic location (latitude & longitude).
 
 ```{r, eval=FALSE}
-library(ggplot2)
-ggplot(stations,aes(x = longitude,y = latitude)) + geom_point()
+ggplot(data    = stations,
+       mapping = aes(x = longitude,y = latitude)) +
+  geom_point()
 ```
 
 I'd like to suggest a couple adjustments to the plotting parameters:
 
 ```{r, eval=FALSE}
-ggplot(stations,aes(x = longitude,y = latitude)) +
+ggplot(data = stations,
+       mapping = aes(x = longitude,y = latitude)) +
   geom_point(shape = 21,fill = "darkblue",color = "white",size = 2.5)
 ```
 
-ggplot implements transformation and adjustments with separate
-functions by modifying the initial plot using the "+" operator.
+There are many functions in ggplot2 for adjusting the plot
+setting. All changes to a plot are implemented using the "+" operator.
 Here's an example:
 
 ```{r, eval=FALSE}
-ggplot(stations,aes(x = longitude,y = latitude)) +
+ggplot(data = stations,
+       mapping = aes(x = longitude,y = latitude)) +
   geom_point(shape = 21,fill = "darkblue",color = "white",size = 2.5) +
   theme_minimal() +
   theme(panel.grid.major = element_blank(),
@@ -70,14 +74,15 @@ ggplot(stations,aes(x = longitude,y = latitude)) +
 
 ## Scale the area of each station by total number of departures
 
-So far, our plot traces the outlines of the City of Chicago and the
-Lake Michigan shore. I would like to add an additional piece of
-information to this visualization: the number of trips from each
-station.
+So far, our plot traces the outlines of the City of Chicago and Lake
+Michigan. I would like to add an additional piece of information to
+this visualization: the amount of activity at each station, which
+should be a rough proxy for population density in Chicago.
 
 To do this, we need to add this information to the "stations" data
-frame. Let's create a new variable containing the counts of the number
-of departures at each station:
+frame, because this is the data frame we have been providing to
+ggplot. Let's create a new variable containing the counts of the
+number of departures at each station:
 
 ```{r, eval=FALSE}
 counts <- table(trips$from_station_name)
@@ -90,8 +95,12 @@ listed in the same order as the stations in the data frame:
 all(names(counts) == rownames(stations))
 ```
 
-Looks good, so we can use this variable to create a new column in the
-stations data frame:
+This should output TRUE because above we were careful to make sure
+that the factor levels are in the same order as the rows of the
+"stations" table.
+
+Assuming all looks good, let's use this new variable to create a new
+column in the stations data frame:
 
 ```{r, eval=FALSE}
 counts   <- as.vector(counts)
@@ -114,8 +123,8 @@ ggplot(stations,aes(x = longitude,y = latitude, size = departures)) +
 
 This looks nice, but isn't doesn't accomplish *exactly* what I wanted
 because I wanted to scale the *area* of each circle by the number of
-departures, not the diameter of each circle. This requires one change
-to our plotting code.
+departures, and not the diameter of each circle. This requires only
+one change to our plotting code.
 
 ```{r, eval=FALSE}
 ggplot(stations,aes(x = longitude,y = latitude, size = sqrt(departures))) +
@@ -125,16 +134,17 @@ ggplot(stations,aes(x = longitude,y = latitude, size = sqrt(departures))) +
         panel.grid.minor = element_blank())
 ```
 
-Notice that the location of the downtown is now apparent, and that
-there generally more departures per station on the North Side
-(although Hyde Park has a decent amount of hiking activity).
+Notice that the location of the downtown is now more apparent, and
+that. Also observe, unsurprisingly, that there are generally more
+departures per station on the North Side, and, interestingly, Hyde
+Park has a good amount of hiking activity.
 
-Do you observe any other interesting trends?
+Do else interesting do you observe from this plot?
 
 ## Visualizing seasonal biking trends
 
-Let's now use the Divvy trip data to examine biking trends in Chicago
-over the course of one year.
+Let's now use the Divvy trip data to examine biking trends over the
+course of one year in Chicago.
 
 Convert the "start week" column to a factor, then we can easily count
 the total number of Divvy trips per week of the year.
