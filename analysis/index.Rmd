@@ -88,7 +88,8 @@ of Chicago.
 
 + [Using R with conda](https://conda.io/docs/r-with-conda.html).
 
-+ [Jupyter](https://jupyter.org) (included with Anaconda).
++ [Jupyter](https://jupyter.org) (included with
+[Anaconda](http://continuum.io/)).
 
 + [workflowr](https://github.com/jdblischak/workflowr) and the
 ["Divvy data exploration" workflowr

@@ -1,5 +1,5 @@
 ---
-title: "Plotting a map of the Divvy stations"
+title: "Create plots using the Divvy station and trip data"
 author: "Peter Carbonetto"
 output: html_document
 ---

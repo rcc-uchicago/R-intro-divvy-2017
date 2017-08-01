@@ -1,4 +1,9 @@
-# Introduction to R for data analysis: Code of Conduct
+---
+title: "Introduction to R for data analysis: Code of Conduct"
+output:
+  html_document:
+    toc: false
+---
 
 As contributors and maintainers of this project, we pledge to respect
 all people who contribute through reporting issues, posting feature
