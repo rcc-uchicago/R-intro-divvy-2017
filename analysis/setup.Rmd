@@ -22,7 +22,6 @@ knitr::read_chunk("chunks.R")
  package git2r is installed -->
 ```{r code-version, echo=FALSE, results="asis"}
 ```
-<br>
 
 ## Setup instructions
 
@@ -101,8 +100,6 @@ the RStudio menus to change the working directory.
 
 Once you have completed these steps, you are ready to move on to the
 lessons.
-<br>
-<br>
 
 ## Session information
 

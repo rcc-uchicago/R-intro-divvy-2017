@@ -26,8 +26,6 @@ Up to this point, we have done lots of work importing and manipulating
 the Divvy data. Now let's do something fun with these data. In this
 episode, we will use the Divvy trip and station data to generate some
 interesting plots.
-<br>
-<br>
 
 ## Our first plot: a map of the Divvy stations
 
@@ -78,7 +76,6 @@ ggplot(data    = stations,
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank())
 ```
-<br>
 
 ## Scale the area of each station by total number of departures
 
@@ -154,8 +151,6 @@ interestingly, Hyde Park also appears to have a good amount of biking
 activity.
 
 What else interesting do you observe from this plot?
-<br>
-<br>
 
 ## Visualizing seasonal biking trends
 
@@ -226,13 +221,11 @@ summer.
 
 ## Save your session
 
-It is time to the current state of our session before moving to the
-[next episode](uofc.html).
+It is time to save the current state of our session.
 
 ```{r, eval=FALSE}
 save.image(file = "workshop.RData")
 ```
-<br>
 
 ## Recap
 
@@ -242,5 +235,5 @@ more. The key point is that ggplot works very well provided you take
 the time beforehand to organize your data into a data frame, and
 (e.g., factors, dates & times).
 
-In the [final episode](), we will take a closer look at the biking
-trends at the University of Chicago.
+In the [final episode](uofc.html), we will take a closer look at the
+biking trends at the University of Chicago.

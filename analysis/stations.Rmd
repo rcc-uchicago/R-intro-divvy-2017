@@ -21,7 +21,6 @@ knitr::read_chunk("chunks.R")
  exists and R package git2r is installed -->
 ```{r code-version, echo=FALSE, results="asis"}
 ```
-<br>
 
 ## About this file
 
@@ -37,8 +36,6 @@ your data analyses.
 
 There are many benefits to documenting your data analyses in R
 Markdown---we will not have time to explore all the benefits here.
-<br>
-<br>
 
 ## How to use this file
 
@@ -49,8 +46,6 @@ single command from the
 [rmarkdown package](https://cran.r-project.org/package=rmarkdown), in
 this workshop we will walk through the data analyses by typing or
 copying & pasting the lines of code into the R console.
-<br>
-<br>
 
 ## About the Divvy station data
 
@@ -74,8 +69,6 @@ Sys.glob("../data/*Stations*")
 
 We will only use the Q4 data since it contains the most up-to-date
 information about the Divvy bike stations.
-<br>
-<br>
 
 ## Loading the Divvy station data
 
@@ -104,7 +97,6 @@ questions by accessing the R help documents for this function:
 ```{r, eval=FALSE}
 help(read.table)
 ```
-<br>
 
 ## A first peek at the Divvy station data 
 
@@ -178,7 +170,6 @@ rows     <- order(stations$dpcapacity,decreasing = TRUE)
 stations <- stations[rows,]
 head(stations,n = 8)
 ```
-<br>
 
 ## Quickly accessing stations in the table by their name
 
@@ -212,7 +203,6 @@ corresponding to the Divvy bike station on the university campus:
 ```{r, eval=FALSE}
 stations[uofcstn,]
 ```
-<br>
 
 ## Save your session
 
@@ -222,7 +212,6 @@ you accidentally quit or lose your connection to the cluster.
 ```{r, eval=FALSE}
 save.image(file = "workshop.RData")
 ```
-<br>
 
 ## Recap
 

@@ -21,15 +21,12 @@ knitr::read_chunk("chunks.R")
  exists and R package git2r is installed -->
 ```{r code-version, echo=FALSE, results="asis"}
 ```
-<br>
 
 For this part of the lesson, I'm assuming you have worked through the
 code in the [previous episode](stations.html), and your R session is
 still open. If you have saved your R session using the "save.image"
 command, you can load the session data by running
 `load("workshop.RData")`.
-<br>
-<br>
 
 ## Installing the data.table package
 
@@ -72,7 +69,6 @@ help(package = data.table)
 ```{r, eval=FALSE}
 vignette("datatable-intro")
 ```
-<br>
 
 ## Where are my packages?
 
@@ -106,7 +102,6 @@ run these commands:
 rownames(installed.packages(lib = .libPaths()[1]))
 rownames(installed.packages(lib = .libPaths()[2]))
 ```
-<br>
 
 ## Use data.table to load the Divvy trip data
 
@@ -120,8 +115,6 @@ trips <- fread("../data/Divvy_Trips_2016.csv",sep = ",",header = TRUE,
 
 On my MacBook Air, this took about 30 seconds---not too bad. It will
 take much longer if you use "read.csv". (Try it!)
-<br>
-<br>
 
 ## A first peek at the Divvy trip data
 
@@ -152,8 +145,6 @@ summary(trips)
 Unfortunately, the "summary" command isn't particularly informative
 for this data frame. It will be more useful if we first convert some
 of the columns to *factors*.
-<br>
-<br>
 
 ## Create some factor columns
 
@@ -206,8 +197,6 @@ summary(trips$from_station_name)
 
 What is the second argument of function "factor" for? Why did we set
 the second argument of "factor" in this case, and not before?
-<br>
-<br>
 
 ## Convert the dates and times
 
@@ -254,7 +243,6 @@ summary(trips$starttime)
 summary(trips$start.day)
 summary(trips$start.week)
 ```
-<br>
 
 ## Trips from University of Chicago
 
@@ -287,7 +275,6 @@ uc.dests <- uc.dests[i]
 uc.dests
 data.frame(uc.dests)
 ```
-<br>
 
 ## Save your session
 
@@ -297,7 +284,6 @@ be safe.
 ```{r, eval=FALSE}
 save.image(file = "workshop.RData")
 ```
-<br>
 
 ## Recap
 

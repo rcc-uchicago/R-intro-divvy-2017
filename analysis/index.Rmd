@@ -12,8 +12,6 @@ Date: Tuesday, August 1, 2017<br>
 Time: 2:00 pm to 4:00 pm<br>
 Location: Zar Room, John Crerar Library<br>
 Instructor: Peter Carbonetto
-<br>
-<br>
 
 ## General Information
 
@@ -42,8 +40,6 @@ See also
 [this article](http://dx.doi.org/10.12688/f1000research.3-62.v2).
 Please also take a look at the [Code of Conduct](conduct.html), and the
 [license information](license.html).
-<br>
-<br>
 
 ## Outline
 
@@ -62,8 +58,6 @@ University of Chicago.
 4. [Create plots from the Divvy station and trip data](plots.html).
 
 5. [Analyze U of C biking trends from Divvy data](uofc.html).
-<br>
-<br>
 
 ## Great resources for R
 
@@ -103,8 +97,6 @@ Sciences](https://leanpub.com/dataanalysisforthelifesciences).
 
 + [STAT Labs: Mathematical Statistics through
 Applications](https://www.stat.berkeley.edu/~statlabs).
-<br>
-<br>
 
 ## Credits
 

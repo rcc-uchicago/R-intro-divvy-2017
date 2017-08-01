@@ -22,7 +22,6 @@ knitr::read_chunk("chunks.R")
  package git2r is installed -->
 ```{r code-version, echo=FALSE, results="asis"}
 ```
-<br>
 
 # Connecting to midway using a Yubikey
 
