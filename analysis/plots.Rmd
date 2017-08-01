@@ -71,6 +71,7 @@ ggplot(data = stations,
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank())
 ```
+<br>
 
 ## Scale the area of each station by total number of departures
 
@@ -139,7 +140,9 @@ that. Also observe, unsurprisingly, that there are generally more
 departures per station on the North Side, and, interestingly, Hyde
 Park has a good amount of hiking activity.
 
-Do else interesting do you observe from this plot?
+What else interesting do you observe from this plot?
+<br>
+<br>
 
 ## Visualizing seasonal biking trends
 
@@ -196,7 +199,8 @@ summer.
 
 ## Save your session
 
-Before moving to the next episode, let's save our current session.
+It is time to the current state of our session before moving to the
+[next episode](uofc.html).
 
 ```{r, eval=FALSE}
 save.image(file = "workshop.RData")
