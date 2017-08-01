@@ -207,8 +207,8 @@ until we extract them from the character strings. Working with dates &
 times in R is much more complicated so I won't explain in detail what
 this code does exactly, or how it works.
 
-To convert the dates and times, I will install and load the
-`lubridate` package.
+To convert the dates and times, install and load the
+[lubridate package](http://lubridate.tidyverse.org).
 
 ```{r, eval=FALSE}
 install.packages("lubridate")

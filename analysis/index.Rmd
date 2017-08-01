@@ -57,7 +57,7 @@ University of Chicago.
 
 4. [Create plots from the Divvy station and trip data](plots.html).
 
-5. [Analyze U of C biking trends from Divvy data](uofc.html).
+5. [Analyze U of C biking trends from the Divvy data](uofc.html).
 
 ## Great resources for R
 

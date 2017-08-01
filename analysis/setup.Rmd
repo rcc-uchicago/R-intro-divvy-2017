@@ -29,6 +29,7 @@ knitr::read_chunk("chunks.R")
 library(data.table)
 library(lubridate)
 library(ggplot2)
+library(cowplot)
 ```
 
 To work through the lessons on your computer, please follow these
