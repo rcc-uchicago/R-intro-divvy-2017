@@ -24,14 +24,24 @@ knitr::read_chunk("chunks.R")
 
 ## Visualizing the usage patterns of University of Chicago Divvy users
 
+Earlier, when we were inspecting the University of Chicago trip data,
+we noticed an interesting trend: the trips end up much more frequently
+at some stations. 
+
 ```{r, eval=FALSE}
 summary(trips.uofc$to_station_name)
 ```
+
+What could explain this pattern? Let's start by visualizing this
+pattern. Let's create a variable storing counts of the number of trips
+by arrival station.
 
 ```{r, eval=FALSE}
 uofc.arrival.counts <- as.vector(table(trips.uofc$to_station_name))
 head(uofc.arrival.counts)
 ```
+
+My hypothesis is that geography can explain this trend---the 
 
 ```{r, eval=FALSE}
 uofcstn <- "University Ave & 57th St"
@@ -55,11 +65,17 @@ Note that we are able to combine these data into one data frame only
 because we were careful earlier to create factors with levels given in
 the same order as the stations in the "stations" data frame.
 
+Let's create a scatterplot comparing the two variables.
+
 ```{r, eval=FALSE}
 ggplot(data    = uofc.arrivals,
        mapping = aes(x = dist,y = count)) +
   geom_point()
 ```
+
+This plot isn't particularly informative because a few trip counts are
+much larger than the others, and a few of the distances are much
+smaller. This suggests that a log-scale will work better.
 
 ```{r, eval=FALSE}
 ggplot(data    = uofc.arrivals,
@@ -69,13 +85,34 @@ ggplot(data    = uofc.arrivals,
   scale_y_log10()
 ```
 
+That's better, but we get a couple warnings because we are taking the
+log of zero. Let's fix this by removing all points at zero.
+
+```{r, eval=FALSE}
+ggplot(data    = subset(uofc.arrivals,count > 0 & dist > 0),
+       mapping = aes(x = dist,y = count)) +
+  geom_point(shape = 4,color = "darkblue") +
+  scale_x_log10() +
+  scale_y_log10(breaks = c(1,10,100,1000))
+```
+
+That's a big improvement. One final adjustment: let's add more
+informative axis labels. And then we can save the plot for later.
+
 ```{r, eval=FALSE}
 plot3 <- ggplot(data    = subset(uofc.arrivals,count > 0 & dist > 0),
                 mapping = aes(x = dist,y = count)) +
   geom_point(shape = 4,color = "darkblue") +
   scale_x_log10() +
-  scale_y_log10(breaks = c(1,10,100,1000))
+  scale_y_log10(breaks = c(1,10,100,1000)) +
+  labs(x = "distance from University & 57th",
+       y = "number of arrivals")
+print(plot3)
 ```
+
+This plot clearly shows that the number of trips to each station drops
+off linearly with distance from the station (on the log-scale). It
+would be interesting to see whether a similar trend occurs city-wide.
 
 ### Analyzing the linear relationship between two variables
 
