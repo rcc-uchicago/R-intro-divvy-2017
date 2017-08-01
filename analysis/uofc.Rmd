@@ -148,6 +148,9 @@ class(fit)
 summary(fit)
 ```
 
+Among other things, the summary tells us that about 50% of the
+variation in trip arrival counts is explained by geographic distance.
+
 We can also add the fitted regression line to the scatterplot we
 created earlier:
 
