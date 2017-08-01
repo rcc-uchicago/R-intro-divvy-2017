@@ -315,12 +315,15 @@ div.section {
 <p><strong>Last updated:</strong> 2017-08-01</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository
  exists and R package git2r is installed -->
-<p><strong>Code version:</strong> edb201b</p>
+<p><strong>Code version:</strong> 58398ea</p>
 <div id="visualizing-the-usage-patterns-of-university-of-chicago-divvy-users" class="section level2">
 <h2>Visualizing the usage patterns of University of Chicago Divvy users</h2>
+<p>Earlier, when we were inspecting the University of Chicago trip data, we noticed an interesting trend: the trips end up much more frequently at some stations.</p>
 <pre class="r"><code>summary(trips.uofc$to_station_name)</code></pre>
+<p>What could explain this pattern? Let’s start by visualizing this pattern. Let’s create a variable storing counts of the number of trips by arrival station.</p>
 <pre class="r"><code>uofc.arrival.counts &lt;- as.vector(table(trips.uofc$to_station_name))
 head(uofc.arrival.counts)</code></pre>
+<p>My hypothesis is that geography can explain this trend—the</p>
 <pre class="r"><code>uofcstn &lt;- &quot;University Ave &amp; 57th St&quot;
 uofc.station.dists &lt;-
   sqrt((stations[uofcstn,&quot;latitude&quot;] - stations$latitude)^2 +
@@ -332,19 +335,32 @@ head(uofc.station.dists)</code></pre>
 rownames(uofc.arrivals) &lt;- rownames(stations)
 head(uofc.arrivals)</code></pre>
 <p>Note that we are able to combine these data into one data frame only because we were careful earlier to create factors with levels given in the same order as the stations in the “stations” data frame.</p>
+<p>Let’s create a scatterplot comparing the two variables.</p>
 <pre class="r"><code>ggplot(data    = uofc.arrivals,
        mapping = aes(x = dist,y = count)) +
   geom_point()</code></pre>
+<p>This plot isn’t particularly informative because a few trip counts are much larger than the others, and a few of the distances are much smaller. This suggests that a log-scale will work better.</p>
 <pre class="r"><code>ggplot(data    = uofc.arrivals,
        mapping = aes(x = dist,y = count)) +
   geom_point() +
   scale_x_log10() +
   scale_y_log10()</code></pre>
+<p>That’s better, but we get a couple warnings because we are taking the log of zero. Let’s fix this by removing all points at zero.</p>
+<pre class="r"><code>ggplot(data    = subset(uofc.arrivals,count &gt; 0 &amp; dist &gt; 0),
+       mapping = aes(x = dist,y = count)) +
+  geom_point(shape = 4,color = &quot;darkblue&quot;) +
+  scale_x_log10() +
+  scale_y_log10(breaks = c(1,10,100,1000))</code></pre>
+<p>That’s a big improvement. One final adjustment: let’s add more informative axis labels. And then we can save the plot for later.</p>
 <pre class="r"><code>plot3 &lt;- ggplot(data    = subset(uofc.arrivals,count &gt; 0 &amp; dist &gt; 0),
                 mapping = aes(x = dist,y = count)) +
   geom_point(shape = 4,color = &quot;darkblue&quot;) +
   scale_x_log10() +
-  scale_y_log10(breaks = c(1,10,100,1000))</code></pre>
+  scale_y_log10(breaks = c(1,10,100,1000)) +
+  labs(x = &quot;distance from University &amp; 57th&quot;,
+       y = &quot;number of arrivals&quot;)
+print(plot3)</code></pre>
+<p>This plot clearly shows that the number of trips to each station drops off linearly with distance from the station (on the log-scale). It would be interesting to see whether a similar trend occurs city-wide.</p>
 <div id="analyzing-the-linear-relationship-between-two-variables" class="section level3">
 <h3>Analyzing the linear relationship between two variables</h3>
 <pre class="r"><code>fit &lt;- lm(data    = subset(uofc.arrivals,count &gt; 0 &amp; dist &gt; 0),
