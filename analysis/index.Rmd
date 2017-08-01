@@ -33,6 +33,8 @@ required. No previous programming experience is required.
 **Where:** Kathleen A. Zar Room, John Crerar Library, University of
 Chicago ([OpenStreetMap](https://www.openstreetmap.org/search?query=john%20crerar%20library#map=18/41.79053/-87.60282)).
 
+**Slides:** See [here](slides.pdf) to access a PDF of the workshop slides.
+
 **Other information:** This workshop is an attempt to apply elements of
 the
 [Software Carpentry approach](http://software-carpentry.org/lessons).
