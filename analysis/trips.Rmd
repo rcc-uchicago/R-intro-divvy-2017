@@ -250,7 +250,7 @@ trips <- transform(trips,
            start.day = factor(weekdays(as.Date(starttime)),
                               c("Monday","Tuesday","Wednesday","Thursday",
                                 "Friday","Saturday","Sunday")))
-summary(trips$start.time)
+summary(trips$starttime)
 summary(trips$start.day)
 summary(trips$start.week)
 ```
