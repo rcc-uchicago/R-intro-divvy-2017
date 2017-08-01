@@ -315,21 +315,24 @@ div.section {
 <p><strong>Last updated:</strong> 2017-08-01</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository
  exists and R package git2r is installed -->
-<p><strong>Code version:</strong> 58398ea</p>
+<p><strong>Code version:</strong> a16ae0a</p>
 <div id="visualizing-the-usage-patterns-of-university-of-chicago-divvy-users" class="section level2">
 <h2>Visualizing the usage patterns of University of Chicago Divvy users</h2>
-<p>Earlier, when we were inspecting the University of Chicago trip data, we noticed an interesting trend: the trips end up much more frequently at some stations.</p>
+<p>Earlier, when we were inspecting the University of Chicago trip data, we noticed an interesting trend: the trips end up much more frequently at some stations than others.</p>
 <pre class="r"><code>summary(trips.uofc$to_station_name)</code></pre>
-<p>What could explain this pattern? Let’s start by visualizing this pattern. Let’s create a variable storing counts of the number of trips by arrival station.</p>
+<p>What could explain this pattern? One hypothesis is that geography can explain this trend—to investigate, let’s visualize these data.</p>
+<p>First, create a variable storing counts of the number of trips by arrival station.</p>
 <pre class="r"><code>uofc.arrival.counts &lt;- as.vector(table(trips.uofc$to_station_name))
 head(uofc.arrival.counts)</code></pre>
-<p>My hypothesis is that geography can explain this trend—the</p>
+<p>Note that most stations in the city have never been visited from University of Chicago.</p>
+<pre class="r"><code>summary(factor(uofc.arrival.counts == 0))</code></pre>
+<p>Next, let’s create another variable with the (Euclidean) distance between the U of C Divvy station and all other stations across the city.</p>
 <pre class="r"><code>uofcstn &lt;- &quot;University Ave &amp; 57th St&quot;
 uofc.station.dists &lt;-
   sqrt((stations[uofcstn,&quot;latitude&quot;] - stations$latitude)^2 +
        (stations[uofcstn,&quot;longitude&quot;] - stations$longitude)^2)
 head(uofc.station.dists)</code></pre>
-<p>Let’s combine these two variables into a single data frame so that we can plot the relationship between these two variables using ggplot.</p>
+<p>To compare the counts and distance, let’s combine these two variables into a single data frame. Once we have a data frame, we can plot the relationship between these two variables using ggplot.</p>
 <pre class="r"><code>uofc.arrivals &lt;- data.frame(dist  = uofc.station.dists,
                             count = uofc.arrival.counts)
 rownames(uofc.arrivals) &lt;- rownames(stations)
@@ -363,9 +366,13 @@ print(plot3)</code></pre>
 <p>This plot clearly shows that the number of trips to each station drops off linearly with distance from the station (on the log-scale). It would be interesting to see whether a similar trend occurs city-wide.</p>
 <div id="analyzing-the-linear-relationship-between-two-variables" class="section level3">
 <h3>Analyzing the linear relationship between two variables</h3>
+<p>Let’s now analyze the relationship between trip counts and geographic distance a little more rigorously. In particular, let’s analyze the linear relationship between these two quantities. The swiss army knife for linear regression in R is the “lm” function. The “formula” argument specifies the regression model. Here, we model log-counts as a linear function of log-distances:</p>
 <pre class="r"><code>fit &lt;- lm(data    = subset(uofc.arrivals,count &gt; 0 &amp; dist &gt; 0),
           formula = log10(count) ~ log10(dist))</code></pre>
-<pre class="r"><code>summary(fit)</code></pre>
+<p>As before, we can get a detailed summary of the linear regression using the “summary” function:</p>
+<pre class="r"><code>class(fit)
+summary(fit)</code></pre>
+<p>We can also add the fitted regression line to the scatterplot we created earlier:</p>
 <pre class="r"><code>b &lt;- coef(fit)
 plot3 + geom_abline(intercept = b[&quot;(Intercept)&quot;],slope = b[&quot;log10(dist)&quot;],
                     color = &quot;red&quot;,linetype = &quot;dotted&quot;)</code></pre>
@@ -373,7 +380,7 @@ plot3 + geom_abline(intercept = b[&quot;(Intercept)&quot;],slope = b[&quot;log10
 </div>
 <div id="recap" class="section level2">
 <h2>Recap</h2>
-<p><em>Recap will go here.</em></p>
+<p>This workshop was only a very brief tour of data analysis in R. To learn more, please see the “Great resources for R” section at the bottom of the <a href="index.html">home page</a>.</p>
 </div>
 
 <script type="text/x-mathjax-config">
