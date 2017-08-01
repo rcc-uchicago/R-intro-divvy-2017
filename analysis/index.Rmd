@@ -103,6 +103,8 @@ demo](https://stephenslab.github.io/wflow-divvy).
 
 + [R for Data Science](http://r4ds.had.co.nz).
 
++ [Efficient R Programming](https://csgillespie.github.io/efficientR).
+
 + [Some advanced topics in R](http://adv-r.had.co.nz).
 
 + [Short guide to writing your own R package](http://r-pkgs.had.co.nz).
