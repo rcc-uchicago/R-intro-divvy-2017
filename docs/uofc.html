@@ -315,10 +315,45 @@ div.section {
 <p><strong>Last updated:</strong> 2017-08-01</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository
  exists and R package git2r is installed -->
-<p><strong>Code version:</strong> 07783cb</p>
-<div id="section-title" class="section level2">
-<h2>Section title</h2>
-<p><em>Text goes here.</em></p>
+<p><strong>Code version:</strong> edb201b</p>
+<div id="visualizing-the-usage-patterns-of-university-of-chicago-divvy-users" class="section level2">
+<h2>Visualizing the usage patterns of University of Chicago Divvy users</h2>
+<pre class="r"><code>summary(trips.uofc$to_station_name)</code></pre>
+<pre class="r"><code>uofc.arrival.counts &lt;- as.vector(table(trips.uofc$to_station_name))
+head(uofc.arrival.counts)</code></pre>
+<pre class="r"><code>uofcstn &lt;- &quot;University Ave &amp; 57th St&quot;
+uofc.station.dists &lt;-
+  sqrt((stations[uofcstn,&quot;latitude&quot;] - stations$latitude)^2 +
+       (stations[uofcstn,&quot;longitude&quot;] - stations$longitude)^2)
+head(uofc.station.dists)</code></pre>
+<p>Let’s combine these two variables into a single data frame so that we can plot the relationship between these two variables using ggplot.</p>
+<pre class="r"><code>uofc.arrivals &lt;- data.frame(dist  = uofc.station.dists,
+                            count = uofc.arrival.counts)
+rownames(uofc.arrivals) &lt;- rownames(stations)
+head(uofc.arrivals)</code></pre>
+<p>Note that we are able to combine these data into one data frame only because we were careful earlier to create factors with levels given in the same order as the stations in the “stations” data frame.</p>
+<pre class="r"><code>ggplot(data    = uofc.arrivals,
+       mapping = aes(x = dist,y = count)) +
+  geom_point()</code></pre>
+<pre class="r"><code>ggplot(data    = uofc.arrivals,
+       mapping = aes(x = dist,y = count)) +
+  geom_point() +
+  scale_x_log10() +
+  scale_y_log10()</code></pre>
+<pre class="r"><code>plot3 &lt;- ggplot(data    = subset(uofc.arrivals,count &gt; 0 &amp; dist &gt; 0),
+                mapping = aes(x = dist,y = count)) +
+  geom_point(shape = 4,color = &quot;darkblue&quot;) +
+  scale_x_log10() +
+  scale_y_log10(breaks = c(1,10,100,1000))</code></pre>
+<div id="analyzing-the-linear-relationship-between-two-variables" class="section level3">
+<h3>Analyzing the linear relationship between two variables</h3>
+<pre class="r"><code>fit &lt;- lm(data    = subset(uofc.arrivals,count &gt; 0 &amp; dist &gt; 0),
+          formula = log10(count) ~ log10(dist))</code></pre>
+<pre class="r"><code>summary(fit)</code></pre>
+<pre class="r"><code>b &lt;- coef(fit)
+plot3 + geom_abline(intercept = b[&quot;(Intercept)&quot;],slope = b[&quot;log10(dist)&quot;],
+                    color = &quot;red&quot;,linetype = &quot;dotted&quot;)</code></pre>
+</div>
 </div>
 <div id="recap" class="section level2">
 <h2>Recap</h2>
