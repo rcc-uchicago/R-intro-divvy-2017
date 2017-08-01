@@ -309,7 +309,7 @@ div.tocify {
 <p><strong>Last updated:</strong> 2017-08-01</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository
  exists and R package git2r is installed -->
-<p><strong>Code version:</strong> 4019913</p>
+<p><strong>Code version:</strong> 943bdf0</p>
 <p>Up to this point, we have done lots of work importing and manipulating the Divvy data. Now let’s do something fun with these data. In this episode, we will use the Divvy trip and station data to generate some interesting plots. <br> <br></p>
 <div id="our-first-plot-a-map-of-the-divvy-stations" class="section level2">
 <h2>Our first plot: a map of the Divvy stations</h2>
@@ -370,14 +370,19 @@ summary(stations$departures)</code></pre>
 <div id="visualizing-seasonal-biking-trends" class="section level2">
 <h2>Visualizing seasonal biking trends</h2>
 <p>Let’s now use the Divvy trip data to examine biking trends over the course of one year in Chicago.</p>
-<p>Convert the “start week” column to a factor, then we can easily count the total number of Divvy trips per week of the year.</p>
-<pre class="r"><code>trips       &lt;- transform(trips,start.week = factor(start.week))
-counts.week &lt;- table(trips$start.week)
+<p>First, let’s convert the “start week” column to a factor.</p>
+<pre class="r"><code>trips &lt;- transform(trips,start.week = factor(start.week))
+summary(trips$start.week)</code></pre>
+<p>Now that the column is a factor, we can easily count the total number of Divvy trips each week of the year, from January to December. We will use these counts to create a new data frame. Remember that ggplot works best with data frames.</p>
+<pre class="r"><code>counts.week &lt;- table(trips$start.week)
 counts.week &lt;- as.vector(counts.week)
-counts.week &lt;- data.frame(week = 0:52,departures = counts.week)
+counts.week &lt;- data.frame(week       = 0:52,
+                          departures = counts.week)
 head(counts.week)
 tail(counts.week)</code></pre>
-<pre class="r"><code>ggplot(counts.week,aes(x = week,y = departures)) +
+<p>To illustrate the ability of ggplot to easily combine multiple <em>layers</em> into a single plot, in this plot let’s add both points and lines.</p>
+<pre class="r"><code>ggplot(data    = counts.week,
+       mapping = aes(x = week,y = departures)) +
   geom_point(color = &quot;darkblue&quot;) +
   geom_line(color = &quot;darkblue&quot;) +
   theme_minimal() +
