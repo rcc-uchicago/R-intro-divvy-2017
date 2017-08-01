@@ -1,4 +1,4 @@
-s---
+---
 title: "Introduction to R for data analysis"
 output:
   html_document:
