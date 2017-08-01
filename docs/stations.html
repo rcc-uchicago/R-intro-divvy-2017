@@ -309,11 +309,11 @@ div.tocify {
 <p><strong>Last updated:</strong> 2017-07-31</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository
  exists and R package git2r is installed -->
-<p><strong>Code version:</strong> c5f5092 <br></p>
+<p><strong>Code version:</strong> e983c1a <br></p>
 <div id="about-this-file" class="section level2">
 <h2>About this file</h2>
 <p>This file is either a webpage generated from an R Markdown document, or the original R Markdown file itself.</p>
-<p><a href="http://r4ds.had.co.nz/r-markdown.html">R Markdown</a> combines <a href="http://daringfireball.net/projects/markdown">Markdown</a>, a popular, easy-to-read plain text formatting syntax, with “chunks” of R code. R Markdown notebooks can be easily rendered into various formats (e.g., PDF, HTML) for creating sharable and reproducible <a href="https://www.oreilly.com/ideas/the-state-of-jupyter">narratives</a> of your data analyses.</p>
+<p><a href="http://r4ds.had.co.nz/r-markdown.html">R Markdown</a> combines <a href="http://daringfireball.net/projects/markdown">Markdown</a> with “chunks” of R code. R Markdown notebooks can be easily rendered into various formats (e.g., PDF, HTML) for creating sharable and reproducible <a href="https://www.oreilly.com/ideas/the-state-of-jupyter">narratives</a> of your data analyses.</p>
 <p>There are many benefits to documenting your data analyses in R Markdown—we will not have time to explore all the benefits here. <br> <br></p>
 </div>
 <div id="how-to-use-this-file" class="section level2">
@@ -326,19 +326,16 @@ div.tocify {
 <p>After you launch R or RStudio, double-check that your working directory is set to the “analysis” directory. For example, on my MacBook Air the current working directory is</p>
 <pre class="r"><code>getwd()
 # [1] &quot;/Users/pcarbo/git/R-intro-divvy/analysis&quot;</code></pre>
-<p>In the “data” directory, three should be three CSV files containing station data:</p>
-<pre class="r"><code>Sys.glob(&quot;../data/*Stations*&quot;)
-# [1] &quot;../data/Divvy_Stations_2016_Q1Q2.csv&quot;
-# [2] &quot;../data/Divvy_Stations_2016_Q3.csv&quot;  
-# [3] &quot;../data/Divvy_Stations_2016_Q4.csv&quot;</code></pre>
-<p>We will only use the Q4 data since it contains the most up-to-date information about the Divvy stations. <br> <br></p>
+<p>If it is not, see the <a href="setup.html">setup</a> instructions for how to change the working directory.</p>
+<p>In the “data” directory, you should see 3 CSV files containing station data:</p>
+<p><code>{r, eval=TRUE}divvy Sys.glob(&quot;../data/*Stations*&quot;)</code></p>
+<p>We will only use the Q4 data since it contains the most up-to-date information about the Divvy bike stations. <br> <br></p>
 </div>
 <div id="loading-the-divvy-station-data" class="section level2">
 <h2>Loading the Divvy station data</h2>
 <p>The R environment is where all <em>variables and functions</em> are stored and accessed.</p>
 <p>Immediately after launching R, your R environment will be empty.</p>
 <pre class="r"><code>ls()</code></pre>
-<p>If it is not, see the <a href="setup.html">setup</a> instructions for how to change the working directory.</p>
 <p>We will create a new variable called “stations” by running function “read.csv”, and assigning the result of “read.csv” to “stations”:</p>
 <pre class="r"><code>stations &lt;- read.csv(file = &quot;../data/Divvy_Stations_2016_Q4.csv&quot;,
                      stringsAsFactors = FALSE)</code></pre>
@@ -349,14 +346,14 @@ div.tocify {
 <div id="a-first-peek-at-the-divvy-station-data" class="section level2">
 <h2>A first peek at the Divvy station data</h2>
 <p>What kind of variable is “stations”? We can check this:</p>
-<pre class="r"><code>class(read.table)</code></pre>
+<pre class="r"><code>class(stations)</code></pre>
 <p>It is a “data frame”, which is R’s main data structure for tables.</p>
 <p>Peek at the first few rows of the table:</p>
 <pre class="r"><code>head(stations)</code></pre>
 <p>Peek at the last few rows of the table:</p>
 <pre class="r"><code>tail(stations)</code></pre>
 <p>See the “README.txt” file in the data directory for more information about the columns in the table.</p>
-<p>Use <code>summary</code> to quickly generate an overview of the data in the table:</p>
+<p>Use <code>summary</code> to quickly generate an overview of the table:</p>
 <pre class="r"><code>summary(stations)</code></pre>
 <p>This is a general function that works for many types of variables.</p>
 <p>How many stations are there?</p>
@@ -369,30 +366,30 @@ ncol(stations)</code></pre>
 class(stations$dpcapacity)
 x &lt;- stations$dpcapacity
 summary(x)
-quantile(x,seq(0,1,0.1))
-table(x)</code></pre>
+table(x)
+quantile(x,seq(0,1,0.1))</code></pre>
 <p>It is interesting that a few of the Divvy bike stations are much larger than all the others. Where are these stations?</p>
 <pre class="r"><code>subset(stations,dpcapacity &gt;= 40)</code></pre>
 <p>Alternatively, we can sort the table rows and inspect the top rows:</p>
 <pre class="r"><code>rows     &lt;- order(stations$dpcapacity,decreasing = TRUE)
 stations &lt;- stations[rows,]
-head(stations,n = 10)</code></pre>
+head(stations,n = 8)</code></pre>
 <p><br></p>
 </div>
 <div id="quickly-accessing-stations-in-the-table-by-their-name" class="section level2">
 <h2>Quickly accessing stations in the table by their name</h2>
-<p>It is often useful to access rows of a table by their name or label instead of using a number. This can be done by setting the row names in the data frame.</p>
+<p>It is often useful to access rows of a table by their name instead of using a number. This can be done by setting the row names in the data frame.</p>
 <p>For example, this is one of the Divvy stations on the University of Chicago campus:</p>
-<pre class="r"><code>stn.name &lt;- &quot;University Ave &amp; 57th St&quot;
-i &lt;- which(stations$name == stn.name)
+<pre class="r"><code>uofcstn &lt;- &quot;University Ave &amp; 57th St&quot;
+i       &lt;- which(stations$name == uofcstn)
 stations[i,]</code></pre>
 <p>Let’s now add row names:</p>
 <pre class="r"><code>rownames(stations) &lt;- stations$name
 stations           &lt;- stations[-2]
 head(stations)</code></pre>
-<p>Note that I removed the second column in the table because it is no longer needed once we have the row names.</p>
-<p>Once we have row names, we have an easier way to access the same information:</p>
-<pre class="r"><code>stations[stn.name,]</code></pre>
+<p>Note that I removed the second column in the table because it is no longer needed.</p>
+<p>Once we have row names, we can more easily access the row corresponding to the Divvy bike station on the university campus:</p>
+<pre class="r"><code>stations[uofcstn,]</code></pre>
 <p><br></p>
 </div>
 <div id="save-your-session" class="section level2">
@@ -403,8 +400,8 @@ head(stations)</code></pre>
 </div>
 <div id="recap" class="section level2">
 <h2>Recap</h2>
-<p>In this first episode, we explored some basic commands for loading data from a text file into a data frame in R, inspecting the data in the data frame, and making a few simple (but useful!) modifications to the data.</p>
-<p>In <a href="trips.html">the next episode</a>, we will explore these same techniques, but in a much larger table—the Divvy trip data.</p>
+<p>In this first episode, we explored some basic commands for loading data from a text file into R, inspecting data in a data frame, and making a few useful changes to the data.</p>
+<p>In <a href="trips.html">the next episode</a>, we will explore these same techniques, but on a larger scale, using the Divvy trip data.</p>
 </div>
 
 <script type="text/x-mathjax-config">
