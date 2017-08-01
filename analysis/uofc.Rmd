@@ -26,22 +26,33 @@ knitr::read_chunk("chunks.R")
 
 Earlier, when we were inspecting the University of Chicago trip data,
 we noticed an interesting trend: the trips end up much more frequently
-at some stations. 
+at some stations than others. 
 
 ```{r, eval=FALSE}
 summary(trips.uofc$to_station_name)
 ```
 
-What could explain this pattern? Let's start by visualizing this
-pattern. Let's create a variable storing counts of the number of trips
-by arrival station.
+What could explain this pattern? One hypothesis is that geography can
+explain this trend---to investigate, let's visualize these data.
+
+First, create a variable storing counts of the number of trips by
+arrival station.
 
 ```{r, eval=FALSE}
 uofc.arrival.counts <- as.vector(table(trips.uofc$to_station_name))
 head(uofc.arrival.counts)
 ```
 
-My hypothesis is that geography can explain this trend---the 
+Note that most stations in the city have never been visited from
+University of Chicago.
+
+```{r, eval=FALSE}
+summary(factor(uofc.arrival.counts == 0))
+```
+
+Next, let's create another variable with the (Euclidean) distance
+between the U of C Divvy station and all other stations across the
+city.
 
 ```{r, eval=FALSE}
 uofcstn <- "University Ave & 57th St"
@@ -51,8 +62,9 @@ uofc.station.dists <-
 head(uofc.station.dists)
 ```
 
-Let's combine these two variables into a single data frame so that we
-can plot the relationship between these two variables using ggplot.
+To compare the counts and distance, let's combine these two variables
+into a single data frame. Once we have a data frame, we can plot the
+relationship between these two variables using ggplot.
 
 ```{r, eval=FALSE}
 uofc.arrivals <- data.frame(dist  = uofc.station.dists,
@@ -116,14 +128,28 @@ would be interesting to see whether a similar trend occurs city-wide.
 
 ### Analyzing the linear relationship between two variables
 
+Let's now analyze the relationship between trip counts and geographic
+distance a little more rigorously. In particular, let's analyze the
+linear relationship between these two quantities. The swiss army knife
+for linear regression in R is the "lm" function. The "formula"
+argument specifies the regression model. Here, we model log-counts as
+a linear function of log-distances:
+
 ```{r, eval=FALSE}
 fit <- lm(data    = subset(uofc.arrivals,count > 0 & dist > 0),
           formula = log10(count) ~ log10(dist))
 ```
 
+As before, we can get a detailed summary of the linear regression
+using the "summary" function:
+
 ```{r, eval=FALSE}
+class(fit)
 summary(fit)
 ```
+
+We can also add the fitted regression line to the scatterplot we
+created earlier:
 
 ```{r, eval=FALSE}
 b <- coef(fit)
@@ -133,4 +159,6 @@ plot3 + geom_abline(intercept = b["(Intercept)"],slope = b["log10(dist)"],
 
 ## Recap
 
-*Recap will go here.*
+This workshop was only a very brief tour of data analysis in R. To
+learn more, please see the "Great resources for R" section at the
+bottom of the [home page](index.html).
