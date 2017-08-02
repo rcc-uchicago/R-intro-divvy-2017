@@ -60,8 +60,9 @@ repository.
 
 4. Download the Divvy data files into the "data" directory, and
 prepare the data files for analysis. **Easiest approach:** download
-the prepared data files [here](https://uchicago.box.com/v/divvy), and
-move the files into the "data" directory. The file on Box is about 82
+the prepared data files
+[here](https://www.dropbox.com/s/77vhlmmozytwoek/divvy_data_for_rintro_workshop.zip?dl=0),
+and move the files into the "data" directory. The file on Box is about 82
 MB, so it may take a few minutes to download. **More complicated
 approach:** download the data directly from the Divvy website. I have
 provided a bash script `code/retrieve_divvy_data.sh` to do this
