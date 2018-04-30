@@ -8,5 +8,5 @@ Time: 2:00 pm to 4:00 pm<br>
 Location: Zar Room, John Crerar Library<br>
 Instructor: Peter Carbonetto
 
-View the workshop materials
+View the workshop materials 
 [here](https://rcc-uchicago.github.io/R-intro-divvy).
